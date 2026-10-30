@@ -1,0 +1,33 @@
+# Dependencies and generated builds
+node_modules/
+dist/
+build/
+coverage/
+.cache/
+.vite/
+
+# Environment variables and private credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Local logs, temporary files and editor state
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local QA artifacts
+/playwright-report/
+/test-results/
+
+# Empty nested repository created during initial GitHub setup
+/game-pm-portfolio/

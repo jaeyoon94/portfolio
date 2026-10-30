@@ -1,0 +1,19 @@
+/* Star Journey: a restrained annotation layer, independent of content layout. */
+:root { --star-primary: #365b87; --star-secondary: #7d96b5; --star-dim: #a6b5c7; --path-active: #6886ab; --path-inactive: #90a3bb; --star-glow: rgba(112,153,205,.18); --journey-line-width: 1px; --star-small: 4px; --star-medium: 6px; --star-major: 8px; }
+.star-journey { position: absolute; inset: 0 0 auto; height: 0; z-index: 5; pointer-events: none; overflow: visible; }
+.journey-segment { position: absolute; left: 0; overflow: visible; pointer-events: none; }
+.journey-path { fill: none; stroke-width: var(--journey-line-width); vector-effect: non-scaling-stroke; }
+.journey-path-base { stroke: var(--path-inactive); opacity: .18; }
+.journey-path-travelled { stroke: var(--path-active); opacity: .58; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.journey-star { position: absolute; width: var(--star-medium); height: var(--star-medium); margin: calc(var(--star-medium) / -2); background: var(--star-secondary); border-radius: 50%; opacity: .42; transform: scale(.8); transition: opacity var(--motion-base) var(--ease-standard),transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
+.journey-star[data-kind="milestone"], .journey-star[data-kind="arrival"] { width: var(--star-major); height: var(--star-major); margin: calc(var(--star-major) / -2); }
+.journey-star[data-kind="first"] { width: var(--star-small); height: var(--star-small); margin: calc(var(--star-small) / -2); }
+.journey-star.is-reached { opacity: 1; transform: scale(1); background: var(--star-primary); }
+.journey-star.is-current { box-shadow: 0 0 0 4px var(--star-glow); }
+.journey-star.is-dark { --star-primary: #d2e2fa; --star-secondary: #91a9cb; --star-glow: rgba(167,199,240,.13); }
+.journey-star.is-emphasized { box-shadow: 0 0 0 5px var(--star-glow); opacity: 1; }
+.journey-convergence { position: absolute; width: 28px; height: 48px; overflow: visible; opacity: .3; }
+.journey-convergence path { stroke: var(--path-active); fill: none; stroke-width: 1; }
+@media (max-width: 767px) { .journey-convergence { display: none; } .journey-star.is-current { box-shadow: 0 0 0 2px var(--star-glow); } }
+@media (prefers-reduced-motion: reduce) { .journey-star { transition: none; transform: none; opacity: .9; } .journey-path-travelled { stroke-dashoffset: 0 !important; } }
+@media print { .star-journey { display: none; } }

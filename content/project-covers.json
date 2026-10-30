@@ -1,0 +1,108 @@
+{
+  "projectsOrder": [
+    "talesrunner",
+    "dme",
+    "undecember",
+    "neon",
+    "slime"
+  ],
+  "homeOrder": [
+    "talesrunner",
+    "dme",
+    "undecember",
+    "neon",
+    "slime"
+  ],
+  "items": {
+    "neon": {
+      "context": "개발 일정과 협업, 후속 작업 관리",
+      "image": {
+        "src": null,
+        "plannedPath": "assets/images/projects/project-neon-cover.webp",
+        "alt": "",
+        "positionDesktop": "50% 50%",
+        "positionTablet": "50% 50%",
+        "positionMobile": "50% 50%"
+      },
+      "gradientMiddle": 0.12,
+      "gradientBottom": 0.94,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "undecember": {
+      "context": "업데이트와 라이브 서비스 운영",
+      "image": {
+        "src": null,
+        "plannedPath": "assets/images/projects/undecember-cover.webp",
+        "alt": "",
+        "positionDesktop": "50% 50%",
+        "positionTablet": "50% 50%",
+        "positionMobile": "50% 50%"
+      },
+      "gradientMiddle": 0.12,
+      "gradientBottom": 0.94,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "slime": {
+      "context": "개발·출시 준비와 라이브 운영",
+      "image": {
+        "src": null,
+        "plannedPath": "assets/images/projects/legend-of-slime-cover.webp",
+        "alt": "",
+        "positionDesktop": "50% 50%",
+        "positionTablet": "50% 50%",
+        "positionMobile": "50% 50%"
+      },
+      "gradientMiddle": 0.12,
+      "gradientBottom": 0.94,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "talesrunner": {
+      "context": "라이브 서비스 운영과 사업 기획",
+      "image": {
+        "src": null,
+        "plannedPath": "assets/images/projects/tales-runner-cover.webp",
+        "alt": "",
+        "positionDesktop": "50% 50%",
+        "positionTablet": "50% 50%",
+        "positionMobile": "50% 50%"
+      },
+      "gradientMiddle": 0.12,
+      "gradientBottom": 0.94,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "dme": {
+      "context": "프로젝트 관리와 AI·자동화 적용",
+      "image": {
+        "src": null,
+        "plannedPath": "assets/images/projects/project-dme-cover.webp",
+        "alt": "",
+        "positionDesktop": "50% 50%",
+        "positionTablet": "50% 50%",
+        "positionMobile": "50% 50%"
+      },
+      "gradientMiddle": 0.12,
+      "gradientBottom": 0.94,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    }
+  }
+}

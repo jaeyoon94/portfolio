@@ -1,0 +1,132 @@
+{
+  "sort": {
+    "companies": "start-descending",
+    "projects": "end-descending-then-start-descending"
+  },
+  "sources": {
+    "user-confirmation-2026-10-30": "사용자가 확인한 재직일과 동일한 프로젝트 참여일. 너드포 2026.05.04–2026.05.31, 블로믹스 2026.06.01–2026.07.22.",
+    "portfolio": "저장소 포트폴리오 PDF 2, 8–10, 21, 28–29, 32쪽 및 대응 PPTX. 회사는 연도까지만 확인 가능. 프로젝트 참여 기간을 회사 재직 월로 대체하지 않음."
+  },
+  "companies": [
+    {
+      "id": "bloomix",
+      "name": "블로믹스",
+      "role": "Service / Business PM",
+      "start": "2026-06-01",
+      "end": "2026-07-22",
+      "source": "user-confirmation-2026-10-30"
+    },
+    {
+      "id": "nerd4",
+      "name": "너드포",
+      "role": "Development PM",
+      "start": "2026-05-04",
+      "end": "2026-05-31",
+      "source": "user-confirmation-2026-10-30"
+    },
+    {
+      "id": "needs",
+      "name": "니즈게임즈",
+      "role": "Live Service PM",
+      "start": "2025",
+      "end": "2026",
+      "source": "portfolio-pdf-page-2"
+    },
+    {
+      "id": "act5",
+      "name": "액트파이브",
+      "role": "Development PM",
+      "start": "2024",
+      "end": "2024",
+      "source": "portfolio-pdf-page-2"
+    },
+    {
+      "id": "loadcomplete",
+      "name": "로드컴플릿",
+      "role": "Development PM · 개발 QA",
+      "start": "2021",
+      "end": "2024",
+      "source": "portfolio-pdf-page-2"
+    }
+  ],
+  "projects": [
+    {
+      "id": "talesrunner",
+      "name": "TALES RUNNER",
+      "company": "bloomix",
+      "role": "Service / Business PM",
+      "start": "2026-06-01",
+      "end": "2026-07-22",
+      "file": "tales-runner.html",
+      "section": "project-talesrunner",
+      "anchor": "career-talesrunner",
+      "source": "user-confirmation-2026-10-30",
+      "summary": "자진신고 캠페인 추진안과 유관부서 협의, 21주년 오프라인 행사 초안을 담당했습니다."
+    },
+    {
+      "id": "dme",
+      "name": "PROJECT DME",
+      "company": "nerd4",
+      "role": "Development PM",
+      "start": "2026-05-04",
+      "end": "2026-05-31",
+      "file": "project-dme.html",
+      "section": "project-dme",
+      "anchor": "career-dme",
+      "source": "user-confirmation-2026-10-30",
+      "summary": "프로젝트 관리의 반복 작업에 AI와 자동화를 적용하고 실제 업무 데이터로 처리 규칙을 검증했습니다."
+    },
+    {
+      "id": "undecember",
+      "name": "UNDECEMBER",
+      "company": "needs",
+      "role": "Live Service PM",
+      "start": "2025-10",
+      "end": "2026-01",
+      "file": "undecember.html",
+      "section": "project-undecember",
+      "anchor": "career-undecember",
+      "source": "portfolio-pdf-pages-8-10",
+      "summary": "사업 기획의 콘텐츠 영향과 개발 범위를 검토하고 일정·빌드·업데이트·라이브 이슈를 조율했습니다."
+    },
+    {
+      "id": "neon",
+      "name": "PROJECT NEON",
+      "company": "act5",
+      "role": "Development PM",
+      "start": "2024-02",
+      "end": "2024-12",
+      "file": "project-neon.html",
+      "section": "project-neon",
+      "anchor": "career-neon",
+      "source": "portfolio-pdf-page-21",
+      "summary": "개발 일정과 리소스, 제작 파이프라인을 확인하고 외부 협력사와 작업 일정을 조율했습니다."
+    },
+    {
+      "id": "goddess",
+      "name": "가디스 오더",
+      "company": "loadcomplete",
+      "role": "Development PM · 개발 QA",
+      "start": "2021-04",
+      "end": "2024-01",
+      "file": "goddess-order.html",
+      "section": "project-goddess",
+      "anchor": "career-goddess",
+      "source": "portfolio-pdf-page-32",
+      "summary": "기획 의도와 구현 결과를 비교하고 테스트 시나리오와 결과, 이슈의 담당자와 처리 단계를 확인했습니다."
+    },
+    {
+      "id": "slime",
+      "name": "LEGEND OF SLIME",
+      "company": "loadcomplete",
+      "role": "개발 / 라이브 PM",
+      "start": "2022-03",
+      "end": "2023-05",
+      "file": "legend-of-slime.html",
+      "section": "project-slime",
+      "anchor": "career-slime",
+      "source": "portfolio-pdf-pages-28-29",
+      "summary": "개발 범위와 일정을 조율하고 출시를 준비했습니다. 론칭 이후에는 업데이트·패치와 라이브 이슈를 담당했습니다."
+    }
+  ]
+}

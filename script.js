@@ -111,20 +111,36 @@ document.addEventListener("DOMContentLoaded", () => {
     .map((link) => document.getElementById(link.dataset.section))
     .filter(Boolean);
 
-  // 현재 스크롤 위치에 따라 목차 상태 갱신
+  let sectionTops = [];
+  let pageHeight = 0;
+  let heroBottom = 0;
+  let navFrame = 0;
+  const headerLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
+  function measureSections() {
+    sectionTops = sections.map(section => ({ id: section.id, top: section.getBoundingClientRect().top + window.scrollY })).sort((a,b) => a.top - b.top);
+    pageHeight = document.documentElement.scrollHeight;
+    const heroScene = document.querySelector('.pm-hero');
+    heroBottom = heroScene ? heroScene.getBoundingClientRect().bottom + window.scrollY : 0;
+    handleScroll();
+  }
+
+  // Scroll uses cached geometry; remeasure only after layout changes.
   function updateActiveSection() {
     const scrollPosition = window.scrollY;
-    const viewportMarker = window.innerHeight * 0.35;
+    document.body.classList.toggle('is-body-theme', scrollPosition >= heroBottom - 88);
+    const viewportMarker = Math.min(150, window.innerHeight * 0.2);
 
     let activeId = sections[0]?.id;
 
-    sections.forEach((section) => {
-      const sectionTop =
-        section.getBoundingClientRect().top + window.scrollY;
-
-      if (sectionTop <= scrollPosition + viewportMarker) {
-        activeId = section.id;
-      }
+    sectionTops.forEach(section => {
+      if (section.top <= scrollPosition + viewportMarker) activeId = section.id;
+    });
+    if (window.scrollY + window.innerHeight >= pageHeight - 4) activeId = sectionTops.at(-1)?.id;
+    headerLinks.forEach(link => {
+      const active = link.getAttribute('href') === '#' + activeId;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
     });
 
     navLinks.forEach((link) => {
@@ -146,8 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function handleScroll() {
-    updateActiveSection();
-    updateNavigationVisibility();
+    if (navFrame) return;
+    navFrame = requestAnimationFrame(() => {
+      navFrame = 0;
+      updateActiveSection();
+      updateNavigationVisibility();
+    });
   }
 
   // 목차 클릭 시 해당 영역으로 이동
@@ -187,90 +207,60 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   // 스크롤과 창 크기 변경에 대응
   window.addEventListener("scroll", handleScroll, { passive: true });
-  window.addEventListener("resize", handleScroll);
+  window.addEventListener("resize", measureSections, { passive: true });
+  window.addEventListener("load", measureSections, { once: true });
+  document.addEventListener("toggle", measureSections, true);
+  document.fonts?.ready.then(measureSections);
+  // Native details and responsive reflow may change section positions after toggle.
+  if ("ResizeObserver" in window) new ResizeObserver(measureSections).observe(document.body);
 
   // 최초 실행
-  handleScroll();
+  measureSections();
 });
 
-/* 우측 목차: 현재 위치한 섹션 강조 */
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(
-    ".floating-nav-link[data-section]"
-  );
 
-  const sections = Array.from(navLinks)
-    .map((link) => {
-      const sectionId = link.dataset.section;
-      const section = document.getElementById(sectionId);
-
-      return section ? { link, section } : null;
-    })
-    .filter(Boolean);
-
-  if (!sections.length) return;
-
-  function updateActiveSection() {
-    // 화면 상단에서 조금 내려온 지점을 기준으로 현재 섹션 판별
-    const threshold = 150;
-    let currentSection = sections[0];
-
-    for (const item of sections) {
-      if (item.section.getBoundingClientRect().top <= threshold) {
-        currentSection = item;
-      } else {
-        break;
-      }
+/* Shared one-time reveal. Content stays visible without JS, IO, or motion permission. */
+document.addEventListener('DOMContentLoaded', () => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const selector = '.about-heading,.content-section-heading,.selected-heading,.case-study > header,.neon-flow-main,.ud-change-heading,.sl-timeline,.sl-loop,.tr-planning-grid,.tr-stakeholders,.dm-route,.dm-versions,.cap-intro,.cap-steps,.closing-inner > h2,.closing-career';
+  const groups = [...document.querySelectorAll(selector)];
+  if (reduce.matches || !('IntersectionObserver' in window)) return;
+  const pending = new Set();
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.remove('motion-pending');
+      observer.unobserve(entry.target);
+      pending.delete(entry.target);
+    });
+    if (!pending.size) observer.disconnect();
+  }, { threshold: 0.01, rootMargin: '0px 0px -24px 0px' });
+  function showAll() {
+    pending.forEach(element => element.classList.remove('motion-pending'));
+    pending.clear();
+    observer.disconnect();
+  }
+  groups.forEach(element => {
+    if (element.getBoundingClientRect().top <= window.innerHeight) return;
+    element.classList.add('motion-reveal', 'motion-pending');
+    pending.add(element);
+    observer.observe(element);
+  });
+  reduce.addEventListener('change', () => { if (reduce.matches) showAll(); });
+  function showTarget(event) {
+    let target = event?.target;
+    if (event?.type === 'hashchange' || !target) {
+      try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch { return; }
     }
-
-    navLinks.forEach((link) => {
-      const isActive = link === currentSection.link;
-
-      link.classList.toggle("active", isActive);
-
-      if (isActive) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
+    if (!target) return;
+    pending.forEach(element => {
+      if (element === target || element.contains(target) || target.contains(element)) {
+        element.classList.remove('motion-pending');
+        observer.unobserve(element);
+        pending.delete(element);
       }
     });
   }
-
-  window.addEventListener("scroll", updateActiveSection, {
-    passive: true,
-  });
-
-  window.addEventListener("resize", updateActiveSection);
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      navLinks.forEach((item) => {
-        item.classList.toggle("active", item === link);
-      });
-    });
-  });
-
-  updateActiveSection();
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const title = document.getElementById("typing-title");
-
-  if (!title) return;
-
-  const text = "GAME PM PORTFOLIO";
-  const speed = 100;
-  let index = 0;
-
-  title.textContent = "";
-
-  function typeText() {
-    if (index < text.length) {
-      title.textContent += text.charAt(index);
-      index++;
-      setTimeout(typeText, speed);
-    }
-  }
-
-  // 첫 화면이 준비된 후 타이핑 시작
-  setTimeout(typeText, 500);
+  window.addEventListener('hashchange', showTarget);
+  document.addEventListener('focusin', showTarget);
 });

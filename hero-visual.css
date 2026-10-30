@@ -1,0 +1,78 @@
+/* Hero-only night photography scene. All decorative layers ignore pointer input. */
+.hero.pm-hero { --night-asset: url('assets/images/atmosphere/night-sky-v3.webp'); --night-sky-mask: url('assets/images/atmosphere/night-sky-v3-sky-mask.png'); --night-position: 58% center; background: #07111f; }
+.hero .cinema-scene { background: #07111f; }
+.hero .cinema-scene > div { inset: 0; pointer-events: none; }
+.hero .night-space { z-index: 0; background: #07111f; }
+.hero .night-stars { z-index: 1; background: var(--night-asset) var(--night-position)/cover no-repeat; }
+.hero .night-milkyway { z-index: 2; inset: 0; mask-image: radial-gradient(ellipse 28% 50% at 64% 34%,#000 20%,transparent 85%); }
+.hero .night-dust { opacity: 1; position: absolute; inset: 0; background: var(--night-asset) var(--night-position)/cover no-repeat; }
+.hero .night-cloud { z-index: 3; opacity: .24; mask-image: radial-gradient(ellipse at 58% 73%,#000,transparent 66%); }
+.hero .night-cloud-drift { position: absolute; inset: 0; background: radial-gradient(ellipse 48% 8% at 56% 75%,rgba(163,126,145,.22),transparent 80%),radial-gradient(ellipse 38% 10% at 22% 68%,rgba(143,132,155,.18),transparent 85%); }
+.hero .night-light { z-index: 4; background: radial-gradient(ellipse at 84% 22%,rgba(41,97,111,.07),transparent 65%); }
+.hero .night-forest { z-index: 5; background: var(--night-asset) var(--night-position)/cover no-repeat; mask-image: linear-gradient(transparent 64%,#000 76%); }
+.hero .night-contrast { z-index: 6; background: linear-gradient(90deg,rgba(4,10,21,.68),rgba(4,10,21,.48) 34%,rgba(4,10,21,.08) 65%,rgba(4,10,21,.06)),linear-gradient(0deg,#07101f,transparent 16%),radial-gradient(ellipse at 58% 42%,transparent 40%,rgba(3,8,17,.2)); }
+.hero .pm-hero-copy { animation: night-intro .65s ease-out 1.1s both; }
+@keyframes night-intro { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 1023px) {
+ .hero.pm-hero { --night-position: 62% center; }
+ .hero .night-contrast { background: linear-gradient(90deg,rgba(4,10,21,.72),rgba(4,10,21,.4) 55%,rgba(4,10,21,.14)),linear-gradient(0deg,#07101f,transparent 16%); }
+}
+@media (max-width: 767px) {
+ .hero.pm-hero { --night-asset: url('assets/images/atmosphere/night-sky-v3-mobile.webp'); --night-sky-mask: url('assets/images/atmosphere/night-sky-v3-mobile-sky-mask.png'); --night-position: 61% center; }
+ .hero .night-stars, .hero .night-milkyway { transform: none; }
+ .hero .night-light { display: none; }
+ .hero .night-cloud { opacity: .15; }
+ .hero .night-contrast { background: linear-gradient(180deg,rgba(4,10,21,.16),rgba(4,10,21,.2) 20%,rgba(4,10,21,.68) 35%,rgba(4,10,21,.75) 65%,rgba(4,10,21,.2) 82%,#07101f),linear-gradient(90deg,rgba(4,10,21,.25),transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+ .hero .cinema-scene *, .hero .pm-hero-copy { animation: none !important; transform: none !important; }
+ .hero .pm-hero-copy { opacity: 1; }
+}
+
+/* STEP 2: the first node is a scene object; its geometry belongs to the existing Journey. */
+.star-journey .journey-star[data-kind="first"] { width: 6px; height: 6px; margin: -3px; background: #dfedff; box-shadow: 0 0 0 3px rgba(189,218,251,.1),0 0 16px rgba(163,205,248,.23); animation: first-star-intro .7s var(--ease-standard) .95s both; }
+.star-journey .journey-star[data-kind="first"]::after { content: ''; position: absolute; inset: -8px; border: 0; background: radial-gradient(circle,rgba(194,222,252,.14),transparent 72%); border-radius: 50%; animation: first-star-breath 7s ease-in-out 1.65s infinite alternate; }
+.star-journey .journey-segment[data-from="about"] .journey-path-base { opacity: 0; }
+.star-journey .journey-segment[data-from="about"] .journey-path-travelled { stroke: #91accb; opacity: .5; }
+@keyframes first-star-intro { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+@keyframes first-star-breath { from { opacity: .68; transform: scale(.97); } to { opacity: .88; transform: scale(1.03); } }
+@media (max-width: 767px) { .hero.pm-hero { padding-bottom: 240px; } }
+@media (prefers-reduced-motion: reduce) { .star-journey .journey-star[data-kind="first"], .star-journey .journey-star[data-kind="first"]::after { animation: none; opacity: 1; transform: none; } }
+.star-journey[data-first-star-paused] .journey-star[data-kind="first"], .star-journey[data-first-star-paused] .journey-star[data-kind="first"]::after { animation-play-state: paused; }
+
+/* The photograph contains the forest. Its matching alpha mask preserves the
+   original scene while placing every meteor pixel behind the real tree contour.
+   Match background cover/position at every breakpoint; never crop by a flat line. */
+.hero .hero-shooting-layer {
+ position:absolute; inset:0; z-index:2; pointer-events:none;
+ -webkit-mask-image:var(--night-sky-mask); mask-image:var(--night-sky-mask);
+ -webkit-mask-size:cover; mask-size:cover;
+ -webkit-mask-position:var(--night-position); mask-position:var(--night-position);
+ -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; mask-mode:alpha;
+}
+/* Meteors remain below all interactive content. */
+.hero .hero-shooting-star {
+ position:absolute; left:0; top:0; z-index:2;
+ width:var(--shoot-head,6px); height:var(--shoot-head,6px);
+ border-radius:50%; opacity:0; pointer-events:none;
+ background:radial-gradient(circle,#fff 0 30%,rgba(248,252,255,.98) 48%,rgba(204,231,255,.55) 68%,transparent 78%);
+}
+.hero .hero-shooting-star::before {
+ content:''; position:absolute; right:50%; top:50%; transform:translateY(-50%);
+ width:var(--shoot-tail,280px); height:var(--shoot-thickness,2.5px); pointer-events:none;
+ background:linear-gradient(90deg,transparent 0%,rgba(184,216,250,.15) 18%,rgba(202,230,255,.55) 48%,rgba(230,245,255,.92) 73%,#fff 92%);
+ clip-path:polygon(0 50%,100% 0,100% 100%);
+}
+.hero .hero-shooting-star::after {
+ content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+ width:var(--shoot-halo,20px); height:var(--shoot-halo,20px); pointer-events:none;
+ background:radial-gradient(circle,rgba(213,239,255,.5),rgba(178,221,255,.2) 30%,transparent 70%);
+}
+.hero .hero-shooting-star.is-flying { animation:hero-shooting var(--shoot-duration,1.1s) linear both; }
+@keyframes hero-shooting {
+ 0% { opacity:0; transform:translate3d(var(--shoot-x),var(--shoot-y),0) rotate(var(--shoot-angle)); }
+ 10% { opacity:var(--shoot-brightness,.97); }
+ 72% { opacity:var(--shoot-brightness,.97); }
+ 100% { opacity:0; transform:translate3d(calc(var(--shoot-x) + var(--shoot-dx)),calc(var(--shoot-y) + var(--shoot-dy)),0) rotate(var(--shoot-angle)); }
+}
+@media (prefers-reduced-motion:reduce) { .hero .hero-shooting-star { display:none; animation:none!important; } }

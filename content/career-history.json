@@ -4,14 +4,14 @@
     "projects": "end-descending-then-start-descending"
   },
   "sources": {
-    "user-confirmation-2026-10-30": "사용자가 확인한 재직일과 동일한 프로젝트 참여일. 너드포 2026.05.04–2026.05.31, 블로믹스 2026.06.01–2026.07.22.",
+    "user-confirmation-2026-10-30": "사용자가 확인한 재직일과 동일한 프로젝트 참여일. 너드포 2026.05.04 ~ 2026.05.31, 블로믹스 2026.06.01 ~ 2026.07.22.",
     "portfolio": "저장소 포트폴리오 PDF 2, 8–10, 21, 28–29, 32쪽 및 대응 PPTX. 회사는 연도까지만 확인 가능. 프로젝트 참여 기간을 회사 재직 월로 대체하지 않음."
   },
   "companies": [
     {
       "id": "bloomix",
       "name": "블로믹스",
-      "role": "Service / Business PM",
+      "role": "Business / Service PM",
       "start": "2026-06-01",
       "end": "2026-07-22",
       "source": "user-confirmation-2026-10-30"
@@ -54,7 +54,7 @@
       "id": "talesrunner",
       "name": "TALES RUNNER",
       "company": "bloomix",
-      "role": "Service / Business PM",
+      "role": "Business / Service PM",
       "start": "2026-06-01",
       "end": "2026-07-22",
       "file": "tales-runner.html",
@@ -119,7 +119,7 @@
       "id": "slime",
       "name": "LEGEND OF SLIME",
       "company": "loadcomplete",
-      "role": "개발 / 라이브 PM",
+      "role": "Development PM",
       "start": "2022-03",
       "end": "2023-05",
       "file": "legend-of-slime.html",

@@ -22,8 +22,8 @@ a { text-underline-offset: .22em; }
 .map-ai { --map-x: 81%; --map-y: 64%; }
 .map-business { --map-x: 57%; --map-y: 61%; }
 .map-core { position: absolute; left: 9px; top: 20px; width: 5px; height: 5px; border-radius: 50%; background: #dceaff; box-shadow: 0 0 0 4px rgba(188,214,247,.08),0 0 14px rgba(173,211,253,.18); transition: transform var(--motion-base) var(--ease-standard),box-shadow var(--motion-base) var(--ease-standard); }
-.map-label { font-size: clamp(.875rem,1vw,1rem); font-weight: 600; letter-spacing: .015em; }
-.map-preview { font-size: .75rem; line-height: 1.6; max-width: 150px; color: #bccbdd; opacity: .68; transition: opacity var(--motion-base) var(--ease-standard); word-break: keep-all; }
+.map-label { font-size: clamp(1rem,1.15vw,1.125rem); font-weight: 600; letter-spacing: .015em; }
+.map-preview { font-size: .8125rem; line-height: 1.6; max-width: 150px; color: #bccbdd; opacity: .68; transition: opacity var(--motion-base) var(--ease-standard); word-break: keep-all; }
 .map-star:hover, .map-star:focus-visible { color: #f5f9ff; }
 .map-star:hover .map-core, .map-star:focus-visible .map-core { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(188,214,247,.1),0 0 18px rgba(173,211,253,.24); }
 .map-star:hover .map-preview, .map-star:focus-visible .map-preview { opacity: 1; }
@@ -638,3 +638,45 @@ html { scroll-behavior: auto; }
 #page-top { scroll-margin-top:16px; }
 .hub-page .project-showcase .project-cover:focus-visible { outline-color:#f1f6ff; }
 .detail-toc nav a[aria-current="location"] { color:var(--color-primary); }
+
+/* A quiet menu highlight without changing the navigation layout. */
+.header nav.site-nav a { position:relative; isolation:isolate; text-decoration:none; transform:scale(1); transition:color var(--motion-fast) var(--ease-standard),transform var(--motion-fast) var(--ease-standard); }
+.header nav.site-nav a:is([aria-current],.active) { text-decoration:none; }
+.header nav.site-nav a:is(:hover,:focus-visible) { transform:scale(1.06); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.22em; }
+.header nav.site-nav a::before { content:''; position:absolute; inset:-8px -10px; z-index:-1; border-radius:4px; background:rgba(210,226,248,.1); opacity:0; transition:opacity var(--motion-fast) var(--ease-standard); pointer-events:none; }
+.header nav.site-nav a:is(:hover,:focus-visible)::before { opacity:1; }
+.is-body-theme .header nav.site-nav a::before { background:rgba(17,39,71,.065); }
+
+
+/* Break between sentences; let each sentence wrap naturally on narrow screens. */
+.hub-page .hero-description-sentence { display:block; word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty; }
+
+/* Keep supplied artwork recognizable while protecting the editorial cover copy. */
+.project-showcase .project-cover.has-image .project-cover__image { filter:saturate(.82) brightness(.92); }
+.project-showcase .project-cover.has-image .project-cover__gradient { background:linear-gradient(180deg,rgba(10,20,38,.1) 0%,rgba(10,20,38,var(--cover-gradient-middle,.35)) 32%,rgba(10,20,38,.86) 60%,rgba(10,20,38,var(--cover-gradient-bottom,.98)) 100%); }
+
+/* TALES RUNNER: actual policy-draft evidence, within the existing editorial case. */
+.tr-study .tr-policy-evidence { margin-block:clamp(64px,8vw,112px); }
+.tr-policy-reading { margin:32px 0 48px; }
+.tr-policy-reading > div { display:grid; grid-template-columns:minmax(120px,1fr) 2fr; gap:24px; padding-block:20px; border-top:1px solid var(--color-border); }
+.tr-policy-reading dt { font-weight:650; }
+.tr-policy-reading dd { margin:0; color:var(--color-text-secondary); line-height:1.9; }
+.tr-policy-evidence figure { margin:0 0 40px; }
+.tr-policy-evidence figure a { display:block; }
+.tr-policy-evidence img { display:block; width:100%; height:auto; border:1px solid var(--color-border); }
+.tr-policy-evidence figcaption { margin-top:12px; color:var(--color-text-secondary); font-size:var(--font-caption); line-height:1.8; }
+@media (max-width:767px) { .tr-policy-reading > div { grid-template-columns:1fr; gap:8px; } }
+
+/* DME document-based diagrams: uncropped preview with explicit playback. */
+.dm-study .dm-process-diagram { margin:40px 0 24px; }
+.dm-process-diagram img { display:block; width:100%; height:auto; aspect-ratio:8 / 5; object-fit:contain; }
+.dm-diagram-controls { display:flex; align-items:center; gap:16px 24px; flex-wrap:wrap; margin-top:16px; }
+.dm-diagram-controls button { font:inherit; padding:10px 16px; border:1px solid var(--color-border); background:var(--color-background); color:var(--color-text); cursor:pointer; }
+.dm-diagram-controls button[aria-pressed="true"] { border-color:var(--color-primary); }
+.dm-diagram-controls button:focus-visible { outline:2px solid var(--color-primary); outline-offset:4px; }
+.dm-process-diagram figcaption { margin-top:16px; font-size:var(--font-caption); line-height:1.8; color:var(--color-text-secondary); }
+.dm-process-notes { margin:32px 0 48px; }
+.dm-process-notes > div { display:grid; grid-template-columns:minmax(120px,1fr) 2fr; gap:24px; padding-block:24px; border-top:1px solid var(--color-border); }
+.dm-process-notes dt { font-weight:650; }
+.dm-process-notes dd { margin:0; line-height:1.9; color:var(--color-text-secondary); }
+@media (max-width:767px) { .dm-process-notes > div { grid-template-columns:1fr; gap:8px; } }

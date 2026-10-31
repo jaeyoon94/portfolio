@@ -40,39 +40,23 @@
 @media (prefers-reduced-motion: reduce) { .star-journey .journey-star[data-kind="first"], .star-journey .journey-star[data-kind="first"]::after { animation: none; opacity: 1; transform: none; } }
 .star-journey[data-first-star-paused] .journey-star[data-kind="first"], .star-journey[data-first-star-paused] .journey-star[data-kind="first"]::after { animation-play-state: paused; }
 
-/* The photograph contains the forest. Its matching alpha mask preserves the
-   original scene while placing every meteor pixel behind the real tree contour.
-   Match background cover/position at every breakpoint; never crop by a flat line. */
-.hero .hero-shooting-layer {
+/* Alpha follows the photographed tree contour, with the same responsive crop. */
+.hero .hero-twinkle-layer {
  position:absolute; inset:0; z-index:2; pointer-events:none;
  -webkit-mask-image:var(--night-sky-mask); mask-image:var(--night-sky-mask);
  -webkit-mask-size:cover; mask-size:cover;
  -webkit-mask-position:var(--night-position); mask-position:var(--night-position);
  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; mask-mode:alpha;
+ animation-play-state:running;
 }
-/* Meteors remain below all interactive content. */
-.hero .hero-shooting-star {
- position:absolute; left:0; top:0; z-index:2;
- width:var(--shoot-head,6px); height:var(--shoot-head,6px);
- border-radius:50%; opacity:0; pointer-events:none;
- background:radial-gradient(circle,#fff 0 30%,rgba(248,252,255,.98) 48%,rgba(204,231,255,.55) 68%,transparent 78%);
+.sky-point { position:absolute; width:1.3px; height:1.3px; border-radius:50%; background:#e0edff; opacity:.12; pointer-events:none; }
+.sky-point--medium { width:2.2px; height:2.2px; --twinkle-peak:.6; }
+.sky-point--accent { width:3px; height:3px; --twinkle-peak:.72; background:radial-gradient(circle,#f3f8ff,rgba(187,222,249,.3) 55%,transparent 75%); box-shadow:0 0 3px rgba(190,222,249,.12); }
+.sky-point.is-twinkling { animation:sky-twinkle var(--twinkle-duration) ease-in-out var(--twinkle-delay) infinite; animation-play-state:inherit; }
+.hero-twinkle-layer.is-paused .sky-point { animation-play-state:paused; }
+@keyframes sky-twinkle {
+ 0%,35%,68%,100% { opacity:.12; }
+ 45% { opacity:.16; }
+ 54% { opacity:var(--twinkle-peak,.32); }
 }
-.hero .hero-shooting-star::before {
- content:''; position:absolute; right:50%; top:50%; transform:translateY(-50%);
- width:var(--shoot-tail,280px); height:var(--shoot-thickness,2.5px); pointer-events:none;
- background:linear-gradient(90deg,transparent 0%,rgba(184,216,250,.15) 18%,rgba(202,230,255,.55) 48%,rgba(230,245,255,.92) 73%,#fff 92%);
- clip-path:polygon(0 50%,100% 0,100% 100%);
-}
-.hero .hero-shooting-star::after {
- content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
- width:var(--shoot-halo,20px); height:var(--shoot-halo,20px); pointer-events:none;
- background:radial-gradient(circle,rgba(213,239,255,.5),rgba(178,221,255,.2) 30%,transparent 70%);
-}
-.hero .hero-shooting-star.is-flying { animation:hero-shooting var(--shoot-duration,1.1s) linear both; }
-@keyframes hero-shooting {
- 0% { opacity:0; transform:translate3d(var(--shoot-x),var(--shoot-y),0) rotate(var(--shoot-angle)); }
- 10% { opacity:var(--shoot-brightness,.97); }
- 72% { opacity:var(--shoot-brightness,.97); }
- 100% { opacity:0; transform:translate3d(calc(var(--shoot-x) + var(--shoot-dx)),calc(var(--shoot-y) + var(--shoot-dy)),0) rotate(var(--shoot-angle)); }
-}
-@media (prefers-reduced-motion:reduce) { .hero .hero-shooting-star { display:none; animation:none!important; } }
+@media (prefers-reduced-motion:reduce) { .sky-point.is-twinkling { animation:none; opacity:.12; } }

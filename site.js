@@ -91,3 +91,15 @@
  document.fonts?.ready.then(()=>schedule(true));
  schedule();
 })();
+
+/* Diagram playback is always an explicit choice; PNG works without JavaScript. */
+(() => {
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ document.querySelectorAll('[data-process-diagram]').forEach(figure=>{
+  const image=figure.querySelector('img'),button=figure.querySelector('button');
+  const show=playing=>{image.src=playing?image.dataset.motion:image.dataset.still;button.setAttribute('aria-pressed',String(playing));button.textContent=playing?'정지 이미지 보기':'흐름 재생';};
+  button.hidden=false;
+  button.addEventListener('click',()=>show(button.getAttribute('aria-pressed')!=='true'));
+  reduced.addEventListener('change',event=>{if(event.matches)show(false);});
+ });
+})();

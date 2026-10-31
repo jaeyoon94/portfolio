@@ -17,15 +17,15 @@
     "neon": {
       "context": "개발 일정과 협업, 후속 작업 관리",
       "image": {
-        "src": null,
+        "src": "assets/images/projects/project-neon-cover.png",
         "plannedPath": "assets/images/projects/project-neon-cover.webp",
-        "alt": "",
-        "positionDesktop": "50% 50%",
-        "positionTablet": "50% 50%",
-        "positionMobile": "50% 50%"
+        "alt": "PROJECT NEON의 도시 폐허와 붉은 포털 타이틀 이미지",
+        "positionDesktop": "50% 40%",
+        "positionTablet": "50% 40%",
+        "positionMobile": "52% 40%"
       },
-      "gradientMiddle": 0.12,
-      "gradientBottom": 0.94,
+      "gradientMiddle": 0.3,
+      "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",
@@ -35,15 +35,15 @@
     "undecember": {
       "context": "업데이트와 라이브 서비스 운영",
       "image": {
-        "src": null,
+        "src": "assets/images/projects/undecember-cover.png",
         "plannedPath": "assets/images/projects/undecember-cover.webp",
-        "alt": "",
-        "positionDesktop": "50% 50%",
-        "positionTablet": "50% 50%",
-        "positionMobile": "50% 50%"
+        "alt": "UNDECEMBER 로고와 붉은 인물 키 비주얼",
+        "positionDesktop": "50% 35%",
+        "positionTablet": "50% 35%",
+        "positionMobile": "50% 35%"
       },
-      "gradientMiddle": 0.12,
-      "gradientBottom": 0.94,
+      "gradientMiddle": 0.35,
+      "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",
@@ -53,15 +53,15 @@
     "slime": {
       "context": "개발·출시 준비와 라이브 운영",
       "image": {
-        "src": null,
+        "src": "assets/images/projects/legend-of-slime-cover.png",
         "plannedPath": "assets/images/projects/legend-of-slime-cover.webp",
-        "alt": "",
-        "positionDesktop": "50% 50%",
-        "positionTablet": "50% 50%",
-        "positionMobile": "50% 50%"
+        "alt": "LEGEND OF SLIME 게임 캐릭터 키 비주얼",
+        "positionDesktop": "35% 50%",
+        "positionTablet": "35% 50%",
+        "positionMobile": "32% 50%"
       },
-      "gradientMiddle": 0.12,
-      "gradientBottom": 0.94,
+      "gradientMiddle": 0.35,
+      "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",
@@ -71,15 +71,15 @@
     "talesrunner": {
       "context": "라이브 서비스 운영과 사업 기획",
       "image": {
-        "src": null,
+        "src": "assets/images/projects/tales-runner-cover.png",
         "plannedPath": "assets/images/projects/tales-runner-cover.webp",
-        "alt": "",
+        "alt": "테일즈런너 로고",
         "positionDesktop": "50% 50%",
         "positionTablet": "50% 50%",
-        "positionMobile": "50% 50%"
+        "positionMobile": "0% 50%"
       },
-      "gradientMiddle": 0.12,
-      "gradientBottom": 0.94,
+      "gradientMiddle": 0.28,
+      "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",
@@ -89,15 +89,15 @@
     "dme": {
       "context": "프로젝트 관리와 AI·자동화 적용",
       "image": {
-        "src": null,
+        "src": "assets/images/projects/project-dme-cover.png",
         "plannedPath": "assets/images/projects/project-dme-cover.webp",
-        "alt": "",
-        "positionDesktop": "50% 50%",
-        "positionTablet": "50% 50%",
-        "positionMobile": "50% 50%"
+        "alt": "PROJECT DME 타이틀과 날개 달린 캐릭터",
+        "positionDesktop": "50% 20%",
+        "positionTablet": "50% 20%",
+        "positionMobile": "50% 20%"
       },
-      "gradientMiddle": 0.12,
-      "gradientBottom": 0.94,
+      "gradientMiddle": 0.35,
+      "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",

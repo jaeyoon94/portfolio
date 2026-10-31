@@ -7,7 +7,7 @@ module.exports=function syncHistory(){
  const projects=[...data.projects].sort((a,b)=>b.end.localeCompare(a.end)||b.start.localeCompare(a.start));
  const company=id=>companies.find(c=>c.id===id);
  const date=value=>`<time datetime="${value}"${value.length===10?` title="${value.replaceAll('-','.')}">`:'>'}${value.slice(0,7).replaceAll('-','.')}</time>`;
- const period=p=>date(p.start)+' — '+date(p.end);
+ const period=p=>date(p.start)+' ~ '+date(p.end);
  const link=p=>`${p.file}#${p.section}`;
  const projectBlock=p=>`<div class="employment-project" id="${p.anchor}"><h4>${esc(p.name)}</h4><p class="employment-project-role">${esc(p.role)}</p><p class="career-period">참여 ${period(p)}</p><p class="career-scope">${esc(p.summary)}</p><a class="career-project-link" href="${link(p)}">${esc(p.name)} · 상세 사례</a></div>`;
  const legacy=c=>c.id==='bloomix'?'<span id="career-service" aria-hidden="true"></span><span id="career-service-heading" aria-hidden="true"></span>':c.id==='nerd4'?'<span id="career-automation" aria-hidden="true"></span><span id="career-automation-heading" aria-hidden="true"></span>':'';

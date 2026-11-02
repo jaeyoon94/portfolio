@@ -1,0 +1,79 @@
+{
+  "talesrunner": {
+    "context": "라이브 서비스 운영과 운영 리스크 대응, 사업 기획",
+    "responsibilities": [
+      "자진신고 캠페인 추진안 기획",
+      "신고 범위·검증 기준·처리 절차 정리",
+      "유관부서와 추진 방향 협의"
+    ],
+    "collaboration": "유관부서",
+    "tools": null,
+    "team": null,
+    "source": "현재 상세 사례와 자진신고 정책 초안 ver0.1. 21주년 온라인 제안의 개인 기여 범위는 별도 확인되지 않아 책임 항목에 포함하지 않음."
+  },
+  "dme": {
+    "context": "프로젝트 정보 동기화와 Excel 반복 처리 자동화",
+    "responsibilities": [
+      "동기화할 프로젝트 정보와 처리 규칙 정의",
+      "Jira·Notion·Google Sheets 관리 정보 연결",
+      "Excel Copy Tool 요구사항 정의와 로직 수정",
+      "실제 업무 데이터로 결과와 예외 확인"
+    ],
+    "collaboration": null,
+    "tools": "Jira · Notion · Google Sheets · Excel · ChatGPT · Claude Code",
+    "team": null,
+    "source": "기존 포트폴리오 5–7쪽 및 현재 상세 사례. 실제 GUI 이미지는 미확보."
+  },
+  "undecember": {
+    "context": "업데이트와 라이브 서비스 운영",
+    "responsibilities": [
+      "사업 기획의 콘텐츠 영향과 개발 범위 검토",
+      "개발 일정과 작업 범위 조율",
+      "빌드·업데이트 준비 확인",
+      "라이브 이슈 대응과 회의 운영"
+    ],
+    "collaboration": "개발 · 사업",
+    "tools": "Jira · Asana · Notion · P4V · Unreal Engine 4",
+    "team": "18명",
+    "source": "기존 포트폴리오 10쪽 / 개발 인력 18명. 현행 경력 데이터의 회사·기간·역할과 대조."
+  },
+  "neon": {
+    "context": "개발 일정·리소스와 회의 후속 작업 조율",
+    "responsibilities": [
+      "개발 일정과 리소스 확인",
+      "제작 파이프라인과 외부 협력사 일정 조율",
+      "개발·아트·사업 정기 회의 운영",
+      "이슈 담당자와 완료 기한 확인"
+    ],
+    "collaboration": "개발 · 아트 · 사업 · 외부 협력사",
+    "tools": "Asana · Confluence · P4V · Unreal Engine 5",
+    "team": "90명 → 120명",
+    "source": "기존 포트폴리오 21–24쪽 / 개발 인력 규모 변화. 직접 보고 인원이 아님."
+  },
+  "slime": {
+    "context": "개발 → 출시 준비 → 론칭 → 라이브",
+    "responsibilities": [
+      "기능 우선순위와 개발 범위 확인",
+      "리소스를 고려한 일정 산정과 일감 조율",
+      "출시 준비와 라이브 이슈 시나리오 검토",
+      "론칭 이후 업데이트·패치와 라이브 이슈 대응"
+    ],
+    "collaboration": "개발 · 운영 · 사업",
+    "tools": "Jira · Notion · Git · Unity 3D",
+    "team": "30명 → 80명",
+    "source": "기존 포트폴리오 28–30쪽 / 개발 인력 규모 변화. VERIFY_PROJECT_DATA: 원자료 역할은 개발/라이브 PM, 현행 사이트와 사용자 지정 직무는 Development PM을 유지."
+  },
+  "goddess": {
+    "context": "개발 품질 검증과 Jira 이슈 처리 흐름 정리",
+    "responsibilities": [
+      "테스트 시나리오 계획과 설계",
+      "테스트 진행과 결과 보고",
+      "Jira 이슈 처리 워크플로우 개선",
+      "이슈 현황판 대시보드 제작"
+    ],
+    "collaboration": null,
+    "tools": "Unity 3D · Trello · Notion · Jira",
+    "team": "150명 → 170명",
+    "source": "기존 포트폴리오 PDF·PPTX 32–33쪽. 개발 인력 규모이며 직접 관리 인원이 아님. Unity 3D·Trello·Notion은 사용자 확인(2026-11-01), Jira는 기존 포트폴리오 기준."
+  }
+}

@@ -680,3 +680,73 @@ html { scroll-behavior: auto; }
 .dm-process-notes dt { font-weight:650; }
 .dm-process-notes dd { margin:0; line-height:1.9; color:var(--color-text-secondary); }
 @media (max-width:767px) { .dm-process-notes > div { grid-template-columns:1fr; gap:8px; } }
+
+/* Real game context remains separate from PM work evidence. */
+.project-detail .project-context-visual { margin:40px 0 64px; }
+.project-context-visual a { display:block; }
+.project-context-visual img { display:block; width:100%; height:auto; object-fit:contain; }
+.project-context-visual figcaption { margin-top:12px; font-size:var(--font-caption); line-height:1.8; color:var(--color-text-secondary); max-width:var(--measure-reading); }
+.project-detail .project-context-visual--logo img { width:min(200px,100%); }
+.project-detail .project-context-visual--slime { max-width:800px; }
+.project-detail .project-context-visual--season { max-width:960px; }
+.project-detail .project-context-visual--portrait { max-width:300px; margin-top:40px; }
+@media (max-width:767px) { .project-detail .project-context-visual { margin-block:32px 48px; } .project-detail .project-context-visual--logo img { width:160px; } .project-detail .project-context-visual--portrait { max-width:min(280px,100%); } }
+
+/* UNDECEMBER identity and game image share the introductory header. */
+.detail-intro--with-visual { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,4vw,64px); align-items:center; }
+.detail-intro-copy { min-width:0; }
+.detail-intro-copy > p:last-child { color:var(--color-text-secondary); line-height:1.9; }
+.detail-intro-visual { margin:0; width:100%; max-width:600px; justify-self:end; }
+.detail-intro-visual img { display:block; width:100%; height:auto; object-fit:contain; }
+@media (max-width:767px) { .detail-intro--with-visual { grid-template-columns:1fr; gap:24px; } }
+
+.detail-intro-visual--square { max-width:280px; justify-self:center; }
+.detail-intro-visual figcaption { margin-top:10px; color:var(--color-text-secondary); font-size:var(--font-caption); line-height:1.7; }
+@media (max-width:767px) { .detail-intro-visual--square { max-width:240px; } }
+
+/* Anniversary proposal: reuse editorial lists and document evidence styling. */
+.tr-anniversary .tr-participation-flow { display:flex; flex-wrap:wrap; gap:12px 0; list-style:none; margin:24px 0 16px; padding:0; }
+.tr-participation-flow li { display:flex; align-items:center; font-weight:600; }
+.tr-participation-flow li:not(:last-child)::after { content:'→'; margin-inline:16px; color:var(--color-text-secondary); font-weight:400; }
+.tr-anniversary-evidence { margin:40px 0 16px; }
+.tr-anniversary-evidence img { display:block; width:100%; height:auto; }
+.tr-anniversary-evidence figcaption,.tr-anniversary-conditions { font-size:var(--font-caption); line-height:1.8; color:var(--color-text-secondary); }
+.tr-anniversary-evidence figcaption { margin-top:12px; }
+.tr-anniversary-considerations p,.tr-anniversary-boundary p { color:var(--color-text-secondary); }
+.tr-anniversary .tr-anniversary-boundary { margin-top:32px; }
+@media (max-width:767px) { .tr-anniversary .tr-participation-flow { flex-direction:column; gap:8px; } .tr-participation-flow li { align-items:flex-start; flex-direction:column; gap:8px; } .tr-participation-flow li:not(:last-child)::after { content:'↓'; margin:0; } }
+
+.tr-anniversary :is(p,dd,figcaption) { word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty; }
+
+/* Project Introduction: existing detail header extended, case narratives preserved. */
+.detail-intro--with-visual .project-introduction-role{font-weight:600;margin-bottom:var(--space-sm,16px)}
+.detail-intro--with-visual .project-introduction-context{margin-bottom:24px;word-break:keep-all}
+.project-introduction-meta{display:flex;flex-wrap:wrap;gap:20px 32px;margin:24px 0 0}
+.project-introduction-meta div{min-width:0}
+.project-introduction-meta dt,.project-introduction-scope dt{font-size:.8rem;color:var(--color-text-secondary,#667085);margin-bottom:6px}
+.project-introduction-meta dd,.project-introduction-scope dd{margin:0;word-break:keep-all;overflow-wrap:anywhere}
+.project-introduction-scope{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr;gap:32px;border-top:1px solid var(--color-border,#e5e7eb);padding-top:32px;margin-top:8px}
+.project-introduction-scope h2{font-size:1rem;margin:0 0 12px}
+.project-introduction-scope ul{margin:0;padding-left:1.2em;line-height:1.9;word-break:keep-all}
+.project-introduction-scope dl{margin:0;display:grid;align-content:start;gap:20px}
+@media(max-width:767px){.project-introduction-scope{grid-template-columns:1fr;gap:24px}.project-introduction-meta{gap:16px 24px}.project-introduction-scope ul{font-size:.95rem}.detail-intro--with-visual .project-introduction-context{margin-bottom:16px}}
+
+/* Goddess Order: quality checks and issue ownership, scoped to this case. */
+.goddess-study .go-lead{max-width:var(--measure-reading,760px);margin-bottom:56px}
+.goddess-study .go-section{padding-block:40px;border-top:1px solid var(--color-border);margin:0}
+.goddess-study h2{font-size:var(--font-section-title,clamp(2rem,3vw,2.75rem));word-break:keep-all}
+.goddess-study p{max-width:var(--measure-reading,760px);word-break:keep-all;line-height:1.9}
+.goddess-study .go-source-note{font-size:var(--font-caption,.875rem);color:var(--color-text-secondary)}
+.goddess-study .go-reading{margin:24px 0 0}
+.goddess-study .go-reading>div{display:grid;grid-template-columns:1fr 2fr;gap:24px;padding-block:20px;border-top:1px solid var(--color-border)}
+.goddess-study dd{margin:0;word-break:keep-all;line-height:1.9}
+.goddess-study .go-workflow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;list-style:none;padding:24px 0;margin:24px 0;border-block:1px solid var(--color-border)}
+.goddess-study .go-workflow li{display:grid;gap:12px;align-content:start;word-break:keep-all}
+.goddess-study .go-workflow span{color:var(--color-text-secondary);line-height:1.8}
+@media(max-width:767px){.goddess-study .go-reading>div{grid-template-columns:1fr;gap:8px}.goddess-study .go-workflow{grid-template-columns:1fr}.goddess-study .go-section{padding-block:32px}.goddess-study .go-lead{margin-bottom:32px}}
+
+/* Brand marks identify verified tools; visible names remain for accessibility. */
+.project-introduction-scope .project-tool-icons{display:flex;flex-wrap:wrap;gap:16px 24px;list-style:none;margin:12px 0 0;padding:0}
+.project-introduction-scope .project-tool-icons li{display:inline-flex;align-items:center;gap:9px;max-width:100%;font-size:.9375rem;line-height:1.5}
+.project-tool-icons img{display:block;flex:0 0 24px;width:24px;height:24px;object-fit:contain}
+@media(max-width:767px){.project-introduction-scope .project-tool-icons{gap:16px 20px}.project-introduction-scope .project-tool-icons li{font-size:.875rem}}

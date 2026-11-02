@@ -1,0 +1,71 @@
+{
+  "collection": "Simple Icons 13.21.0",
+  "documentation": "https://github.com/simple-icons/simple-icons",
+  "icons": [
+    {
+      "id": "jira",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/jira.svg",
+      "status": "OK"
+    },
+    {
+      "id": "notion",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/notion.svg",
+      "status": "OK"
+    },
+    {
+      "id": "googlesheets",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/googlesheets.svg",
+      "status": "OK"
+    },
+    {
+      "id": "microsoftexcel",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/microsoftexcel.svg",
+      "status": "OK"
+    },
+    {
+      "id": "openai",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/openai.svg",
+      "status": "OK"
+    },
+    {
+      "id": "claude",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/claude.svg",
+      "status": "OK"
+    },
+    {
+      "id": "asana",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/asana.svg",
+      "status": "OK"
+    },
+    {
+      "id": "perforce",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/perforce.svg",
+      "status": "OK"
+    },
+    {
+      "id": "unrealengine",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/unrealengine.svg",
+      "status": "OK"
+    },
+    {
+      "id": "confluence",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/confluence.svg",
+      "status": "OK"
+    },
+    {
+      "id": "git",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/git.svg",
+      "status": "OK"
+    },
+    {
+      "id": "unity",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/unity.svg",
+      "status": "OK"
+    },
+    {
+      "id": "trello",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/trello.svg",
+      "status": "OK"
+    }
+  ]
+}

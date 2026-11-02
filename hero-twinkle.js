@@ -17,12 +17,21 @@
   for(const [px,py] of points){
    const x=ox+px*iw*scale,y=oy+py*ih*scale;
    if(x<12||x>b.width-12||y<12||y>b.height-12||protectedRects.some(r=>x>=r.l&&x<=r.r&&y>=r.t&&y<=r.b)||selected.some(p=>Math.hypot(x-p.x,y-p.y)<18))continue;
-   selected.push({x,y});if(selected.length===wanted)break;
+   selected.push({x,y});
   }
-  const animated=Math.round(selected.length*.15),fragment=document.createDocumentFragment();
-  selected.forEach((p,i)=>{
-   const star=document.createElement('span'),twinkle=i<animated;
-   const kind=twinkle&&(i===0||(!mobile&&i===8))?'accent':twinkle&&i%5===0?'medium':'small';
+  const animated=Math.round(wanted*.15),active=[];
+  // Choose visible sky points across the photograph, rather than the brightest cloud pixels first.
+  const sky=selected.filter(p=>p.y<b.height*.64);
+  while(active.length<animated&&sky.length){
+   let best=0,score=-1;
+   sky.forEach((p,i)=>{const distance=active.length?Math.min(...active.map(a=>Math.hypot(p.x-a.x,p.y-a.y))):b.height-p.y;
+    if(distance>score){score=distance;best=i;}});
+   active.push(sky.splice(best,1)[0]);
+  }
+  const chosen=[...active,...selected.filter(p=>!active.includes(p))].slice(0,wanted),fragment=document.createDocumentFragment();
+  chosen.forEach((p,i)=>{
+   const star=document.createElement('span'),twinkle=i<active.length;
+   const kind=twinkle&&(i===0||(!mobile&&i===8))?'accent':twinkle&&i===5?'medium':'small';
    star.className='sky-point sky-point--'+kind+(twinkle?' is-twinkling':'');
    star.style.left=p.x+'px';star.style.top=p.y+'px';
    if(twinkle){star.style.setProperty('--twinkle-duration',(4.5+((i*11)%21)/10)+'s');star.style.setProperty('--twinkle-delay',(-((i*1.731)%5)).toFixed(3)+'s');}

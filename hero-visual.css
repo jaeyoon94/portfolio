@@ -39,26 +39,3 @@
 @media (max-width: 767px) { .hero.pm-hero { padding-bottom: 240px; } }
 @media (prefers-reduced-motion: reduce) { .star-journey .journey-star[data-kind="first"], .star-journey .journey-star[data-kind="first"]::after { animation: none; opacity: 1; transform: none; } }
 .star-journey[data-first-star-paused] .journey-star[data-kind="first"], .star-journey[data-first-star-paused] .journey-star[data-kind="first"]::after { animation-play-state: paused; }
-
-/* Alpha follows the photographed tree contour, with the same responsive crop. */
-.hero .hero-twinkle-layer {
- position:absolute; inset:0; z-index:2; pointer-events:none;
- -webkit-mask-image:var(--night-sky-mask); mask-image:var(--night-sky-mask);
- -webkit-mask-size:cover; mask-size:cover;
- -webkit-mask-position:var(--night-position); mask-position:var(--night-position);
- -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; mask-mode:alpha;
- animation-play-state:running;
-}
-.sky-point { position:absolute; width:1.3px; height:1.3px; border-radius:50%; background:#e0edff; opacity:.12; pointer-events:none; }
-.sky-point--small.is-twinkling { width:1.9px; height:1.9px; }
-.sky-point--medium { width:2.2px; height:2.2px; --twinkle-peak:.76; }
-.sky-point--accent { width:3px; height:3px; --twinkle-peak:.84; background:radial-gradient(circle,#f3f8ff,rgba(187,222,249,.3) 55%,transparent 75%); box-shadow:0 0 3px rgba(190,222,249,.12); }
-.sky-point.is-twinkling { animation:sky-twinkle var(--twinkle-duration) ease-in-out var(--twinkle-delay) infinite; animation-play-state:inherit; }
-.hero-twinkle-layer.is-paused .sky-point { animation-play-state:paused; }
-@keyframes sky-twinkle {
- 0%,37%,67%,100% { opacity:.12; }
- 44% { opacity:.2; }
- 53% { opacity:var(--twinkle-peak,.52); }
- 61% { opacity:.2; }
-}
-@media (prefers-reduced-motion:reduce) { .sky-point.is-twinkling { animation:none; opacity:.12; } }

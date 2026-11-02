@@ -4,8 +4,9 @@
 - Schedule: every 1 hour while this Windows user is logged in; runs independently of Codex. A powered-off PC cannot run it. Missed starts run when available.
 - Task: `Portfolio-Git-Auto-Sync` (Windows Task Scheduler).
 - Script: `scripts/git-auto-sync.ps1`; repository defaults to the script parent.
-- Manual (from repository root): `& ([scriptblock]::Create([IO.File]::ReadAllText((Join-Path $PWD "scripts/git-auto-sync.ps1")))) -RepositoryPath $PWD`
-- Dry run: append `-DryRun` to the manual command. The scheduled action uses the same inline loader with absolute repository arguments; it does not change system execution policy.
+- Manual: `Start-ScheduledTask -TaskName Portfolio-Git-Auto-Sync`.
+- Dry run (from repository root): `& (Get-ScheduledTask -TaskName Portfolio-Git-Auto-Sync).Actions.Execute -NoProfile -NonInteractive -File (Join-Path $PWD "scripts/git-auto-sync.ps1") -DryRun`.
+- The task uses the existing local PowerShell 7 runtime; system execution policy is unchanged. If that runtime is moved or removed, update the task executable. No running Codex session is required.
 - Log: `.git/portfolio-scheduled-sync.log`; one rotated copy at 1 MB.
 - Disable: `Disable-ScheduledTask -TaskName Portfolio-Git-Auto-Sync`
 - Remove: `Unregister-ScheduledTask -TaskName Portfolio-Git-Auto-Sync -Confirm:$false`

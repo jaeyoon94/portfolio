@@ -1,3 +1,18 @@
+// Reloads return to the home entry; ordinary navigation and history stay native.
+(() => {
+ const navigation=performance.getEntriesByType('navigation')[0];
+ if(!navigation||navigation.type!=='reload')return;
+ const home=new URL('index.html',location.href);
+ if(location.pathname!==home.pathname||location.hash||location.search){
+  location.replace(home.href);
+  return;
+ }
+ history.scrollRestoration='manual';
+ const reset=()=>window.scrollTo({top:0,left:0,behavior:'instant'});
+ reset();
+ window.addEventListener('pageshow',reset,{once:true});
+})();
+
 /* Native page navigation and history; interactions never delay following a link. */
 (() => {
  const hero=document.querySelector('.pm-hero');
@@ -102,4 +117,19 @@
   button.addEventListener('click',()=>show(button.getAttribute('aria-pressed')!=='true'));
   reduced.addEventListener('change',event=>{if(event.matches)show(false);});
  });
+})();
+
+// Project selection changes only the preview; the preview remains a native detail link.
+(() => {
+ const root=document.querySelector('[data-project-selection]');
+ if(!root)return;
+ const covers=[...root.querySelectorAll('[data-cover-project]')];
+ const buttons=[...root.querySelectorAll('[data-select-project]')];
+ function select(id){
+  covers.forEach(cover=>{cover.hidden=cover.dataset.coverProject!==id;});
+  buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.selectProject===id)));
+ }
+ buttons.forEach(button=>button.addEventListener('click',()=>select(button.dataset.selectProject)));
+ select(buttons[0].dataset.selectProject);
+ root.classList.add('is-ready');
 })();

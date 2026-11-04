@@ -1,3 +1,5 @@
+> 2026-11-04 current implementation: the static multipage site uses the existing typography, spacing and color tokens. Home has a selected project preview plus six index buttons; Projects uses six portrait covers. The night-sky photograph is static. Only eight small fixed points change opacity; reduced motion hides them. Floating, mouse parallax, scroll parallax and shooting stars are not loaded. Notes below retain the original design history and do not override current source.
+
 # 홈페이지 디자인 시스템
 
 기존 섹션 순서, 앵커, 문구, 프로젝트 수를 유지한다. 새로운 프로젝트 콘텐츠는 추가하지 않는다.

@@ -66,10 +66,11 @@
   "goddess": {
     "context": "개발 품질 검증과 Jira 이슈 처리 흐름 정리",
     "responsibilities": [
-      "테스트 시나리오 계획과 설계",
-      "테스트 진행과 결과 보고",
-      "Jira 이슈 처리 워크플로우 개선",
-      "이슈 현황판 대시보드 제작"
+      "테스트 시나리오 계획·설계",
+      "기획 대비 기능·구현 검증",
+      "테스트 결과 보고·이슈 공유",
+      "Jira 이슈 처리 절차 개선",
+      "이슈 현황 대시보드 구축"
     ],
     "collaboration": null,
     "tools": "Unity 3D · Trello · Notion · Jira",

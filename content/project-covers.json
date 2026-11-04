@@ -4,6 +4,7 @@
     "dme",
     "undecember",
     "neon",
+    "goddess",
     "slime"
   ],
   "homeOrder": [
@@ -11,6 +12,7 @@
     "dme",
     "undecember",
     "neon",
+    "goddess",
     "slime"
   ],
   "items": {
@@ -97,6 +99,23 @@
         "positionMobile": "50% 20%"
       },
       "gradientMiddle": 0.35,
+      "gradientBottom": 0.98,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "goddess": {
+      "context": "개발 QA와 Jira 이슈 담당자 지정 흐름 정리",
+      "image": {
+        "src": "assets/images/projects/goddess-order-cover.png",
+        "alt": "가디스 오더 타이틀과 게임 캐릭터",
+        "positionDesktop": "50% 45%",
+        "positionTablet": "50% 45%",
+        "positionMobile": "45% 45%"
+      },
+      "gradientMiddle": 0.3,
       "gradientBottom": 0.98,
       "textAlignment": {
         "desktop": "left",

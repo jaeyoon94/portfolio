@@ -39,3 +39,9 @@
 @media (max-width: 767px) { .hero.pm-hero { padding-bottom: 240px; } }
 @media (prefers-reduced-motion: reduce) { .star-journey .journey-star[data-kind="first"], .star-journey .journey-star[data-kind="first"]::after { animation: none; opacity: 1; transform: none; } }
 .star-journey[data-first-star-paused] .journey-star[data-kind="first"], .star-journey[data-first-star-paused] .journey-star[data-kind="first"]::after { animation-play-state: paused; }
+
+/* A few fixed sky points breathe independently; the photograph stays still. */
+.hero .night-twinkle { z-index:4; position:absolute; pointer-events:none; }
+.night-twinkle span { position:absolute; left:var(--x); top:var(--y); width:var(--size); height:var(--size); border-radius:50%; background:#edf5ff; opacity:.18; animation:sky-point-twinkle var(--duration) ease-in-out var(--delay) infinite; }
+@keyframes sky-point-twinkle { 0%,100%{opacity:.12} 45%{opacity:.65} 65%{opacity:.22} }
+@media(prefers-reduced-motion:reduce) { .hero .night-twinkle { display:none; } }

@@ -1,22 +1,24 @@
 # Multi-page portfolio
 
-## Structure
-Home is a map, detail pages contain the full source material. No framework/router was added. All generated HTML works with native links and browser history; JavaScript only enhances the theme, hover/focus paths, menu closing and legacy bookmarks.
+## Current source and generation
 
-Pages: index.html, about.html, career.html, projects.html, project-neon.html, undecember.html, legend-of-slime.html, tales-runner.html, project-dme.html, goddess-order.html, ai.html, business.html.
+Edit `content/portfolio-source.html` for page content. Career dates and roles come from `content/career-history.json`; cover content and order come from `content/project-covers.json`; detail introductions come from `content/project-introductions.json`.
 
-## Editing / regeneration
-content/portfolio-source.html preserves the original complete single-page source. Existing migrated sections are extracted without rewriting their content; only link targets change. scripts/build-pages.cjs owns shared header, footer, page titles, descriptions, breadcrumbs, destination navigation and source-section routing. Run `node scripts/build-pages.cjs` after editing the source/shared template. This is an optional dependency-free maintenance script, not a runtime/build prerequisite.
+Run `node scripts/build-pages.cjs`, then `node scripts/verify-pages.cjs`.
+The generator writes 12 static pages, `sitemap.xml`, `robots.txt` and the page manifest. No runtime framework or hosted build service is required. Vercel continues to serve the committed static output.
 
-content/page-manifest.json records page names and source-section destinations. site.css and site.js provide the shared multipage shell. Existing design, Hero assets and hero-motion.js are reused. Legacy script.js/star-journey.js stay available as the former long-scroll implementation but are not loaded into the new pages. Star design tokens remain shared. The hub's five native anchor stars take over experience navigation; detail pages use restrained star nodes, project entry connections and breadcrumbs rather than a page-wide sky.
+## Shared behavior
 
-## Content ownership
-Home: existing Hero copy, short introduction, NEON / UNDECEMBER / DME previews, identity summary, original Contact CTA.
-About: full About, original Closing synthesis/evidence, documents.
-Career: original full timeline and existing role-evolution summary.
-Projects: existing full selected-project entries; six cases remain accessible, including Goddess Order.
-Project pages: each complete original case study, preserving diagrams/metrics/caveats.
-AI: complete capability framework and cross-page DME evidence links.
-Business: existing MapleStar and Artale content, clearly labelled personal planning portfolios; Tales Runner is separately linked as actual experience.
+- Home: static night-sky photograph, five navigation links, eight small CSS-only twinkling points, selected project preview with six choices, closing and contact.
+- Projects: six portrait covers followed by a compact participation history. Career retains the full responsibility summaries.
+- Project details: distinct narratives with shared header, introduction, typography, footer and native navigation.
+- Explicit browser reload returns to `index.html` at the top, as requested. Ordinary links, fragments and browser back remain native.
+- No shooting stars, background drift or parallax scripts are loaded. Reduced motion hides the decorative twinkle.
 
-No unverified pricing tables, market data or KPI hypotheses were created. Additional original BM materials are needed to expand beyond the existing summaries.
+## Images and SEO
+
+`content/image-assets.json` maps original images to lighter WebP display copies and intrinsic dimensions. `scripts/image-assets.cjs` updates image tags without changing links used to enlarge originals. Original files are preserved. Evidence screenshots and charts remain legible and retain their existing scope labels.
+
+The builder generates unique canonical and sharing metadata using `https://parkjaeyoon-portfolio.vercel.app`. Keep this origin in sync only if the real production domain changes.
+
+Historical design notes in `STAR_JOURNEY.md` describe earlier long-page experiments. The current static multipage shell loads `site.js`, not the old long-page scripts.

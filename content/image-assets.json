@@ -1,0 +1,52 @@
+{
+  "assets/images/dme/project-dme-header.png": {
+    "src": "assets/images/dme/project-dme-header.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "assets/images/goddess-order/goddess-order-header.png": {
+    "src": "assets/images/goddess-order/goddess-order-header.webp",
+    "width": 900,
+    "height": 600
+  },
+  "assets/images/projects/goddess-order-cover.png": {
+    "src": "assets/images/projects/goddess-order-cover.webp",
+    "width": 900,
+    "height": 600
+  },
+  "assets/images/projects/legend-of-slime-cover.png": {
+    "src": "assets/images/projects/legend-of-slime-cover.webp",
+    "width": 800,
+    "height": 450
+  },
+  "assets/images/projects/project-dme-cover.png": {
+    "src": "assets/images/projects/project-dme-cover.webp",
+    "width": 1254,
+    "height": 1254
+  },
+  "assets/images/projects/project-neon-cover.png": {
+    "src": "assets/images/projects/project-neon-cover.webp",
+    "width": 1919,
+    "height": 670
+  },
+  "assets/images/projects/tales-runner-cover.png": {
+    "src": "assets/images/projects/tales-runner-cover.webp",
+    "width": 500,
+    "height": 500
+  },
+  "assets/images/projects/undecember-cover.png": {
+    "src": "assets/images/projects/undecember-cover.webp",
+    "width": 1200,
+    "height": 630
+  },
+  "assets/images/slime/loading-screen.jpeg": {
+    "src": "assets/images/slime/loading-screen.webp",
+    "width": 1080,
+    "height": 2400
+  },
+  "assets/images/undecember/abyss-gate-header.png": {
+    "src": "assets/images/undecember/abyss-gate-header.webp",
+    "width": 600,
+    "height": 335
+  }
+}

@@ -808,3 +808,24 @@ br.sentence-break{display:initial}
 .about-editorial .about-values p{color:#c2cce0;font-size:.9375rem;line-height:1.9;margin:0}
 @media(max-width:1023px){.about-editorial .about-profile-grid{gap:40px}.about-editorial .about-skill-row{grid-template-columns:110px 1fr}.about-editorial .about-skill-row p{grid-column:2}.about-editorial .about-capability-grid{column-gap:40px}}
 @media(max-width:767px){.about-editorial .about-profile-grid{grid-template-columns:1fr;gap:48px}.about-editorial .about-profile-copy h2{max-width:none}.about-editorial .about-capability-grid{grid-template-columns:1fr}.about-editorial .about-skill-row{grid-template-columns:1fr;gap:16px}.about-editorial .about-skill-row p{grid-column:auto}.about-editorial .about-team{padding:32px 24px}.about-editorial .about-values{grid-template-columns:1fr;gap:24px}.about-editorial .about-education dl>div{grid-template-columns:110px 1fr}}
+
+/* Codex personal case: office structure, implementation and iterative testing. */
+.ai-capability-page .cap-codex{margin-top:96px;padding-block:64px;border-top:1px solid var(--color-border)}
+.cap-codex-heading{max-width:var(--measure-reading,760px);margin-bottom:40px}
+.cap-codex h2{font-size:var(--font-section);line-height:1.5;margin:0 0 24px}
+.cap-codex h3{font-size:clamp(1.125rem,1.6vw,1.5rem);line-height:1.6;margin:0 0 20px}
+.cap-codex p,.cap-codex dd{line-height:1.9;color:var(--color-text-secondary)}
+.cap-codex-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
+.cap-codex-floors{margin:24px 0}
+.cap-codex-floors>div{display:grid;grid-template-columns:64px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--color-border)}
+.cap-codex dd{margin:0}
+.cap-codex-screen{margin:0}
+.cap-codex-screen img{display:block;width:100%;height:auto}
+.cap-codex-screen figcaption{margin-top:12px}
+.cap-codex-development{margin-top:48px}
+.cap-codex-steps{display:flex;flex-wrap:wrap;gap:16px 32px;list-style:none;padding:20px 0;margin:24px 0;border-block:1px solid var(--color-border)}
+.cap-codex-steps li:not(:last-child)::after{content:'→';display:inline-block;margin-left:32px;color:var(--color-text-secondary)}
+.cap-codex-record{margin:32px 0}
+.cap-codex-record>div{display:grid;grid-template-columns:minmax(130px,1fr) 3fr;gap:32px;padding:20px 0;border-bottom:1px solid var(--color-border)}
+.cap-codex .cap-text-link{display:inline-block;margin-top:16px}
+@media(max-width:767px){.ai-capability-page .cap-codex{margin-top:64px;padding-block:40px}.cap-codex-layout{grid-template-columns:1fr;gap:32px}.cap-codex-record>div{grid-template-columns:1fr;gap:8px}.cap-codex-steps{flex-direction:column;gap:12px}.cap-codex-steps li:not(:last-child)::after{content:'↓';display:block;margin:12px 0 0}}

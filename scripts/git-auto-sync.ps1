@@ -11,12 +11,39 @@ $syncMutex = $null
 $ownsMutex = $false
 $exitCode = 0
 function Git([string[]]$Arguments) {
-    $savedPreference = $ErrorActionPreference
-    $ErrorActionPreference = 'Continue'
-    try { $result = & git.exe -C $RepositoryPath @Arguments 2>&1; $gitExit = $LASTEXITCODE } finally { $ErrorActionPreference = $savedPreference }
-    if ($gitExit -ne 0) { throw "Git command failed: $($Arguments[0])" }
-    return ($result -join "`n")
+    $start = New-Object Diagnostics.ProcessStartInfo
+    $start.FileName = (Get-Command git.exe).Source
+    $start.UseShellExecute = $false
+    $start.CreateNoWindow = $true
+    $start.RedirectStandardOutput = $true
+    $start.RedirectStandardError = $true
+    $start.StandardOutputEncoding = [Text.Encoding]::UTF8
+    $start.StandardErrorEncoding = [Text.Encoding]::UTF8
+    foreach ($argument in (@('-C', $RepositoryPath) + $Arguments)) { $start.ArgumentList.Add($argument) }
+    $process = New-Object Diagnostics.Process
+    $process.StartInfo = $start
+    try {
+        [void]$process.Start()
+        $output = $process.StandardOutput.ReadToEndAsync()
+        $errorOutput = $process.StandardError.ReadToEndAsync()
+        if (-not $process.WaitForExit(60000)) {
+            $process.Kill($true)
+            $process.WaitForExit()
+            throw "SYNC FAILED - GIT TIMEOUT (60s): $($Arguments[0])"
+        }
+        $stdout = $output.GetAwaiter().GetResult()
+        $stderr = $errorOutput.GetAwaiter().GetResult()
+        if ($process.ExitCode -ne 0) {
+            $reason = 'GIT ERROR'
+            if ($stderr -match 'Authentication|could not read Username|403|401') { $reason = 'AUTHENTICATION ERROR' }
+            elseif ($stderr -match 'resolve host|connect|SSL|timed out') { $reason = 'NETWORK ERROR' }
+            throw "SYNC FAILED - $reason ($($Arguments[0]), exit $($process.ExitCode))"
+        }
+        # Keep diagnostics out of filename/ref output; never print credential/error contents.
+        return $stdout.TrimEnd("`r", "`n")
+    } finally { $process.Dispose() }
 }
+
 try {
     $RepositoryPath = (Resolve-Path -LiteralPath $RepositoryPath).Path
     $gitDir = Git @('rev-parse','--absolute-git-dir')
@@ -46,7 +73,9 @@ try {
     if ($remote -eq '.' -or -not $remoteBranch.StartsWith('refs/heads/')) { throw 'SYNC BLOCKED - INVALID UPSTREAM' }
     $remoteUrl = Git @('remote','get-url',$remote)
     if ($remoteUrl -match 'https?://[^/]+@') { throw 'SYNC BLOCKED - POSSIBLE SENSITIVE FILE: remote credentials' }
+    Log 'REMOTE CHECK START'
     Git @('fetch','--quiet',$remote) | Out-Null
+    Log 'REMOTE CHECK OK'
     $behind = [int](Git @('rev-list','--count',"HEAD..$upstream"))
     if ($behind -gt 0) { throw 'SYNC BLOCKED - REMOTE CONFLICT' }
     if (Git @('diff','--cached','--name-only')) { throw 'SYNC BLOCKED - EXISTING STAGED CHANGES' }
@@ -80,7 +109,9 @@ try {
             if ($outgoing -match '(?im)(^|/)(\.env($|\.)|credentials?[^/]*|secrets?[^/]*|service[-_]?account[^/]*)(/|$)|\.(pem|key|pfx|p12)$') { throw 'SYNC BLOCKED - POSSIBLE SENSITIVE FILE IN OUTGOING COMMIT' }
         }
     }
+    Log 'SAFETY CHECK START'
     CheckFiles
+    Log 'SAFETY CHECK OK'
     # Require a stable full working-tree snapshot and a quiet interval. Never lock or rewrite editor files.
     function FileHash([string]$full) {
         $stream = [IO.File]::OpenRead($full)
@@ -95,6 +126,7 @@ try {
         }
         return $status + ($lines -join "`n")
     }
+    Log 'STABILITY CHECK START'
     $before = Snapshot
     Start-Sleep -Seconds 5
     if ($before -cne (Snapshot)) { throw 'SYNC BLOCKED - FILES CHANGING' }

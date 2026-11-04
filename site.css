@@ -750,3 +750,61 @@ html { scroll-behavior: auto; }
 .project-introduction-scope .project-tool-icons li{display:inline-flex;align-items:center;gap:9px;max-width:100%;font-size:.9375rem;line-height:1.5}
 .project-tool-icons img{display:block;flex:0 0 24px;width:24px;height:24px;object-fit:contain}
 @media(max-width:767px){.project-introduction-scope .project-tool-icons{gap:16px 20px}.project-introduction-scope .project-tool-icons li{font-size:.875rem}}
+
+/* Consistent Korean reading rhythm; wrapping follows available space. */
+.detail-page main :is(p,dd,li),.hub-page .hub-intro p{word-break:keep-all;overflow-wrap:break-word;text-wrap:pretty}
+.detail-page main :is(h1,h2,h3,h4),.hub-page .hub-intro h2{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+.detail-page .evidence-enlarge{display:block;max-width:100%}
+.detail-page figure .evidence-enlarge:focus-visible{outline:2px solid var(--color-focus);outline-offset:4px}
+.detail-page :is(.evidence-viewport,.dm-document .evidence-viewport a){width:auto;max-width:100%}
+.detail-page :is(.work-evidence--wbs,.work-evidence--preparation,.dm-document) img{width:100%;max-width:100%;height:auto}
+.detail-page .evidence-viewport{overflow:visible}
+.detail-page figure figcaption{font-size:var(--font-caption);color:var(--color-text-secondary);line-height:1.7}
+
+/* Each prose sentence starts on a new line, independently of viewport wrapping. */
+br.sentence-break{display:initial}
+.hub-page .pm-hero-description br.sentence-break{display:initial}
+
+/* About: a personal profile, working habits and verified tool use. */
+.profile-detail .about-editorial{display:block;padding-top:32px}
+.about-editorial .about-profile-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(48px,7vw,112px)}
+.profile-detail .about-editorial h2{font-size:var(--font-section);line-height:1.5;margin:0 0 24px}
+.about-editorial .about-profile-copy h2{max-width:17ch;font-size:clamp(2rem,3vw,2.75rem);letter-spacing:-.045em}
+.about-editorial .about-profile-copy p{max-width:35rem;color:var(--color-text-secondary);line-height:1.95;margin-bottom:24px}
+.about-editorial .about-profile-copy .about-profile-lead{color:var(--color-text);font-size:1.125rem}
+.about-editorial .about-email{display:block;width:fit-content;margin-top:32px}
+.about-editorial .about-career-link{display:block;width:fit-content;margin-top:16px;font-size:.9375rem}
+.about-editorial h3{font-size:1rem;line-height:1.6;margin:0 0 20px}
+.about-editorial .about-career-list{padding:0;margin:0;list-style:none}
+.about-editorial .about-career-list li{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;padding:12px 0;border-bottom:1px solid var(--color-border);font-size:.9375rem}
+.about-editorial .about-career-list li:first-child{padding-top:0}
+.about-editorial .about-career-list li>span{color:var(--color-text-secondary);font-size:.8125rem;white-space:nowrap}
+.about-editorial .about-career-list small{grid-column:2;font-size:.75rem;color:var(--color-text-secondary);line-height:1.6}
+.about-editorial .about-education{margin-top:40px}
+.about-editorial .about-education dl{margin:0}
+.about-editorial .about-education dl>div{display:grid;grid-template-columns:1fr 1.4fr;gap:16px;margin-bottom:12px;font-size:.875rem;line-height:1.8}
+.about-editorial .about-education dt{color:var(--color-text-secondary)}
+.about-editorial .about-education dd{margin:0}
+.about-editorial :is(.about-capabilities,.about-skills){margin-top:clamp(80px,9vw,128px)}
+.about-editorial .about-section-heading{margin-bottom:32px}
+.about-editorial .about-section-heading p{color:var(--color-text-secondary);line-height:1.9}
+.about-editorial .about-capability-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 64px}
+.about-editorial .about-capability-grid article{padding:28px 0;border-top:1px solid var(--color-border);margin:0;background:none;border-radius:0;box-shadow:none}
+.about-editorial .about-capability-grid h3{font-size:1.25rem;margin:0 0 16px}
+.about-editorial .about-capability-grid p{color:var(--color-text-secondary);line-height:1.9;margin:0}
+.about-editorial .about-skill-row{display:grid;grid-template-columns:130px minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:start;padding:28px 0;border-top:1px solid var(--color-border)}
+.about-editorial .about-skill-row h3{margin:0}
+.about-editorial .about-tool-list{display:flex;flex-wrap:wrap;gap:20px 24px;padding:0;margin:0;list-style:none}
+.about-editorial .about-tool-list li{display:flex;align-items:center;gap:9px;font-size:.875rem}
+.about-editorial .about-tool-list img{width:24px;height:24px;object-fit:contain}
+.about-editorial .about-skill-row p{margin:0;color:var(--color-text-secondary);font-size:.9375rem;line-height:1.9}
+.about-editorial .about-ai-link{display:inline-block;margin-top:20px}
+.about-editorial .about-team{margin-top:clamp(80px,9vw,128px);padding:48px;background:var(--color-primary);color:var(--scene-text,#f4f7ff)}
+.profile-detail .about-editorial .about-team h2{color:inherit;font-size:clamp(1.5rem,2.5vw,2rem)}
+.about-editorial .about-team>p{max-width:48rem;line-height:1.9;color:#c2cce0}
+.about-editorial .about-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:40px}
+.about-editorial .about-values>div{padding-top:20px;border-top:1px solid rgba(255,255,255,.25)}
+.about-editorial .about-values h3{color:inherit;margin:0 0 12px}
+.about-editorial .about-values p{color:#c2cce0;font-size:.9375rem;line-height:1.9;margin:0}
+@media(max-width:1023px){.about-editorial .about-profile-grid{gap:40px}.about-editorial .about-skill-row{grid-template-columns:110px 1fr}.about-editorial .about-skill-row p{grid-column:2}.about-editorial .about-capability-grid{column-gap:40px}}
+@media(max-width:767px){.about-editorial .about-profile-grid{grid-template-columns:1fr;gap:48px}.about-editorial .about-profile-copy h2{max-width:none}.about-editorial .about-capability-grid{grid-template-columns:1fr}.about-editorial .about-skill-row{grid-template-columns:1fr;gap:16px}.about-editorial .about-skill-row p{grid-column:auto}.about-editorial .about-team{padding:32px 24px}.about-editorial .about-values{grid-template-columns:1fr;gap:24px}.about-editorial .about-education dl>div{grid-template-columns:110px 1fr}}

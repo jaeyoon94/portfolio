@@ -829,3 +829,29 @@ br.sentence-break{display:initial}
 .cap-codex-record>div{display:grid;grid-template-columns:minmax(130px,1fr) 3fr;gap:32px;padding:20px 0;border-bottom:1px solid var(--color-border)}
 .cap-codex .cap-text-link{display:inline-block;margin-top:16px}
 @media(max-width:767px){.ai-capability-page .cap-codex{margin-top:64px;padding-block:40px}.cap-codex-layout{grid-template-columns:1fr;gap:32px}.cap-codex-record>div{grid-template-columns:1fr;gap:8px}.cap-codex-steps{flex-direction:column;gap:12px}.cap-codex-steps li:not(:last-child)::after{content:'↓';display:block;margin:12px 0 0}}
+
+/* Tales Runner offline event: proposal data and three supplied charts. */
+.tr-study .tr-offline{margin-top:80px;padding-top:48px;border-top:1px solid var(--color-border)}
+.tr-offline .tr-offline-plan-note{font-size:var(--font-caption);margin-top:20px;color:var(--color-text-secondary)}
+.tr-offline-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding:24px 0;margin:32px 0;border-block:1px solid var(--color-border)}
+.tr-offline dt{font-weight:600}
+.tr-offline-meta dt{font-size:.8125rem;color:var(--color-text-secondary);margin-bottom:8px}
+.tr-offline dd{margin:0;line-height:1.9;word-break:keep-all}
+.tr-offline-block{margin-top:40px}
+.tr-offline-block h3{font-size:clamp(1.25rem,1.8vw,1.625rem);line-height:1.6;margin-bottom:20px}
+.tr-offline-block p{max-width:var(--measure-reading,760px);line-height:1.9;color:var(--color-text-secondary)}
+.tr-offline-chart{margin:28px 0;max-width:900px}
+.tr-offline-chart img{display:block;width:100%;height:auto}
+.tr-offline-chart figcaption{margin-top:12px}
+.tr-offline-reading{margin:24px 0}
+.tr-offline-reading>div{display:grid;grid-template-columns:minmax(140px,1fr) 3fr;gap:24px;padding:20px 0;border-top:1px solid var(--color-border)}
+.tr-offline-reading dd{color:var(--color-text-secondary)}
+.tr-offline-goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px;margin:24px 0}
+.tr-offline-goals>div{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--color-border)}
+.tr-offline-goals dt{font-weight:400;color:var(--color-text-secondary)}
+.tr-offline-schedule{width:100%;border-collapse:collapse;margin-top:24px;font-size:.9375rem;line-height:1.8}
+.tr-offline-schedule caption{text-align:left;font-size:.8125rem;color:var(--color-text-secondary);margin-bottom:12px}
+.tr-offline-schedule :is(th,td){text-align:left;vertical-align:top;padding:16px 12px;border-bottom:1px solid var(--color-border);word-break:keep-all}
+.tr-offline-schedule th:first-child{padding-left:0;white-space:nowrap}
+.tr-offline-schedule td{color:var(--color-text-secondary)}
+@media(max-width:767px){.tr-offline-meta{grid-template-columns:1fr;gap:20px}.tr-offline-reading>div{grid-template-columns:1fr;gap:8px}.tr-offline-goals{grid-template-columns:1fr}.tr-offline-schedule,.tr-offline-schedule tbody{display:block}.tr-offline-schedule thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.tr-offline-schedule tr{display:grid;gap:8px;padding:20px 0;border-bottom:1px solid var(--color-border)}.tr-offline-schedule :is(th,td){display:block;padding:0;border:0}.tr-offline-schedule td::before{content:attr(data-label);display:block;font-size:.75rem;color:var(--color-text-secondary)}.tr-study .tr-offline{margin-top:56px;padding-top:32px}}

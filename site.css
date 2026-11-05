@@ -889,3 +889,11 @@ br.sentence-break{display:initial}
 @media(max-width:1023px) { .project-history-page .project-cover-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:600px) { .project-history-page .project-cover-grid { grid-template-columns:minmax(0,1fr); } }
 @media(prefers-reduced-motion:reduce) { .project-selection__item { transition:none; } }
+
+/* Original QA worksheet evidence lives within the existing quality section. */
+.goddess-study .go-documents { margin-top:48px; padding-top:32px; border-top:1px solid var(--color-border); }
+.goddess-study .go-document { margin-top:32px; }
+.goddess-study .go-document + .go-document { margin-top:48px; }
+.goddess-study .go-document figure { margin:24px 0 0; }
+.goddess-study .go-document img { display:block; width:100%; height:auto; border:1px solid var(--color-border); }
+.goddess-study .go-document figcaption { margin-top:12px; font-size:var(--font-caption); color:var(--color-text-secondary); }

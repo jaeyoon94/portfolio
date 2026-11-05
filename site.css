@@ -902,3 +902,10 @@ br.sentence-break{display:initial}
 
 /* Preview follows the document content ratio; the complete PDF stays unchanged. */
 .goddess-study .go-document img { max-height:none; object-fit:contain; background:#fff; }
+
+/* Actual project process documents: full composition, native image enlargement. */
+.case-study .process-evidence { grid-column:1 / -1; margin:32px 0 0; min-width:0; }
+.case-study .process-evidence img { display:block; width:100%; height:auto; object-fit:contain; }
+.case-study .process-evidence--issue { max-width:900px; }
+.case-study .process-evidence-reading { margin-top:32px; }
+.case-study .process-evidence figcaption { margin-top:12px; color:var(--color-text-secondary); font-size:var(--font-caption); }

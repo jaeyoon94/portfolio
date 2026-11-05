@@ -1,6 +1,6 @@
 # Project management dashboard
 
-Home `#dashboard` is a browser-only demonstration. Jira usage classifications and linked responsibilities describe experience; synthetic task dates, owners and metrics are not historical results. No Jira API connection is made.
+Standalone `dashboard.html` is a browser-only demonstration. Jira usage classifications and linked responsibilities describe experience; synthetic task dates, owners and metrics are not historical results. No Jira API connection is made.
 
 CSV: UTF-8, up to 1 MiB and 5,000 records. Required columns (any order): `id,project,group,title,owner,status,start,due`. All values required, at most 300 characters each. IDs must be unique within the uploaded dataset. Status: todo, doing, done, blocked. Dates: real YYYY-MM-DD dates; start must not exceed due. Project names must match the selected tab. The provided demo download supplies exact names.
 

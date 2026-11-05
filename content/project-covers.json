@@ -5,7 +5,8 @@
     "undecember",
     "neon",
     "goddess",
-    "slime"
+    "slime",
+    "thek"
   ],
   "homeOrder": [
     "talesrunner",
@@ -13,7 +14,8 @@
     "undecember",
     "neon",
     "goddess",
-    "slime"
+    "slime",
+    "thek"
   ],
   "items": {
     "neon": {
@@ -117,6 +119,23 @@
       },
       "gradientMiddle": 0.3,
       "gradientBottom": 0.98,
+      "textAlignment": {
+        "desktop": "left",
+        "tablet": "left",
+        "mobile": "left"
+      }
+    },
+    "thek": {
+      "context": "데이터 가공·분석과 Power BI 대시보드 제작",
+      "image": {
+        "src": "assets/images/projects/the-k-cover.svg",
+        "alt": "가상 데이터로 재구성한 The K 데이터 시각화 예시",
+        "positionDesktop": "50% 0%",
+        "positionTablet": "50% 0%",
+        "positionMobile": "50% 0%"
+      },
+      "gradientMiddle": 0.15,
+      "gradientBottom": 0.97,
       "textAlignment": {
         "desktop": "left",
         "tablet": "left",

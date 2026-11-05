@@ -5,7 +5,8 @@
   },
   "sources": {
     "user-confirmation-2026-10-30": "사용자가 확인한 재직일과 동일한 프로젝트 참여일. 너드포 2026.05.04 ~ 2026.05.31, 블로믹스 2026.06.01 ~ 2026.07.22.",
-    "portfolio": "저장소 포트폴리오 PDF 2, 8–10, 21, 28–29, 32쪽 및 대응 PPTX. 회사는 연도까지만 확인 가능. 프로젝트 참여 기간을 회사 재직 월로 대체하지 않음."
+    "portfolio": "저장소 포트폴리오 PDF 2, 8–10, 21, 28–29, 32쪽 및 대응 PPTX. 회사는 연도까지만 확인 가능. 프로젝트 참여 기간을 회사 재직 월로 대체하지 않음.",
+    "user-confirmation-2026-11-05-skcc": "사용자 최종 지시서: SK주식회사 C&C 2020.02~2021.04, 전략기획담당·선임. The K 참여 2020.05~2020.12. 사전 튜닝된 SQL 사용, 직접 쿼리 튜닝 아님."
   },
   "companies": [
     {
@@ -47,6 +48,23 @@
       "start": "2021",
       "end": "2024",
       "source": "portfolio-pdf-page-2"
+    },
+    {
+      "id": "skcc",
+      "name": "SK주식회사 C&C",
+      "role": "전략기획담당 · 선임",
+      "start": "2020-02",
+      "end": "2021-04",
+      "source": "user-confirmation-2026-11-05-skcc",
+      "summary": "사내 VDI에 도입할 소프트웨어의 호환성·보안 위험성·안정성을 검증했습니다. 데이터 가공과 분석, Power BI 대시보드 제작도 담당했습니다.",
+      "skills": [
+        "VDI",
+        "IT Risk Management",
+        "MySQL",
+        "MS Excel",
+        "Power BI",
+        "Data Visualization"
+      ]
     }
   ],
   "projects": [
@@ -127,6 +145,19 @@
       "anchor": "career-slime",
       "source": "portfolio-pdf-pages-28-29",
       "summary": "개발 범위와 일정을 조율하고 출시를 준비했습니다. 론칭 이후에는 업데이트·패치와 라이브 이슈를 담당했습니다."
+    },
+    {
+      "id": "thek",
+      "name": "KB국민은행 The K",
+      "company": "skcc",
+      "role": "데이터 가공·분석 · BI 시각화",
+      "start": "2020-05",
+      "end": "2020-12",
+      "file": "the-k.html",
+      "section": "project-thek",
+      "anchor": "career-thek",
+      "source": "user-confirmation-2026-11-05-skcc",
+      "summary": "사전 튜닝된 SQL로 데이터를 조회하고 Excel로 가공했습니다. 요청된 금융·고객 지표를 Power BI 대시보드로 제작하고 피드백에 따라 수정했습니다."
     }
   ]
 }

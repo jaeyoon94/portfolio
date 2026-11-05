@@ -76,5 +76,17 @@
     "tools": "Unity 3D · Trello · Notion · Jira",
     "team": "150명 → 170명",
     "source": "기존 포트폴리오 PDF·PPTX 32–33쪽. 개발 인력 규모이며 직접 관리 인원이 아님. Unity 3D·Trello·Notion은 사용자 확인(2026-11-01), Jira는 기존 포트폴리오 기준."
+  },
+  "thek": {
+    "context": "KB국민은행 차세대 전산시스템 구축 사업 · 데이터 분석 및 시각화",
+    "responsibilities": [
+      "사전 작성·튜닝된 SQL 쿼리로 데이터 조회",
+      "Excel 기반 데이터 정제·가공과 지표 구성",
+      "Power BI 차트·대시보드 제작 및 수정"
+    ],
+    "collaboration": "개발·데이터 담당자 · 프로젝트 관리자",
+    "tools": "MySQL · Excel · Power BI",
+    "team": null,
+    "source": "사용자 확인(2026-11-05). SQL 튜닝·DB 설계·DAX·Power Query·데이터 모델 설계는 확인된 수행 범위에 포함하지 않음. 웹 대시보드는 가상 데이터로 현재 재구성한 예시."
   }
 }

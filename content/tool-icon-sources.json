@@ -66,6 +66,16 @@
       "id": "trello",
       "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/trello.svg",
       "status": "OK"
+    },
+    {
+      "id": "mysql",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/mysql.svg",
+      "status": "OK"
+    },
+    {
+      "id": "powerbi",
+      "url": "https://cdn.jsdelivr.net/npm/simple-icons@11.15.0/icons/powerbi.svg",
+      "status": "OK"
     }
   ]
 }

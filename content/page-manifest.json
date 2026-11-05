@@ -9,6 +9,7 @@
     "tales-runner.html",
     "project-dme.html",
     "goddess-order.html",
+    "the-k.html",
     "ai.html",
     "business.html",
     "index.html"
@@ -53,6 +54,10 @@
     [
       "project-goddess",
       "goddess-order.html"
+    ],
+    [
+      "project-thek",
+      "the-k.html"
     ],
     [
       "ai-automation",

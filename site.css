@@ -909,3 +909,7 @@ br.sentence-break{display:initial}
 .case-study .process-evidence--issue { max-width:900px; }
 .case-study .process-evidence-reading { margin-top:32px; }
 .case-study .process-evidence figcaption { margin-top:12px; color:var(--color-text-secondary); font-size:var(--font-caption); }
+
+/* The older BI project uses the existing cover treatment across the final row. */
+.project-history-page .project-cover[data-cover-project="thek"] { grid-column:1 / -1; aspect-ratio:auto; min-height:360px; }
+@media(max-width:600px) { .project-history-page .project-cover[data-cover-project="thek"] { min-height:420px; } }

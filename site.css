@@ -894,9 +894,11 @@ br.sentence-break{display:initial}
 .goddess-study .go-documents { margin-top:48px; padding-top:32px; border-top:1px solid var(--color-border); }
 .goddess-study .go-document { margin-top:32px; }
 .goddess-study .go-document + .go-document { margin-top:48px; }
-.goddess-study .go-document figure { margin:24px 0 0; }
+.goddess-study .go-document figure { margin:24px 0 0; max-width:1100px; }
+.goddess-study .go-document--report figure { max-width:800px; }
+.goddess-study .go-document .evidence-enlarge { display:block; width:fit-content; max-width:100%; }
 .goddess-study .go-document img { display:block; width:100%; height:auto; border:1px solid var(--color-border); }
 .goddess-study .go-document figcaption { margin-top:12px; font-size:var(--font-caption); color:var(--color-text-secondary); }
 
-/* Show each complete worksheet preview; enlargement opens every PDF page. */
-.goddess-study .go-document img { max-height:480px; object-fit:contain; background:#fff; }
+/* Preview follows the document content ratio; the complete PDF stays unchanged. */
+.goddess-study .go-document img { max-height:none; object-fit:contain; background:#fff; }

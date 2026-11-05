@@ -12,7 +12,7 @@ The generator writes 12 static pages, `sitemap.xml`, `robots.txt` and the page m
 - Home: static night-sky photograph, five navigation links, eight small CSS-only twinkling points, selected project preview with six choices, closing and contact.
 - Projects: six portrait covers followed by a compact participation history. Career retains the full responsibility summaries.
 - Project details: distinct narratives with shared header, introduction, typography, footer and native navigation.
-- Explicit browser reload returns to `index.html` at the top, as requested. Ordinary links, fragments and browser back remain native.
+- Explicit browser reload keeps the current page and query, clears any fragment without navigating, and scrolls to the top. Ordinary links, direct fragments and browser back remain native.
 - No shooting stars, background drift or parallax scripts are loaded. Reduced motion hides the decorative twinkle.
 
 ## Images and SEO

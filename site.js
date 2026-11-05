@@ -1,16 +1,16 @@
-// Reloads return to the home entry; ordinary navigation and history stay native.
+// A reload keeps the current page and starts at the top; normal links/history stay native.
 (() => {
  const navigation=performance.getEntriesByType('navigation')[0];
  if(!navigation||navigation.type!=='reload')return;
- const home=new URL('index.html',location.href);
- if(location.pathname!==home.pathname||location.hash||location.search){
-  location.replace(home.href);
-  return;
- }
  history.scrollRestoration='manual';
+ // Remove the fragment without navigating so it cannot scroll back to a section.
+ if(location.hash)history.replaceState(history.state,'',location.pathname+location.search);
  const reset=()=>window.scrollTo({top:0,left:0,behavior:'instant'});
  reset();
- window.addEventListener('pageshow',reset,{once:true});
+ window.addEventListener('pageshow',()=>{
+  reset();
+  requestAnimationFrame(()=>{history.scrollRestoration='auto';});
+ },{once:true});
 })();
 
 /* Native page navigation and history; interactions never delay following a link. */

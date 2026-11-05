@@ -897,3 +897,6 @@ br.sentence-break{display:initial}
 .goddess-study .go-document figure { margin:24px 0 0; }
 .goddess-study .go-document img { display:block; width:100%; height:auto; border:1px solid var(--color-border); }
 .goddess-study .go-document figcaption { margin-top:12px; font-size:var(--font-caption); color:var(--color-text-secondary); }
+
+/* Show each complete worksheet preview; enlargement opens every PDF page. */
+.goddess-study .go-document img { max-height:480px; object-fit:contain; background:#fff; }

@@ -1,0 +1,87 @@
+/* Home page in the manner of apple.com: work-first tiles, centered type, pill actions, 12px gutters.
+   Tiles alternate light (#f5f5f7) and black by the key art they hold; the art fills the lower part
+   of each tile. Links follow Apple's blues (#0066cc on light, #2997ff on dark). */
+.hm-body {
+  --h-ink:#1d1d1f; --h-ink-2:#6e6e73; --h-light:#f5f5f7; --h-dark:#000; --h-on-dark:#f5f5f7; --h-on-dark-2:#a1a1a6;
+  --h-blue:#0071e3; --h-link:#0066cc; --h-link-dark:#2997ff;
+  background:#fff;
+}
+.hm { padding:88px 0 0 !important; color:var(--h-ink); }
+.hm h1,.hm h2,.hm h3 { letter-spacing:-.015em; }
+
+/* Pills and links */
+.hm-ctas { display:flex; flex-wrap:wrap; justify-content:center; gap:12px 17px; margin-top:24px; }
+.hm-pill { display:inline-flex; align-items:center; min-height:44px; padding:0 22px; border:1px solid var(--h-blue); border-radius:980px; background:var(--h-blue); color:#fff !important; font-size:1.0625rem; font-weight:400; text-decoration:none; transition:background-color 150ms var(--p-ease),color 150ms var(--p-ease); }
+.hm-pill--sm { min-height:36px; padding:0 15px; font-size:.875rem; }
+.hm-pill:hover { background:#0077ed; }
+.hm-pill--line { background:transparent; color:var(--h-blue) !important; }
+.hm-pill--line:hover { background:var(--h-blue); color:#fff !important; }
+.hm-link { display:inline-block; color:var(--h-link) !important; font-size:1.0625rem; text-decoration:none; }
+.hm-link:hover { text-decoration:underline; text-underline-offset:.2em; }
+
+/* Hero: the night sky, text centered in its upper half */
+.hm-hero { position:relative; display:flex; justify-content:center; min-height:692px; margin:0; padding:56px 24px; background:#05070d url('assets/images/atmosphere/night-sky-v3.webp') 58% 60% / cover no-repeat; color:var(--h-on-dark); text-align:center; }
+.hm-hero-text { max-width:44rem; }
+.hm-hero h1 { margin:0; font-size:3.5rem; font-weight:600; line-height:1.18; letter-spacing:-.01em; color:#fff; }
+.hm-hero-sub { margin:4px 0 0; font-size:1.75rem; font-weight:400; line-height:1.25; color:var(--h-on-dark); }
+.hm-hero-body { max-width:34rem; margin:20px auto 0; font-size:1.0625rem; line-height:1.7; color:#d2d2d7; }
+.hm-hero .hm-pill--line { border-color:#f5f5f7; color:#f5f5f7 !important; }
+.hm-hero .hm-pill--line:hover { background:#f5f5f7; color:var(--h-ink) !important; }
+
+/* Tile grid */
+.hm-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; padding:12px; }
+.hm-tile { display:grid; grid-template-rows:auto minmax(0,1fr); min-height:580px; overflow:hidden; text-align:center; }
+.hm-tile--light { background:var(--tile-bg,var(--h-light)); color:var(--h-ink); }
+.hm-tile--dark { background:var(--tile-bg,var(--h-dark)); color:var(--h-on-dark); }
+.hm-tile--feature { grid-column:1 / -1; min-height:692px; }
+.hm-tile--feature h3 { font-size:3.5rem; line-height:1.18; }
+.hm-tile--feature .hm-tile-sub { font-size:1.75rem; max-width:none; }
+.hm-tile--index.hm-tile--feature { min-height:0; }
+.hm-tile-text { display:grid; justify-items:center; gap:6px; padding:53px 32px 32px; }
+.hm-tile h3 { margin:0; font-size:2.5rem; font-weight:600; line-height:1.1; }
+.hm-tile-sub { margin:2px 0 0; max-width:28rem; font-size:1.3125rem; line-height:1.3; word-break:keep-all; }
+.hm-tile-meta { margin:0 0 8px; font-size:.875rem; color:var(--h-ink-2); font-variant-numeric:tabular-nums; }
+.hm-tile--dark .hm-tile-meta { color:var(--h-on-dark-2); }
+.hm-tile--dark .hm-link { color:var(--h-link-dark) !important; }
+.hm-tile .hm-ctas { margin-top:4px; gap:14px; }
+.hm-card h3 { color:var(--h-ink); }
+.hm-tile-art { position:relative; overflow:hidden; }
+.hm-tile--light .hm-tile-sub { color:var(--h-ink); }
+.hm-tile-art img { position:absolute; inset:0; width:100%; height:100%; object-fit:var(--fit,cover); object-position:var(--pos,50% 50%); transition:transform 600ms var(--p-ease); }
+.hm-tile[style*='--fit:contain'] .hm-tile-art img { inset:8px 24px 32px; width:calc(100% - 48px); height:calc(100% - 40px); }
+.hm-tile:hover .hm-tile-art img { transform:scale(1.02); }
+.hm-tile--index { align-content:center; grid-template-rows:auto; }
+.hm-tile--index .hm-tile-text { gap:10px; padding:48px 32px; }
+
+/* Smaller text tiles */
+.hm-grid--more { grid-template-columns:repeat(4,minmax(0,1fr)); padding-top:0; }
+.hm-card { display:grid; align-content:start; justify-items:center; gap:10px; min-height:240px; padding:40px 24px; background:var(--h-light); color:var(--h-ink); text-align:center; text-decoration:none; transition:background-color 150ms var(--p-ease); }
+.hm-card:hover { background:#ececf0; }
+.hm-card h3 { margin:0; font-size:1.5rem; font-weight:600; line-height:1.2; }
+.hm-card p { margin:0; max-width:18rem; font-size:1rem; line-height:1.5; color:var(--h-ink-2); }
+.hm-card:hover .hm-link { text-decoration:underline; text-underline-offset:.2em; }
+
+/* Contact */
+.hm-contact { padding:96px 24px 112px; text-align:center; }
+.hm-contact h2 { margin:0; font-size:clamp(2rem,1.5rem + 2vw,3rem); font-weight:600; line-height:1.1; }
+.hm-contact p { margin:12px 0 0; font-size:1.1875rem; color:var(--h-ink-2); }
+.hm-email { display:inline-block; margin-top:24px; font-size:clamp(1.375rem,1.1rem + 1vw,1.75rem); font-weight:500; color:var(--h-ink) !important; text-decoration:none; border-bottom:1px solid rgba(29,29,31,.25); }
+.hm-email:hover { border-bottom-color:currentColor; }
+
+.hm-body .site-footer { background:var(--h-light); color:var(--h-ink-2); border-top:1px solid #d2d2d7; font-size:.8125rem; }
+.hm-body .site-footer a { color:var(--h-ink-2); }
+
+@media (max-width:1068px) { .hm-grid--more { grid-template-columns:repeat(2,minmax(0,1fr)); } .hm-tile { min-height:500px; } }
+@media (max-width:734px) {
+ .hm { padding-top:72px !important; }
+ .hm-hero { margin:0; min-height:500px; padding:39px 20px; background-image:url('assets/images/atmosphere/night-sky-v3-mobile.webp'); background-position:61% 60%; }
+ .hm-grid { grid-template-columns:minmax(0,1fr); padding:12px 0; }
+ .hm-grid--more { grid-template-columns:minmax(0,1fr); padding-top:0; }
+ .hm-tile { min-height:500px; }
+ .hm-tile-text { padding:39px 24px 24px; }
+ .hm-hero h1 { font-size:2.5rem; } .hm-hero-sub { font-size:1.3125rem; }
+ .hm-tile h3,.hm-tile--feature h3 { font-size:2rem; } .hm-tile-sub,.hm-tile--feature .hm-tile-sub { font-size:1.1875rem; }
+ .hm-tile--feature { min-height:500px; }
+ .hm-card { min-height:0; padding:36px 24px; }
+}
+@media (prefers-reduced-motion:reduce) { .hm * { transition:none !important; } }

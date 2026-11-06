@@ -1,0 +1,90 @@
+/* Career page. Same graphite neutrals and blue accent as the About page.
+   The one visual is the participation strip: month-precise project periods on a 2020–2026 axis,
+   ink bars, the hovered row in the accent. Dates use one format: YYYY.MM ~ YYYY.MM, or the year alone
+   where only the year is recorded. */
+.cr-body {
+  --c-page:#f6f7f9; --c-card:#fff; --c-raised:#f1f2f4; --c-line:rgba(17,24,39,.08); --c-line-strong:rgba(17,24,39,.14);
+  --c-ink:#111827; --c-ink-2:#4b5563; --c-ink-3:#6b7280; --c-accent:#1f5fae;
+  --c-ease:cubic-bezier(.22,1,.36,1);
+  background:var(--c-page);
+}
+.cr { font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; color:var(--c-ink); padding-bottom:96px; }
+.cr > * { width:min(calc(100% - var(--page-gutter) * 2),1200px); margin-inline:auto; }
+.cr h1,.cr h2,.cr h3,.cr h4 { font-weight:600; letter-spacing:-.01em; text-wrap:balance; }
+.cr p { margin:0; }
+.cr :focus-visible { outline:2px solid var(--c-accent); outline-offset:3px; }
+
+/* Intro */
+.cr-intro { padding:40px 0 48px; }
+.cr-intro .breadcrumbs { display:flex; gap:8px; margin-bottom:32px; font-size:.875rem; color:var(--c-ink-3); }
+.cr-intro .breadcrumbs a { color:var(--c-ink-2); }
+.cr-intro h1 { margin:0 0 16px; font-size:clamp(2.5rem,1.9rem + 2.4vw,3.75rem); line-height:1.1; letter-spacing:-.03em; }
+.cr-lede { max-width:40rem; font-size:1.0625rem; line-height:1.75; color:var(--c-ink-2); }
+
+/* Participation strip */
+.cr-timeline { padding:24px 28px 20px; background:var(--c-card); border:1px solid var(--c-line); border-radius:16px; }
+.cr-timeline-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:4px 16px; margin-bottom:12px; }
+.cr-timeline-head h2 { margin:0; font-size:1rem; line-height:1.5; }
+.cr-timeline-head p { font-size:.8125rem; color:var(--c-ink-3); }
+.cr-tl { --name-w:200px; --date-w:140px; }
+.cr-tl-axis,.cr-tl-row { display:grid; grid-template-columns:var(--name-w) minmax(0,1fr) var(--date-w); gap:0 16px; align-items:center; }
+.cr-tl-axis { height:28px; }
+.cr-tl-axis > div { display:grid; grid-template-columns:repeat(7,1fr); align-self:end; padding-bottom:6px; font-size:.75rem; color:var(--c-ink-3); font-variant-numeric:tabular-nums; }
+.cr-tl-row { min-height:44px; border-top:1px solid var(--c-line); color:inherit; text-decoration:none; border-radius:8px; transition:background-color 150ms var(--c-ease); }
+.cr-tl-row:hover { background:#fafafb; }
+.cr-tl-name { display:grid; padding-left:8px; font-size:.875rem; font-weight:600; line-height:1.35; }
+.cr-tl-name small { font-size:.75rem; font-weight:400; color:var(--c-ink-3); }
+.cr-tl-track { position:relative; height:44px; background-image:linear-gradient(to right,var(--c-line) 1px,transparent 1px); background-size:calc(100% / 7) 100%; border-right:1px solid var(--c-line); }
+.cr-tl-bar { position:absolute; top:50%; left:var(--from); width:var(--width); min-width:6px; height:8px; border-radius:4px; background:var(--c-ink); transform:translateY(-50%); transition:background-color 150ms var(--c-ease); }
+.cr-tl-row:hover .cr-tl-bar,.cr-tl-row:focus-visible .cr-tl-bar { background:var(--c-accent); }
+.cr-tl-date { padding-right:8px; font-size:.8125rem; color:var(--c-ink-3); text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.cr-tl-note { margin-top:12px !important; padding-top:12px; border-top:1px solid var(--c-line); font-size:.8125rem; line-height:1.7; color:var(--c-ink-3); }
+
+/* Records */
+.cr-records { padding-top:96px; }
+.cr-records > h2 { margin:0 0 24px; font-size:clamp(1.5rem,1.2rem + 1vw,2rem); line-height:1.3; }
+.cr-list { margin:0; padding:0; list-style:none; border-bottom:1px solid var(--c-line-strong); }
+.cr-company { display:grid; grid-template-columns:minmax(0,4fr) minmax(0,8fr); gap:16px 64px; padding:32px 0; border-top:1px solid var(--c-line-strong); scroll-margin-top:112px; }
+.cr-company-head h3 { margin:0 0 6px; font-size:1.25rem; line-height:1.4; }
+.cr-role { font-size:.9375rem; color:var(--c-ink-2); }
+.cr-tenure { margin-top:4px !important; font-size:.8125rem; color:var(--c-ink-3); font-variant-numeric:tabular-nums; }
+.cr-projects { display:grid; gap:24px; }
+.cr-project { scroll-margin-top:112px; }
+.cr-project + .cr-project { padding-top:24px; border-top:1px solid var(--c-line); }
+.cr-project h4 { margin:0 0 4px; font-size:1.0625rem; line-height:1.5; }
+.cr-project h4 a { color:var(--c-ink); text-decoration:underline; text-decoration-color:var(--c-line-strong); text-decoration-thickness:1px; text-underline-offset:.3em; transition:text-decoration-color 150ms var(--c-ease),color 150ms var(--c-ease); }
+.cr-project h4 a:hover { color:var(--c-accent); text-decoration-color:currentColor; }
+.cr-meta { margin-bottom:8px !important; font-size:.8125rem; color:var(--c-ink-3); font-variant-numeric:tabular-nums; }
+.cr-meta span { color:var(--c-ink-2); }
+.cr-meta time ~ span { margin-left:12px; }
+.cr-projects > span[aria-hidden] { position:absolute; }
+.cr-scope { max-width:40rem; font-size:.9375rem; line-height:1.8; color:var(--c-ink-2); }
+.cr-project:target h4 a,.cr-company:target h3 { color:var(--c-accent); }
+
+/* Next */
+.cr-next { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; padding-top:64px; }
+.cr-next a { display:grid; gap:4px; padding:20px 24px; background:var(--c-card); border:1px solid var(--c-line); border-radius:12px; color:var(--c-ink); text-decoration:none; transition:background-color 150ms var(--c-ease); }
+.cr-next a:hover { background:#fafafb; }
+.cr-next span { font-size:1.0625rem; font-weight:600; }
+.cr-next small { font-size:.875rem; color:var(--c-ink-3); }
+.cr-body .detail-destinations { display:none; }
+
+@media (max-width:900px) {
+ .cr-company { grid-template-columns:minmax(0,1fr); gap:20px; }
+ .cr-tl { --name-w:150px; --date-w:120px; }
+}
+@media (max-width:767px) {
+ .cr-intro { padding:16px 0 32px; }
+ .cr-timeline { padding:16px; }
+ .cr-tl { --name-w:0px; --date-w:0px; }
+ .cr-tl-axis { grid-template-columns:minmax(0,1fr); }
+ .cr-tl-axis > span { display:none; }
+ .cr-tl-axis > div span:nth-child(even) { visibility:hidden; }
+ .cr-tl-row { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"name date" "track track"; padding:8px 0 0; }
+ .cr-tl-name { grid-area:name; padding-left:0; }
+ .cr-tl-date { grid-area:date; align-self:start; padding-right:0; }
+ .cr-tl-track { grid-area:track; height:24px; }
+ .cr-records { padding-top:72px; }
+ .cr-next { grid-template-columns:minmax(0,1fr); }
+}
+@media (prefers-reduced-motion:reduce) { .cr * { transition:none !important; } }

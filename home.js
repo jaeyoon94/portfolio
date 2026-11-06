@@ -12,7 +12,6 @@
   const img=feature.querySelector('.pl-art');
   img.src='assets/images/'+d.img;img.width=+d.w;img.height=+d.h;img.alt=d.alt;
   feature.querySelector('.pl-name').textContent=d.name;
-  const chips=feature.querySelector('.pl-chips');chips.replaceChildren(...d.role.split(',').map(r=>el('span','pl-chip',r.trim())));
   const title=feature.querySelector('.pl-title');title.replaceChildren(d.context);if(d.foot)title.append(el('sup',null,'1'));
   const dd=feature.querySelectorAll('.pl-spec dd');[d.company,d.period,d.role].forEach((v,i)=>{dd[i].textContent=v;});
   feature.querySelector('.pl-cta').href=d.href;

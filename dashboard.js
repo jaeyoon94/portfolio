@@ -11,7 +11,7 @@ const DAY=86400000,DEFAULT_DATE='2026-11-05';
 const seed={
  'Project DME':['DME',[
   ['기능 개발','Jira 일감 상태 동기화 규칙 정리','기획','done','2026-10-13','2026-10-24'],
-  ['기능 개발','Epic·Task 매핑 시트 자동 생성','클라이언트','doing','2026-10-20','2026-11-07'],
+  ['기능 개발','Epic/Task 매핑 시트 자동 생성','클라이언트','doing','2026-10-20','2026-11-07'],
   ['기능 개발','Excel 복사 도구 예외 처리','클라이언트','blocked','2026-10-22','2026-11-03'],
   ['QA','변환 결과 샘플 50건 대조','QA','doing','2026-10-27','2026-11-10'],
   ['QA','누락 일감 재검증','QA','todo','2026-11-04','2026-11-14'],
@@ -81,7 +81,7 @@ function render(){
  const lateDays=r=>Math.round((t(today)-t(r.due))/DAY);
  const done=selected.filter(isDone).length,blocked=selected.filter(r=>r.status==='blocked').length,lateN=validDate?selected.filter(late).length:null;
 
- $('source').textContent=sources[mode]==='demo'?`시연 데이터 · ${data[mode].length}건`:`불러온 CSV · ${data[mode].length}건 검증 완료`;
+ $('source').textContent=sources[mode]==='demo'?`시연 데이터 / ${data[mode].length}건`:`불러온 CSV / ${data[mode].length}건 검증 완료`;
  $('source').dataset.kind=sources[mode];
 
  // KPI row: a label, the number, one line of context.
@@ -89,7 +89,7 @@ function render(){
  const due=validDate?selected.filter(r=>r.due<=today).length:0;
  for(const [label,value,unit,sub,state] of [
   ['전체 작업',selected.length,'건',`${new Set(selected.map(r=>r.project)).size}개 프로젝트`],
-  ['완료율',selected.length?pct(done,selected.length):'—',selected.length?'%':'',validDate?`${done}건 완료 · 기준일까지 예상 ${pct(due,selected.length)}%`:`${done}건 완료`],
+  ['완료율',selected.length?pct(done,selected.length):'—',selected.length?'%':'',validDate?`${done}건 완료 / 기준일까지 예상 ${pct(due,selected.length)}%`:`${done}건 완료`],
   ['지연',lateN??'—',lateN===null?'':'건',validDate?'종료일이 기준일보다 앞선 미완료':'기준일을 입력하세요',lateN?'late':null],
   ['차단',blocked,'건','다른 작업을 기다리는 중',blocked?'blocked':null]]){
   const k=el('div',undefined,'kpi');if(state)k.dataset.state=state;
@@ -100,7 +100,7 @@ function render(){
  // Timeline of open work against the as-of date.
  const open=selected.filter(r=>!isDone(r)).sort((a,b)=>a.due.localeCompare(b.due)||a.id.localeCompare(b.id));
  const tl=$('timeline');tl.replaceChildren();
- $('schedule-meta').textContent=open.length?`미완료 ${open.length}건 · 종료일 순`:'';
+ $('schedule-meta').textContent=open.length?`미완료 ${open.length}건 / 종료일 순`:'';
  if(!open.length)tl.append(el('p','미완료 작업이 없습니다.','empty'));
  else{
   const times=open.flatMap(r=>[t(r.start),t(r.due)]).concat(today?[t(today)]:[]);
@@ -115,11 +115,11 @@ function render(){
   for(const r of open){
    const state=r.status==='blocked'?'blocked':late(r)?'late':r.status;
    const li=el('li',undefined,'tl-row');
-   const name=el('div',undefined,'tl-name');name.append(el('span',r.title,'tl-title'),el('span',`${r.project} · ${r.owner}`,'tl-sub'));
+   const name=el('div',undefined,'tl-name');name.append(el('span',r.title,'tl-title'),el('span',`${r.project} / ${r.owner}`,'tl-sub'));
    const track=el('div',undefined,'tl-track');
    const bar=el('button',undefined,'tl-bar');bar.type='button';bar.dataset.state=state;
    bar.style.left=x(t(r.start));bar.style.width=`calc(${x(t(r.due)+DAY)} - ${x(t(r.start))})`;
-   const info=[r.title,`${r.project} · ${r.group} · ${r.owner}`,`${r.start} ~ ${r.due} · ${labels[r.status]}${late(r)?` · ${lateDays(r)}일 지연`:''}`];
+   const info=[r.title,`${r.project} / ${r.group} / ${r.owner}`,`${r.start} ~ ${r.due} / ${labels[r.status]}${late(r)?` / ${lateDays(r)}일 지연`:''}`];
    bar.setAttribute('aria-label',info.join(', '));
    for(const [on,fn] of [['pointerenter',()=>showTip(bar,info)],['pointerleave',hideTip],['focus',()=>showTip(bar,info)],['blur',hideTip]])bar.addEventListener(on,fn);
    const tag=state==='blocked'?'차단':state==='late'?`${lateDays(r)}일 지연`:short(r.due);
@@ -139,7 +139,7 @@ function render(){
  for(const {r,kind} of risks.slice(0,8)){
   const li=el('li',undefined,'risk');
   const text=kind==='blocked'?'차단':kind==='late'?`D+${lateDays(r)}`:`D-${Math.round((t(r.due)-t(today))/DAY)}`;
-  const body=el('div',undefined,'risk-body');body.append(el('span',r.title,'risk-title'),el('span',`${r.project} · ${r.owner} · ${short(r.due)} 마감`,'risk-sub'));
+  const body=el('div',undefined,'risk-body');body.append(el('span',r.title,'risk-title'),el('span',`${r.project} / ${r.owner} / ${short(r.due)} 마감`,'risk-sub'));
   li.append(el('span',text,'risk-tag risk-tag--'+kind),body);$('risks').append(li);
  }
  if(risks.length>8)$('risks').append(el('li',`외 ${risks.length-8}건은 작업 목록에서 확인`,'empty'));
@@ -153,12 +153,12 @@ function render(){
   const head=el('div',undefined,'prow-head');head.append(el('span',name,'prow-name'),el('span',items.length?`${pct(n,items.length)}%`:'—','prow-pct'));
   const seg=el('div',undefined,'segbar');
   for(const s of ['done','doing','todo','blocked']){const c=items.filter(r=>r.status===s).length;if(!c)continue;
-   const b=el('button',undefined,'seg seg--'+s);b.type='button';b.style.flexGrow=c;const info=[`${name} · ${labels[s]}`,`${c}건 · 누르면 작업 목록을 걸러 봅니다`];
+   const b=el('button',undefined,'seg seg--'+s);b.type='button';b.style.flexGrow=c;const info=[`${name} / ${labels[s]}`,`${c}건 / 누르면 작업 목록을 걸러 봅니다`];
    b.setAttribute('aria-label',`${name} ${labels[s]} ${c}건, 작업 목록 거르기`);
    for(const [on,fn] of [['pointerenter',()=>showTip(b,info)],['pointerleave',hideTip],['focus',()=>showTip(b,info)],['blur',hideTip]])b.addEventListener(on,fn);
    b.addEventListener('click',()=>setFilter('status',s,name));
    seg.append(b);}
-  row.append(head,seg,el('p',`${items.length}건 · 지연 ${validDate?items.filter(late).length:'—'} · 차단 ${items.filter(r=>r.status==='blocked').length}`,'prow-meta'));
+  row.append(head,seg,el('p',`${items.length}건 / 지연 ${validDate?items.filter(late).length:'—'} / 차단 ${items.filter(r=>r.status==='blocked').length}`,'prow-meta'));
   $('projects').append(row);
  }
 
@@ -168,11 +168,11 @@ function render(){
  for(const {g,n,total,due:d} of groups){
   const row=el('button',undefined,'grow');row.type='button';row.setAttribute('aria-pressed',String(filter.key==='group'&&filter.value===g));
   const behind=d!==null&&n<d;
-  const head=el('span',undefined,'grow-head');head.append(el('span',g,'grow-name'),el('span',`${n}/${total} · ${pct(n,total)}%`,'grow-val'));
+  const head=el('span',undefined,'grow-head');head.append(el('span',g,'grow-name'),el('span',`${n}/${total} / ${pct(n,total)}%`,'grow-val'));
   const track=el('span',undefined,'meter');const fill=el('span',undefined,'meter-fill');fill.style.width=pct(n,total)+'%';track.append(fill);
   if(d!==null){const tick=el('span',undefined,'meter-tick');tick.style.left=pct(d,total)+'%';track.append(tick);}
   row.append(head,track);
-  if(d!==null)row.append(el('span',behind?`예상 ${pct(d,total)}% · ${d-n}건 뒤처짐`:`예상 ${pct(d,total)}% · 일정대로`,'grow-note'+(behind?' is-behind':'')));
+  if(d!==null)row.append(el('span',behind?`예상 ${pct(d,total)}% / ${d-n}건 뒤처짐`:`예상 ${pct(d,total)}% / 일정대로`,'grow-note'+(behind?' is-behind':'')));
   row.setAttribute('aria-label',`${g} 완료 ${n}/${total}건${d!==null?`, 기준일까지 예상 ${d}건`:''}, 작업 목록 거르기`);
   row.addEventListener('click',()=>setFilter('group',g));
   $('groups').append(row);
@@ -191,8 +191,8 @@ function render(){
  }
  if(!shown.length){const tr=el('tr'),td=el('td','조건에 맞는 작업이 없습니다.','empty');td.colSpan=9;tr.append(td);$('tasks').append(tr);}
  const limit=$('limit');limit.replaceChildren();
- if(filter.key){const c=el('button',undefined,'filter-chip');c.type='button';const what=filter.key==='status'?`${filter.project} · ${labels[filter.value]}`:filter.value;c.append(el('span',what),el('span','×','x'));c.setAttribute('aria-label',`${what} 거르기 해제`);c.addEventListener('click',()=>{filter=NO_FILTER;render();});limit.append(c);}
- limit.append(el('span',`${shown.length}건${shown.length>200?' · 최대 200건 표시':''}`));
+ if(filter.key){const c=el('button',undefined,'filter-chip');c.type='button';const what=filter.key==='status'?`${filter.project} / ${labels[filter.value]}`:filter.value;c.append(el('span',what),el('span','×','x'));c.setAttribute('aria-label',`${what} 거르기 해제`);c.addEventListener('click',()=>{filter=NO_FILTER;render();});limit.append(c);}
+ limit.append(el('span',`${shown.length}건${shown.length>200?' / 최대 200건 표시':''}`));
  $('caption').textContent=sources[mode]==='demo'?'시연용 가상 작업 목록':'불러온 CSV 작업 목록';
 }
 
@@ -206,7 +206,7 @@ for(let i=0;i<text.length;i++){const c=text[i];if(state==='quoted'){if(c==='"'){
 if(c==='"'){if(state!=='plain'||field)throw Error('따옴표 형식 오류');state='quoted';}else if(c===','||c==='\n'||c==='\r'){row.push(field);field='';state='plain';if(c!==','){if(c==='\r'&&text[i+1]==='\n')i++;out.push(row);row=[];}}else{if(state==='closed')throw Error('닫는 따옴표 뒤에 구분자가 필요합니다.');field+=c;}}
 if(state==='quoted')throw Error('닫히지 않은 따옴표');if(field||row.length||state==='closed'){row.push(field);out.push(row);}return out.filter(r=>r.some(v=>v.trim()));}
 $('file').addEventListener('change',async()=>{const file=$('file').files[0];if(!file)return;const version=++uploadVersion,uploadMode=mode;try{if(file.size>1024*1024)throw Error('파일 크기는 최대 1MB입니다.');const text=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer());if(version!==uploadVersion)return;const csv=parseCSV(text);if(csv.length<2)throw Error('헤더와 최소 1행이 필요합니다.');if(csv.length>5001)throw Error('최대 5,000행입니다.');const head=csv.shift().map(v=>v.trim());if(head.length!==8||new Set(head).size!==8||headers.some(h=>!head.includes(h)))throw Error('필수 열 8개를 중복 없이 넣어 주세요: '+headers.join(', '));const ids=new Set(),errors=[],result=[];
- csv.forEach((cells,i)=>{if(cells.length!==8){errors.push(`${i+2}행: 열 개수 오류`);return;}const r=Object.fromEntries(head.map((h,j)=>[h,cells[j].trim()]));const issues=[];if(headers.some(h=>!r[h]))issues.push('필수값 누락');if(Object.values(r).some(v=>v.length>300))issues.push('셀은 최대 300자');if(ids.has(r.id))issues.push('ID 중복');ids.add(r.id);if(!projects[uploadMode].includes(r.project))issues.push('현재 탭에 없는 프로젝트');if(!Object.hasOwn(labels,r.status))issues.push('잘못된 상태');if(!dateValid(r.start)||!dateValid(r.due))issues.push('날짜 형식·실제 날짜 확인');else if(r.start>r.due)issues.push('시작일이 종료일 이후');if(issues.length)errors.push(`${i+2}행: ${issues.join(', ')}`);result.push(r);});
+ csv.forEach((cells,i)=>{if(cells.length!==8){errors.push(`${i+2}행: 열 개수 오류`);return;}const r=Object.fromEntries(head.map((h,j)=>[h,cells[j].trim()]));const issues=[];if(headers.some(h=>!r[h]))issues.push('필수값 누락');if(Object.values(r).some(v=>v.length>300))issues.push('셀은 최대 300자');if(ids.has(r.id))issues.push('ID 중복');ids.add(r.id);if(!projects[uploadMode].includes(r.project))issues.push('현재 탭에 없는 프로젝트');if(!Object.hasOwn(labels,r.status))issues.push('잘못된 상태');if(!dateValid(r.start)||!dateValid(r.due))issues.push('날짜 형식/실제 날짜 확인');else if(r.start>r.due)issues.push('시작일이 종료일 이후');if(issues.length)errors.push(`${i+2}행: ${issues.join(', ')}`);result.push(r);});
  if(errors.length)throw Error(`${errors.length}행 오류\n`+errors.slice(0,12).join('\n')+(errors.length>12?'\n나머지 오류는 수정 후 다시 확인하세요.':''));data[uploadMode]=result;sources[uploadMode]='upload';filter=NO_FILTER;setValidation(`${result.length}행을 검증해서 반영했습니다.`,'ok');render();
 }catch(e){if(version!==uploadVersion)return;setValidation('불러오지 못했습니다. 기존 데이터를 유지합니다.\n'+(e instanceof TypeError?'UTF-8 인코딩 파일인지 확인하세요.':e.message),'error');}});
 $('template').addEventListener('click',()=>{const quote=v=>'"'+String(v).replaceAll('"','""')+'"';const csv='﻿'+[headers,...demo[mode].map(r=>headers.map(h=>r[h]))].map(row=>row.map(quote).join(',')).join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=el('a');a.href=url;a.download=`${mode}-dashboard-demo.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});

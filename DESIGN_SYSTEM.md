@@ -1,3 +1,5 @@
+> 2026-11-06 unslop pass: ink 중립색(어두운 면 텍스트 #eef0f5/#a3a9b8/#7a8296, 밝은 면 #111827/#4b5565/#6b7487), 포인트 색 하나(#8cc8f5 / #1f6fb2), 글자 굵기 최대 600, 제목 마침표 없음, 기간 표기 "YYYY.MM ~ YYYY.MM". 시그니처는 2020–2026 기간 막대이며 홈 히어로 타임라인, 경력 참여 항목, 사례 상단에만 쓴다. 반짝임·빛 번짐·반복 모션 없음, 이징 cubic-bezier(.22,1,.36,1) 하나. 스타일은 site.css 끝의 "2026-11 unslop pass" 블록.
+
 > 2026-11-06 polish: Pretendard Variable(CDN) 한 가지 서체, 제목 weight 600. 영어 장식 라벨·링크 끝 화살표·01–07 번호·"이미지를 클릭하면…" 캡션·홈 별자리 라벨과 플로팅 목차를 제거했다. 홈은 이름 헤드라인, 일하는 방식, 기간 막대(2020–2026)가 있는 프로젝트 목록, 연락 순서이며 모든 섹션이 같은 콘텐츠 경계를 쓴다. 스타일은 site.css 끝의 "2026-11 polish" 블록에 있다.
 
 > 2026-11-04 current implementation: the static multipage site uses the existing typography, spacing and color tokens. Home has a selected project preview plus six index buttons; Projects uses six portrait covers. The night-sky photograph is static. Only eight small fixed points change opacity; reduced motion hides them. Floating, mouse parallax, scroll parallax and shooting stars are not loaded. Notes below retain the original design history and do not override current source.

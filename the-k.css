@@ -41,7 +41,7 @@
 .bi-kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:24px 0 32px; }
 .bi-kpis>div { padding:20px 16px; border:1px solid var(--color-border); min-width:0; }
 .bi-kpis dt { font-size:.8125rem; color:var(--color-text-secondary); }
-.bi-kpis dd { margin:12px 0; font-size:clamp(1.5rem,2.7vw,2.25rem); line-height:1.3; font-weight:650; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
+.bi-kpis dd { margin:12px 0; font-size:clamp(1.5rem,2.7vw,2.25rem); line-height:1.3; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.02em; }
 .bi-kpis dd small { font-size:.875rem; margin-left:6px; font-weight:400; }
 .bi-kpis .bi-kpi-note { font-size:.75rem; font-weight:400; letter-spacing:normal; color:var(--color-text-secondary); margin:0; line-height:1.6; word-break:keep-all; }
 .bi-chart-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; }
@@ -51,9 +51,9 @@
 .bi-chart { min-width:0; width:100%; }
 .bi-chart svg { display:block; max-width:100%; height:auto; overflow:visible; font-family:inherit; }
 .bi-chart text { font-size:12px; fill:#546173; }
-.bi-chart .bi-donut-total { font-size:25px; font-weight:650; fill:var(--color-text); }
+.bi-chart .bi-donut-total { font-size:25px; font-weight:600; fill:var(--color-text); }
 .bi-gridline { stroke:#e9edf2; stroke-width:1; }
-.bi-chart [tabindex]:focus { outline:2px solid #17243a; outline-offset:3px; }
+.bi-chart [tabindex]:focus { outline:2px solid #11141c; outline-offset:3px; }
 .bi-customer-legend { list-style:none; padding:0; margin:4px 0 16px; }
 .bi-customer-legend li { display:flex; align-items:center; gap:8px; font-size:.8125rem; line-height:1.8; margin-block:6px; }
 .bi-customer-legend strong { margin-left:auto; font-variant-numeric:tabular-nums; }
@@ -71,7 +71,7 @@
 .bi-table-details :is(th,td) { padding:9px 6px; border-bottom:1px solid var(--color-border); text-align:right; }
 .bi-table-details th:first-child { text-align:left; }
 .bi-definition { font-size:.8125rem; color:var(--color-text-secondary); line-height:1.8; margin:24px 0 0; }
-.bi-tooltip { position:fixed; z-index:100; max-width:230px; padding:10px 12px; color:#fff; background:#17243a; font-size:.8125rem; line-height:1.6; pointer-events:none; }
+.bi-tooltip { position:fixed; z-index:100; max-width:230px; padding:10px 12px; color:#fff; background:#11141c; font-size:.8125rem; line-height:1.6; pointer-events:none; }
 .bi-dashboard [hidden] { display:none!important; }
 @media(max-width:1023px) { .bi-dashboard { padding:24px; } .bi-dashboard-header { flex-direction:column; gap:8px; } .bi-kpis { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:767px) {

@@ -1,0 +1,101 @@
+/* Shared base for polished pages (body.pb). Same values as about, career and dashboard:
+   graphite neutrals, three text roles, one blue accent, Pretendard, radius by size, one easing curve.
+   Page kinds add their own file (case.css); single pages add a page file only for what is theirs. */
+.pb {
+  --p-page:#f6f7f9; --p-card:#fff; --p-raised:#f1f2f4; --p-hover:#fafafb;
+  --p-line:rgba(17,24,39,.08); --p-line-strong:rgba(17,24,39,.14);
+  --p-ink:#111827; --p-ink-2:#4b5563; --p-ink-3:#6b7280;
+  --p-accent:#1f5fae; --p-accent-tint:#edf3fb;
+  --p-ease:cubic-bezier(.22,1,.36,1);
+  --p-wrap:1200px;
+  background:var(--p-page);
+}
+.pb main { font-family:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; color:var(--p-ink); padding-bottom:96px; }
+.pb main h1,.pb main h2,.pb main h3,.pb main h4 { font-weight:600; letter-spacing:-.01em; text-wrap:balance; }
+.pb main :focus-visible { outline:2px solid var(--p-accent); outline-offset:3px; }
+.pb .wrap { width:min(calc(100% - var(--page-gutter) * 2),var(--p-wrap)); margin-inline:auto; }
+
+/* Intro */
+.pb-intro { padding:40px 0 48px; }
+.pb-intro .breadcrumbs { display:flex; gap:8px; margin-bottom:32px; font-size:.875rem; color:var(--p-ink-3); }
+.pb-intro .breadcrumbs a { color:var(--p-ink-2); }
+.pb-intro h1 { margin:0 0 16px; font-size:clamp(2.5rem,1.9rem + 2.4vw,3.75rem); line-height:1.1; letter-spacing:-.03em; }
+.pb-lede { max-width:42rem; margin:0; font-size:1.0625rem; line-height:1.75; color:var(--p-ink-2); }
+
+/* Sections */
+.pb-section { padding-top:96px; }
+.pb-section-head { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:12px 64px; align-items:baseline; margin-bottom:32px; }
+.pb-section-head h2,.pb-section > h2 { margin:0; font-size:clamp(1.5rem,1.2rem + 1vw,2rem); line-height:1.3; }
+.pb-section > h2 { margin-bottom:24px; }
+.pb-section-head p { max-width:40rem; margin:0; font-size:1rem; line-height:1.75; color:var(--p-ink-2); }
+.pb-card { background:var(--p-card); border:1px solid var(--p-line); border-radius:16px; }
+.pb-note { margin:12px 0 0; font-size:.8125rem; line-height:1.7; color:var(--p-ink-3); }
+
+/* Buttons and links */
+.pb-btn { display:inline-flex; align-items:center; height:44px; padding:0 16px; border:1px solid var(--p-line-strong); border-radius:10px; background:var(--p-card); color:var(--p-ink); font-size:.9375rem; font-weight:500; text-decoration:none; white-space:nowrap; transition:background-color 150ms var(--p-ease),transform 120ms var(--p-ease); }
+.pb-btn:hover { background:var(--p-raised); }
+.pb-btn:active { transform:scale(.98); }
+.pb-btn--primary { background:var(--p-ink); border-color:var(--p-ink); color:#fff; }
+.pb-btn--primary:hover { background:#252c3a; }
+.pb main a.pb-link { color:var(--p-accent); font-weight:500; text-underline-offset:.25em; }
+.pb-next { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; padding-top:64px; }
+.pb-next a { display:grid; gap:4px; padding:20px 24px; background:var(--p-card); border:1px solid var(--p-line); border-radius:12px; color:var(--p-ink); text-decoration:none; transition:background-color 150ms var(--p-ease); }
+.pb-next a:hover { background:var(--p-hover); }
+.pb-next span { font-size:1.0625rem; font-weight:600; }
+.pb-next small { font-size:.875rem; color:var(--p-ink-3); }
+.pb .detail-destinations:not(.project-navigation) { display:none; }
+
+/* Disclosure */
+.pb-details > summary { position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 16px; padding:16px 52px 16px 24px; background:var(--p-card); border:1px solid var(--p-line); border-radius:12px; font-weight:600; cursor:pointer; list-style:none; transition:background-color 150ms var(--p-ease); }
+.pb-details > summary::-webkit-details-marker { display:none; }
+.pb-details > summary::after { content:''; position:absolute; right:24px; top:50%; width:8px; height:8px; border-right:1.5px solid var(--p-ink-2); border-bottom:1.5px solid var(--p-ink-2); transform:translateY(-70%) rotate(45deg); transition:transform 150ms var(--p-ease); }
+.pb-details[open] > summary::after { transform:translateY(-30%) rotate(-135deg); }
+.pb-details > summary:hover { background:var(--p-hover); }
+.pb-details > summary small { font-size:.8125rem; font-weight:400; color:var(--p-ink-3); }
+
+/* Older pages draw from the site tokens; remap them to the base ramp instead of recolouring each block. */
+.pb {
+  --color-background:var(--p-page); --color-section:var(--p-raised); --color-surface:var(--p-raised);
+  --color-border:var(--p-line-strong); --color-text:var(--p-ink); --color-text-secondary:var(--p-ink-2);
+  --color-primary:var(--p-ink); --color-primary-hover:#252c3a; --color-focus:var(--p-accent);
+  --font-sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --line-body:1.8;
+}
+.pb main { padding-top:120px; }
+.pb main a { color:var(--p-accent); }
+.pb main .case-study h2,.pb main .case-study h3 { color:var(--p-ink); }
+.pb main .eyebrow { color:var(--p-ink-3); font-weight:500; letter-spacing:0; }
+.pb main .eyebrow::before { display:none; }
+
+/* Shared intro of the older pages (.detail-intro): title, role and facts, with an optional visual */
+.pb .detail-intro { width:min(calc(100% - var(--page-gutter) * 2),var(--p-wrap)); padding:40px 0 0; margin-inline:auto; }
+.pb .detail-intro--with-visual { grid-template-columns:minmax(0,6fr) minmax(0,6fr); gap:24px 64px; align-items:center; }
+.pb .detail-intro .breadcrumbs { display:flex; gap:8px; margin-bottom:32px; font-size:.875rem; color:var(--p-ink-3); }
+.pb .detail-intro .breadcrumbs a { color:var(--p-ink-2); }
+.pb .detail-intro h1 { margin:0 0 16px; font-size:clamp(2.5rem,1.9rem + 2.4vw,3.75rem); line-height:1.1; letter-spacing:-.03em; }
+.pb .project-introduction-role { margin:0 0 4px; font-size:1rem; font-weight:600; color:var(--p-ink); }
+.pb .project-introduction-context { margin:0 0 24px; font-size:1.0625rem; line-height:1.7; color:var(--p-ink-2); }
+.pb .project-introduction-meta { gap:0; margin:0; border-top:1px solid var(--p-line-strong); display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); }
+.pb .project-introduction-meta div { padding:12px 16px 0 0; }
+.pb .project-introduction-meta dt,.pb .project-introduction-scope dt { margin-bottom:4px; font-size:.8125rem; color:var(--p-ink-3); }
+.pb .project-introduction-meta dd { font-size:1rem; font-weight:500; font-variant-numeric:tabular-nums; }
+.pb .detail-intro-visual { max-width:none; justify-self:stretch; }
+.pb .detail-intro-visual img { border-radius:12px; border:1px solid var(--p-line); background:var(--p-card); }
+.pb .detail-intro-visual--square { max-width:320px; justify-self:center; }
+.pb .project-introduction-scope { margin-top:40px; padding:24px 28px; gap:32px 48px; background:var(--p-card); border:1px solid var(--p-line); border-radius:16px; }
+.pb .project-introduction-scope h2 { margin:0 0 12px; font-size:.9375rem; color:var(--p-ink); }
+.pb .project-introduction-scope ul:not(.project-tool-icons) { padding-left:1.1em; font-size:.9375rem; line-height:1.85; color:var(--p-ink-2); }
+.pb .project-introduction-scope dd { font-size:.9375rem; color:var(--p-ink); }
+.pb .project-introduction-scope .project-tool-icons { gap:8px; margin-top:8px; }
+.pb .project-introduction-scope .project-tool-icons li { height:36px; padding:0 10px 0 6px; gap:8px; background:var(--p-hover); border:1px solid var(--p-line); border-radius:10px; font-size:.875rem; font-weight:500; }
+
+.visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+@media (max-width:900px) { .pb-section-head { grid-template-columns:minmax(0,1fr); } .pb .detail-intro--with-visual { grid-template-columns:minmax(0,1fr); } .pb .detail-intro-visual { order:2; } .pb .project-introduction-scope { order:3; } }
+@media (max-width:767px) {
+ .pb-intro { padding:16px 0 32px; }
+ .pb-section { padding-top:72px; }
+ .pb-next { grid-template-columns:minmax(0,1fr); }
+}
+@media (prefers-reduced-motion:reduce) { .pb main * { transition:none !important; } }
+@media (max-width:767px) { .pb main { padding-top:96px; } .pb .detail-intro { padding-top:16px; } .pb .project-introduction-scope { padding:20px; } }

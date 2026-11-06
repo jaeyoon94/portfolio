@@ -1,0 +1,23 @@
+/* Project case pages (body.pb-case). Tokens and the shared intro come from page-base.css;
+   the study body, figures and project navigation are laid out here. Each study keeps its own composition. */
+/* Study body */
+.pb-case main > .case-study { width:min(calc(100% - var(--page-gutter) * 2),var(--p-wrap)); margin-inline:auto; padding-top:24px; }
+.pb-case .case-study p,.pb-case .case-study li { color:var(--p-ink-2); }
+.pb-case .case-study strong,.pb-case .case-study b { color:var(--p-ink); }
+.pb-case .case-study figure img,.pb-case .case-study .evidence-enlarge img { border-radius:12px; border:1px solid var(--p-line); background:var(--p-card); }
+.pb-case .case-study figcaption { font-size:.8125rem; line-height:1.7; color:var(--p-ink-3); }
+.pb-case .case-study table { font-variant-numeric:tabular-nums; }
+.pb-case .case-study th { color:var(--p-ink-3); font-weight:500; }
+.pb-case .evidence-enlarge { cursor:zoom-in; }
+
+/* Project navigation */
+.pb-case .project-navigation { width:min(calc(100% - var(--page-gutter) * 2),var(--p-wrap)); margin:96px auto 0; padding:0; gap:16px; }
+.pb-case .project-navigation > a[rel] { padding:20px 24px; background:var(--p-card); border:1px solid var(--p-line); border-radius:12px; color:var(--p-ink); transition:background-color 150ms var(--p-ease); }
+.pb-case .project-navigation > a[rel]:hover { background:var(--p-hover); }
+.pb-case .project-navigation strong { font-size:1.0625rem; font-weight:600; }
+.pb-case .project-navigation span { font-size:.8125rem; color:var(--p-ink-3); }
+.pb-case .project-nav-index { color:var(--p-ink-2) !important; font-size:.9375rem; text-underline-offset:.25em; }
+
+@media (max-width:767px) {
+ .pb-case .project-navigation { margin-top:72px; }
+}

@@ -133,3 +133,15 @@
  select(buttons[0].dataset.selectProject);
  root.classList.add('is-ready');
 })();
+
+/* Home contact: copy the email address; fall back to selecting the link text. */
+(() => {
+ const button=document.querySelector('.final-copy');if(!button)return;
+ const status=document.querySelector('.final-copy__status');
+ button.addEventListener('click',async()=>{
+  const value=button.dataset.copy;
+  try{await navigator.clipboard.writeText(value);status.textContent='복사했습니다';}
+  catch{const link=document.querySelector('.final-email'),range=document.createRange();range.selectNodeContents(link);const sel=getSelection();sel.removeAllRanges();sel.addRange(range);status.textContent='주소를 선택했습니다. 복사해 주세요';}
+  clearTimeout(button._t);button._t=setTimeout(()=>{status.textContent='';},3000);
+ });
+})();

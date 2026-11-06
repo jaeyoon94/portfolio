@@ -1042,3 +1042,102 @@ h4,h5,h6,[data-display-heading="h4"],[data-display-heading="h5"] { letter-spacin
 .header nav.site-nav a { transition:color 160ms var(--ease-standard); }
 .project-showcase .project-cover__media { transition:transform 320ms var(--ease-standard); }
 .hub-page .hero.pm-hero > .hero-timeline { order:2; }
+
+/* 2026-11 home rebuild. Order: hero (facts + timeline) → 맡아 온 역할 → 프로젝트 → 작업 자료 → 연락.
+   Same ink ramp, single sky accent, weight ≤600, one easing curve. Light bands use #f7f9fc, dark bands #0b0d14. */
+:root { --home-edge:max(var(--page-gutter),calc((100% - var(--container-width)) / 2)); --home-space:clamp(96px,10vw,144px); }
+
+/* Hero: larger readable copy, three facts, primary + secondary action. */
+.hub-page .pm-hero-description { font-size:clamp(1rem,1.2vw,1.125rem); color:#c9cdd6; max-width:36rem; }
+.hero-facts { display:flex; flex-wrap:wrap; gap:12px 40px; margin:32px 0 0; padding:20px 0 0; border-top:1px solid #eef0f526; max-width:40rem; }
+.hero-facts div { display:flex; flex-direction:column; gap:4px; min-width:0; }
+.hero-facts dt { font-size:.8125rem; color:#a3a9b8; }
+.hero-facts dd { margin:0; font-size:1rem; font-weight:500; color:#eef0f5; font-variant-numeric:tabular-nums; }
+.hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; margin-top:32px; }
+.hub-page .hero-actions .pm-hero-cta { margin-top:0; background:#eef0f5; color:#0b0d14; border-color:#eef0f5; font-weight:600; }
+.hub-page .hero-actions .pm-hero-cta:hover { background:#fff; border-color:#fff; }
+.hero-secondary { display:inline-flex; align-items:center; min-height:48px; color:#eef0f5; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.3em; text-decoration-color:#eef0f566; transition:text-decoration-color 160ms var(--ease-standard); }
+.hero-secondary:hover { text-decoration-color:currentColor; }
+.hero-actions a:focus-visible,.home-role a:focus-visible,.evidence-card:focus-visible,.home-evidence__more a:focus-visible,.final-copy:focus-visible { outline:2px solid var(--accent-dark); outline-offset:3px; }
+
+/* 맡아 온 역할: lead text, then three role columns that each end in linked projects. */
+.home-roles { background:#f7f9fc; color:#111827; padding:clamp(160px,14vw,208px) var(--home-edge) var(--home-space); }
+.home-roles__inner { max-width:var(--container-width); margin-inline:auto; }
+.home-roles__head { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:24px 80px; align-items:start; }
+.home-roles__head h2 { margin:0; font-size:clamp(2rem,3vw,2.75rem); line-height:1.3; letter-spacing:-.025em; word-break:keep-all; }
+.home-roles__lead p { margin:0; color:#4b5565; line-height:1.9; max-width:36rem; word-break:keep-all; text-wrap:pretty; }
+.home-roles__lead p + p { margin-top:12px; }
+.home-roles__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:48px; margin-top:clamp(56px,6vw,80px); }
+.home-role { display:flex; flex-direction:column; min-width:0; padding-top:24px; border-top:2px solid #111827; }
+.home-role h3 { margin:0; font-size:1.375rem; line-height:1.4; }
+.home-role__summary { margin:8px 0 0; color:#6b7487; font-size:.9375rem; word-break:keep-all; }
+.home-role__tasks { list-style:none; margin:24px 0 0; padding:0; display:grid; gap:10px; }
+.home-role__tasks li { position:relative; padding-left:16px; color:#4b5565; font-size:.9375rem; line-height:1.6; word-break:keep-all; }
+.home-role__tasks li::before { content:''; position:absolute; left:0; top:.7em; width:6px; height:1px; background:#6b7487; }
+.home-role__projects { list-style:none; margin:0; padding:32px 0 0; }
+.home-role__projects li + li a { border-top:1px solid #11182714; }
+.home-role__projects a { display:flex; justify-content:space-between; align-items:baseline; gap:12px; min-height:48px; padding:12px 0; color:#111827; text-decoration:none; }
+.home-role__projects a span { font-weight:500; transition:color 160ms var(--ease-standard); }
+.home-role__projects a small { color:#6b7487; font-size:.8125rem; text-align:right; font-variant-numeric:tabular-nums; }
+.home-role__projects a:hover span { color:var(--accent-light); }
+.home-roles__note { margin:40px 0 0; font-size:.8125rem; color:#6b7487; }
+.home-roles__note a { color:#111827; margin-left:8px; text-decoration:underline; text-underline-offset:.3em; text-decoration-thickness:1px; }
+
+/* 작업 자료: real documents in neutral frames, each linking to its case. */
+.home-evidence { background:#f7f9fc; color:#111827; padding:var(--home-space) var(--home-edge); }
+.home-evidence__inner { max-width:var(--container-width); margin-inline:auto; }
+.home-evidence__head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:12px 32px; }
+.home-evidence__head h2 { margin:0; font-size:clamp(2rem,3vw,2.75rem); line-height:1.3; letter-spacing:-.025em; }
+.home-evidence__head p { margin:0; color:#4b5565; }
+.home-evidence__grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:40px 32px; margin-top:48px; }
+.evidence-card { grid-column:span 2; display:flex; flex-direction:column; gap:20px; min-width:0; color:#111827; text-decoration:none; }
+.evidence-card--wide { grid-column:span 3; }
+.evidence-card__frame { display:block; height:clamp(220px,22vw,320px); max-width:100%; padding:clamp(12px,1.6vw,24px); background:#ffffff; border:1px solid #11182714; border-radius:12px; overflow:hidden; transition:border-color 160ms var(--ease-standard); }
+.evidence-card__frame--dark { background:#0b1222; border-color:#0b1222; }
+.evidence-card__frame img { display:block; width:100%; height:100%; max-width:100%; object-fit:contain; transition:transform 320ms var(--ease-standard); }
+.evidence-card:hover .evidence-card__frame { border-color:#1f6fb266; }
+.evidence-card:hover .evidence-card__frame img { transform:scale(1.015); }
+.evidence-card__text { display:flex; flex-direction:column; gap:6px; }
+.evidence-card__project { font-size:.8125rem; color:#6b7487; }
+.evidence-card__text strong { font-size:1.125rem; font-weight:600; line-height:1.4; }
+.evidence-card__text > span:last-child { color:#4b5565; font-size:.9375rem; line-height:1.7; word-break:keep-all; text-wrap:pretty; }
+.home-evidence__more { list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 32px; margin:64px 0 0; padding:0; border-top:1px solid #11182714; }
+.home-evidence__more a { display:flex; flex-direction:column; gap:8px; padding:24px 0 8px; color:#111827; text-decoration:none; }
+.home-evidence__more strong { font-weight:600; transition:color 160ms var(--ease-standard); }
+.home-evidence__more strong::after { content:''; display:inline-block; width:.45em; height:.45em; margin-left:.5em; border-top:1.5px solid currentColor; border-right:1.5px solid currentColor; transform:translateY(-.1em) rotate(45deg); }
+.home-evidence__more span { color:#4b5565; font-size:.9375rem; line-height:1.7; word-break:keep-all; }
+.home-evidence__more a:hover strong { color:var(--accent-light); }
+
+/* Project preview: the Tales Runner cover is a small logo, so show it whole on its own sky color. */
+.project-selection__preview .project-cover[data-cover-project="talesrunner"] .project-cover__media { background:#b2eff8; }
+.project-selection__preview .project-cover[data-cover-project="talesrunner"] .project-cover__image { object-fit:contain; object-position:50% 22%; }
+
+/* 연락: dark band again, email with a copy control. */
+.hub-page .finale-composition { background:#0b0d14; }
+.hub-page .final-contact { border-top:0; }
+.final-contact__lead { margin:0; color:#a3a9b8; }
+.final-contact__email { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; }
+.final-copy { min-height:40px; padding:8px 14px; border:1px solid #eef0f54d; border-radius:8px; background:transparent; color:#eef0f5; font:inherit; font-size:.875rem; cursor:pointer; transition:background-color 160ms var(--ease-standard); }
+.final-copy:hover { background:#eef0f514; }
+.final-copy__status { font-size:.875rem; color:var(--accent-dark); }
+.final-contact__links { display:flex; flex-wrap:wrap; align-items:center; gap:12px 24px; }
+.final-text-link { color:#eef0f5; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.3em; text-decoration-color:#eef0f566; min-height:48px; display:inline-flex; align-items:center; }
+.final-text-link:hover { text-decoration-color:currentColor; }
+
+@media(max-width:1023px) {
+ .home-roles__head { grid-template-columns:1fr; }
+ .home-roles__grid { grid-template-columns:1fr 1fr; }
+ .home-roles__grid .home-role:last-child { grid-column:1 / -1; }
+ .home-evidence__grid { grid-template-columns:1fr 1fr; }
+ .evidence-card,.evidence-card--wide { grid-column:span 1; }
+ .home-evidence__more { grid-template-columns:1fr; }
+ .home-evidence__more li + li a { border-top:1px solid #11182714; }
+}
+@media(max-width:767px) {
+ .hero-facts { gap:16px 28px; }
+ .home-roles { padding-top:144px; }
+ .home-roles__grid { grid-template-columns:1fr; gap:48px; }
+ .home-evidence__grid { grid-template-columns:1fr; gap:40px; }
+ .evidence-card__frame { height:auto; aspect-ratio:16/10; }
+}
+@media(prefers-reduced-motion:reduce) { .evidence-card__frame img,.home-role__projects a span,.hero-secondary { transition:none; } .evidence-card:hover .evidence-card__frame img { transform:none; } }

@@ -918,3 +918,61 @@ br.sentence-break{display:initial}
 .business-planning-page .bm-evidence{margin:32px 0;max-width:100%;min-width:0}
 .business-planning-page .bm-evidence img{display:block;width:100%;height:auto;object-fit:contain}
 .business-planning-page .bm-evidence figcaption{margin-top:12px;color:var(--color-text-secondary);font-size:var(--font-caption)}
+
+/* 2026-11 polish: one typeface, quieter chrome, no decorative glows or labels. */
+:root { --font-sans:"Pretendard Variable","Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; --line-body:1.75; }
+body { font-feature-settings:"ss06"; }
+h1,h2,h3,h4 { font-weight:600; letter-spacing:-.02em; }
+.hub-intro h2,.hub-featured > h2,.hub-identity h2,.project-showcase .project-showcase__heading h2 { letter-spacing:-.025em; line-height:1.3; }
+.visually-hidden { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+.header .logo { font-size:1.0625rem; font-weight:600; letter-spacing:-.01em; }
+.header nav.site-nav a,.header nav.site-nav a:is(:hover,:focus-visible) { transform:none; }
+.header nav.site-nav a::before { display:none; }
+
+.eyebrow,.detail-page .detail-intro > .eyebrow { font-weight:500; letter-spacing:0; }
+.detail-intro .eyebrow::before { display:none; }
+
+.detail-toc details { border-color:var(--color-border); border-radius:6px; }
+.detail-top { border-radius:6px; margin-top:8px; border:1px solid var(--color-border); }
+
+/* Home hero: the name is the headline; the sky stays as the only image. */
+.hub-page .pm-hero h1 { font-size:clamp(2.75rem,5vw,4.25rem); line-height:1.15; letter-spacing:-.03em; margin-bottom:28px; }
+.hub-page .pm-hero-description { max-width:33rem; }
+.hub-page .pm-hero-description .hero-description-sentence + .hero-description-sentence { margin-top:12px; }
+
+/* Home intro: plain two-column text on the page surface. */
+.hub-intro::before { display:none; }
+.hub-page .hub-intro { padding-top:clamp(96px,10vw,144px); padding-bottom:clamp(96px,10vw,144px); align-items:start; }
+.hub-intro h2 { margin:0; }
+.hub-intro > div > p { color:#475467; max-width:36rem; }
+.hub-intro .profile-entry-links a { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.3em; }
+
+/* Home projects: each row shows its period on a 2020–2026 track. */
+.project-showcase .project-showcase__heading { align-items:baseline; }
+.project-selection__item { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"name date" "track track"; gap:12px 16px; text-align:left; }
+.project-selection__item > span:first-child { grid-area:name; }
+.project-selection__date { grid-area:date; align-self:start; font-size:.8125rem; color:#aebace; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.project-period { grid-area:track; position:relative; height:2px; background:#ffffff1a; }
+.project-period > span { position:absolute; top:0; bottom:0; left:var(--from); width:var(--width); background:#7f95b5; }
+.project-selection__item[aria-pressed="true"] { box-shadow:none; }
+.project-selection__item[aria-pressed="true"] .project-period > span { background:#e4edf9; }
+.project-selection__item[aria-pressed="true"] .project-selection__date { color:#e4edf9; }
+
+/* Home contact: left-aligned with the content edge, email first. */
+.hub-page .finale-composition { padding:clamp(96px,10vw,144px) max(var(--page-gutter),calc((100% - 1200px)/2)) clamp(64px,8vw,112px); }
+.hub-page .final-contact { width:100%; max-width:none; margin:0; display:flex; flex-direction:column; align-items:flex-start; gap:24px; text-align:left; }
+.hub-page .final-contact h2 { font-size:var(--font-section); font-weight:600; color:#f1f6ff; margin:0; }
+.hub-page .final-email { display:inline-block; font-size:clamp(1.375rem,3vw,2.25rem); font-weight:500; letter-spacing:-.02em; color:#f1f6ff; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.25em; text-decoration-color:#ffffff59; }
+.hub-page .final-email:hover { text-decoration-color:currentColor; }
+.hub-page .final-document { min-height:48px; padding:10px 20px; border-color:#ffffff4d; border-radius:6px; font-weight:500; }
+@media(max-width:600px) {
+ .hub-page .final-email { display:inline-block; }
+}
+/* One content edge for every home section. */
+.hub-page .hub-intro,.hub-page .finale-composition { padding-inline:max(var(--page-gutter),calc((100% - var(--container-width)) / 2)); }
+.hub-page .hub-featured.project-showcase { padding-bottom:clamp(64px,7vw,96px); }
+.hub-page .finale-composition { padding-top:0; }
+.hub-page .final-contact { padding-top:clamp(64px,7vw,96px); border-top:1px solid #ffffff1f; }
+/* Linked evidence images open full size; the cursor says so instead of a caption. */
+figure a:has(> img) { cursor:zoom-in; }

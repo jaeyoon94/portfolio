@@ -40,3 +40,6 @@ Thumbs.db
 *.pfx
 *.p12
 *.bak
+
+# StarJourney web game: dist is the static deploy folder, not a generated build
+!games/star-journey/dist/

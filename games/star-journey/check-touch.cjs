@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+function target(direction){const events={},classes=new Set();return {dataset:{direction},classList:{add:k=>classes.add(k),remove:k=>classes.delete(k),toggle:(k,on)=>on?classes.add(k):classes.delete(k)},addEventListener:(k,fn)=>events[k]=fn,setPointerCapture(){},fire:(k,id=1)=>events[k]?.({pointerId:id,pointerType:'touch',preventDefault(){}})}}
+const buttons=['arrowup','arrowleft','arrowright','arrowdown'].map(target),action=target(),pad=target(),windowEvents={},docEvents={};let dialog=false,interactions=0;
+pad.setAttribute=()=>{};pad.querySelectorAll=()=>buttons;pad.querySelector=()=>action;
+const env={keys:new Set(),state:{},view:'office',window:{addEventListener:(k,f)=>windowEvents[k]=f,dispatchEvent(){}},document:{createElement:()=>pad,querySelector:s=>s==='dialog[open]'?dialog:{append(){}},querySelectorAll:()=>[],addEventListener:(k,f)=>docEvents[k]=f},MutationObserver:class{observe(){}},interact:()=>interactions++,Event:class{}};
+vm.createContext(env);vm.runInContext(fs.readFileSync('dist/mobile-controls.js','utf8'),env);
+buttons[0].fire('pointerdown',1);buttons[2].fire('pointerdown',2);assert(env.keys.has('arrowup')&&env.keys.has('arrowright'));buttons[0].fire('pointerup',1);assert(!env.keys.has('arrowup')&&env.keys.has('arrowright'));buttons[2].fire('pointercancel',2);assert.equal(env.keys.size,0);
+buttons[1].fire('pointerdown',3);buttons[1].fire('pointerdown',4);buttons[1].fire('pointerup',3);assert(env.keys.has('arrowleft'));buttons[1].fire('lostpointercapture',4);assert.equal(env.keys.size,0);
+buttons[3].fire('pointerdown',5);windowEvents.blur();assert.equal(env.keys.size,0);dialog=true;buttons[0].fire('pointerdown',6);assert.equal(env.keys.size,0);action.fire('click');assert.equal(interactions,0);dialog=false;action.fire('click');assert.equal(interactions,1);
+console.log('PASS: simultaneous pointers, per-finger release, cancellation, lost capture, blur, modal guard and interaction.');

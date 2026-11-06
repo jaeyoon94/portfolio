@@ -28,15 +28,7 @@
 .hm-hero .hm-pill--line { border-color:#f5f5f7; color:#f5f5f7 !important; }
 .hm-hero .hm-pill--line:hover { background:#f5f5f7; color:var(--h-ink) !important; }
 
-.hm-card h3 { color:var(--h-ink); }
 
-/* Smaller text tiles */
-.hm-grid--more { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; padding:12px; }
-.hm-card { display:grid; align-content:start; justify-items:center; gap:10px; min-height:240px; padding:40px 24px; background:var(--h-light); color:var(--h-ink); text-align:center; text-decoration:none; transition:background-color 150ms var(--p-ease); }
-.hm-card:hover { background:#ececf0; }
-.hm-card h3 { margin:0; font-size:1.5rem; font-weight:600; line-height:1.2; }
-.hm-card p { margin:0; max-width:18rem; font-size:1rem; line-height:1.5; color:var(--h-ink-2); }
-.hm-card:hover .hm-link { text-decoration:underline; text-underline-offset:.2em; }
 
 /* Contact */
 .hm-contact { padding:96px 24px 112px; text-align:center; }
@@ -48,13 +40,10 @@
 .hm-body .site-footer { background:var(--h-light); color:var(--h-ink-2); border-top:1px solid #d2d2d7; font-size:.8125rem; }
 .hm-body .site-footer a { color:var(--h-ink-2); }
 
-@media (max-width:1068px) { .hm-grid--more { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:734px) {
  .hm { padding-top:72px !important; }
  .hm-hero { margin:0; min-height:500px; padding:39px 20px; background-image:url('assets/images/atmosphere/night-sky-v3-mobile.webp'); background-position:61% 60%; }
- .hm-grid--more { grid-template-columns:minmax(0,1fr); padding-top:0; }
  .hm-hero h1 { font-size:2.5rem; } .hm-hero-sub { font-size:1.3125rem; }
- .hm-card { min-height:0; padding:36px 24px; }
 }
 @media (prefers-reduced-motion:reduce) { .hm * { transition:none !important; } }
 
@@ -154,3 +143,33 @@
 .pl-feature .pl-mark { display:grid; justify-items:start; gap:12px; }
 .pl-feature .pl-name { word-break:keep-all; }
 .pl-feature .pl-chips { justify-content:flex-start; }
+
+/* Page links inside the hero: four quiet columns on the dark foot of the night sky */
+.hm-hero { flex-direction:column; align-items:center; }
+.hm-hero::after { content:''; position:absolute; inset:auto 0 0; height:46%; background:linear-gradient(180deg,rgba(5,7,13,0),rgba(5,7,13,.78) 62%,rgba(5,7,13,.92)); pointer-events:none; }
+.hm-hero-text { position:relative; z-index:1; }
+.hm-quick { position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:min(100%,1200px); margin-top:auto; border-top:1px solid rgba(245,245,247,.2); text-align:left; }
+.hm-quick a { display:grid; align-content:start; gap:6px; padding:24px 28px 8px; color:#f5f5f7 !important; text-decoration:none; transition:background-color 150ms var(--p-ease); }
+.hm-quick a + a { border-left:1px solid rgba(245,245,247,.14); }
+.hm-quick a:hover { background:rgba(245,245,247,.05); }
+.hm-quick a:focus-visible { outline:2px solid #2997ff; outline-offset:-2px; }
+.hm-quick-name { font-size:1.1875rem; font-weight:600; letter-spacing:-.01em; }
+.hm-quick-desc { font-size:.875rem; line-height:1.55; color:#c7c7cc; word-break:keep-all; }
+.hm-quick-go { margin-top:6px; font-size:.875rem; color:#2997ff; }
+.hm-quick a:hover .hm-quick-go { text-decoration:underline; text-underline-offset:.2em; }
+@media (max-width:1068px) {
+ .hm-quick { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .hm-quick a:nth-child(3) { border-left:0; }
+ .hm-quick a:nth-child(n+3) { border-top:1px solid rgba(245,245,247,.14); }
+ .hm-quick a { padding:20px 24px 16px; }
+}
+@media (max-width:734px) {
+ .hm-hero { min-height:0; padding-bottom:0; }
+ .hm-hero-text { margin-bottom:200px; }
+ .hm-quick { grid-template-columns:minmax(0,1fr); margin:0 -20px; width:calc(100% + 40px); }
+ .hm-quick a + a { border-left:0; border-top:1px solid rgba(245,245,247,.14); }
+ .hm-quick a { grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:2px 12px; padding:16px 20px; }
+ .hm-quick-name { grid-column:1; } .hm-quick-desc { grid-column:1; font-size:.8125rem; } .hm-quick-go { grid-column:2; grid-row:1 / span 2; margin:0; }
+ .hm-hero::after { height:70%; }
+}
+.pl { margin-top:0; }

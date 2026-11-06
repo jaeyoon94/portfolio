@@ -183,3 +183,36 @@
  .ab-values div { grid-template-columns:72px minmax(0,1fr); }
 }
 @media (prefers-reduced-motion:reduce) { .ab * { transition:none !important; } }
+
+/* Game play history: three facts, genre counts as ranked bars (one hue), long-played titles, the PDF */
+.ab-play-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:0 0 16px; }
+.ab-play-facts div { padding:20px 24px; background:var(--a-card); border:1px solid var(--a-line); border-radius:16px; }
+.ab-play-facts dt { font-size:.8125rem; color:var(--a-ink-3); }
+.ab-play-facts dd { display:flex; align-items:baseline; gap:4px; margin:6px 0 4px; font-size:2.25rem; font-weight:600; line-height:1.1; letter-spacing:-.02em; }
+.ab-play-facts dd small { font-size:1rem; font-weight:500; color:var(--a-ink-3); letter-spacing:0; }
+.ab-play-facts p { font-size:.875rem; line-height:1.6; color:var(--a-ink-2); }
+.ab-play-grid { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:16px; }
+.ab-play-card { padding:20px 24px; background:var(--a-card); border:1px solid var(--a-line); border-radius:16px; }
+.ab-play-card h3 { margin:0 0 12px; font-size:.9375rem; }
+.ab-genres,.ab-longs { margin:0; padding:0; list-style:none; }
+.ab-genres li { display:grid; grid-template-columns:104px minmax(0,1fr) 28px; gap:12px; align-items:center; padding:6px 0; font-size:.875rem; }
+.ab-g-name { color:var(--a-ink); }
+.ab-g-bar { height:8px; border-radius:4px; background:#eceef1; overflow:hidden; }
+.ab-g-bar i { display:block; height:100%; border-radius:4px; background:var(--a-ink); }
+.ab-g-val { text-align:right; color:var(--a-ink-2); font-variant-numeric:tabular-nums; }
+.ab-longs li { display:grid; grid-template-columns:minmax(0,1fr) auto 48px; gap:12px; align-items:baseline; padding:9px 0; border-top:1px solid var(--a-line); font-size:.9375rem; }
+.ab-longs li:first-child { border-top:0; }
+.ab-l-name { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 8px; font-weight:500; }
+.ab-l-name small { font-size:.75rem; font-weight:400; color:var(--a-ink-3); }
+.ab-l-note { font-size:.8125rem; color:var(--a-ink-3); text-align:right; }
+.ab-l-years { text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
+.ab-play-pdf { display:inline-flex; align-items:baseline; gap:10px; margin-top:20px; font-size:1rem; font-weight:500; }
+.ab-play-pdf span:not(.visually-hidden) { font-size:.8125rem; font-weight:400; color:var(--a-ink-3); }
+@media (max-width:900px) { .ab-play-grid { grid-template-columns:minmax(0,1fr); } }
+@media (max-width:767px) {
+ .ab-play-facts { grid-template-columns:minmax(0,1fr); gap:12px; }
+ .ab-play-facts div { padding:16px 20px; }
+ .ab-play-card { padding:16px 20px; }
+ .ab-longs li { grid-template-columns:minmax(0,1fr) 44px; }
+ .ab-l-note { grid-column:1; grid-row:2; text-align:left; }
+}

@@ -22,3 +22,8 @@
 .pb-hub main a:not(.project-cover):not(.pb-btn) { color:var(--p-accent); }
 .pb-hub .ai-capability .cap-review-flow .cap-review-gate { background:var(--p-raised); border-top-color:var(--p-ink); }
 .pb-hub .ai-capability .cap-steps .cap-verification { border-top-color:var(--p-ink); }
+
+/* Business page: proposal blocks read as short paragraphs, one sentence per line group */
+.business-planning-page .bm-boundary .bm-expansion { grid-column:1 / -1; }
+.business-planning-page .bm-boundary p { max-width:42em; line-height:1.75; word-break:keep-all; overflow-wrap:break-word; text-wrap:pretty; }
+.business-planning-page .bm-boundary br.sentence-break { display:block; content:""; margin-top:.5em; }

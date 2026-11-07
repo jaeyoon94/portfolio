@@ -4,7 +4,7 @@ const root=document.getElementById('dashboard');if(!root)return;
 const $=id=>document.getElementById('db-'+id);
 const projects={jira:['Project DME','언디셈버','레전드 오브 슬라임'],custom:['프로젝트 네온','테일즈런너']};
 const headers=['id','project','group','title','owner','status','start','due'];
-const labels={todo:'예정',doing:'진행',done:'완료',blocked:'차단'};
+const labels={todo:'예정',doing:'진행',done:'완료',blocked:'취소'};
 const DAY=86400000,DEFAULT_DATE='2026-11-05';
 
 // Synthetic demonstration rows: plausible work, not records of real projects.
@@ -72,6 +72,104 @@ function showTip(target,lines){tip.replaceChildren(...lines.map((l,i)=>el(i?'spa
 function hideTip(){tip.hidden=true;}
 addEventListener('scroll',hideTip,{passive:true});
 
+// Charts: SVG drawn at the card's width, redrawn on resize. Every value is also in the table.
+const NS='http://www.w3.org/2000/svg';
+function sv(tag,attrs,parent){const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.append(n);return n;}
+function txt(parent,x,y,text,cls,anchor='middle'){const n=sv('text',{x,y,class:cls,'text-anchor':anchor},parent);n.textContent=text;return n;}
+function nice(v){const raw=Math.max(v,4)/4,mag=Math.pow(10,Math.floor(Math.log10(raw)));const step=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=raw);return {step,max:Math.ceil(Math.max(v,1)/step)*step};}
+const iso=ms=>new Date(ms).toISOString().slice(0,10);
+const monday=ms=>ms-((new Date(ms).getUTCDay()+6)%7)*DAY;
+const pointTip=(svg,x,y)=>({getBoundingClientRect(){const r=svg.getBoundingClientRect();return new DOMRect(r.left+x,r.top+y,0,0);}});
+function bindTip(node,lines){for(const [on,fn] of [['pointerenter',()=>showTip(node,lines)],['pointerleave',hideTip],['focus',()=>showTip(node,lines)],['blur',hideTip]])node.addEventListener(on,fn);}
+let chartCtx=null,chartWidth=0;
+function drawCharts(){if(!chartCtx)return;chartWidth=$('burn').clientWidth;drawBurn(chartCtx);drawWeeks(chartCtx);}
+
+// Remaining work: the planned line drops when a task reaches its due date; the dot is what is actually open on the as-of date.
+function drawBurn({selected,today,done}){
+ const box=$('burn');box.replaceChildren();$('burn-meta').replaceChildren();
+ if(!selected.length){box.append(el('p','선택한 프로젝트에 데이터가 없습니다.','empty'));return;}
+ const total=selected.length,d0=Math.min(...selected.map(r=>t(r.start))),d1=Math.max(...selected.map(r=>t(r.due)));
+ const days=Math.round((d1-d0)/DAY)+1;
+ const plan=Array.from({length:days+1},(_,i)=>total-selected.filter(r=>t(r.due)<d0+i*DAY).length);
+ const W=Math.max(280,box.clientWidth),H=W<520?208:248,m={t:30,r:16,b:28,l:32},pw=W-m.l-m.r,ph=H-m.t-m.b;
+ const {step,max}=nice(total),x=i=>m.l+pw*i/days,y=v=>m.t+ph*(1-v/max);
+ const svg=sv('svg',{viewBox:`0 0 ${W} ${H}`,width:W,height:H,class:'ch',role:'img'});
+ for(let v=0;v<=max;v+=step){sv('line',{x1:m.l,x2:W-m.r,y1:y(v),y2:y(v),class:v?'ch-grid':'ch-base'},svg);txt(svg,m.l-8,y(v)+4,v,'ch-tick','end');}
+ let lastX=-99;for(let i=0;i<=days;i++){const ms=d0+i*DAY;if(new Date(ms).getUTCDay()!==1)continue;const px=x(i);if(px-lastX<48||px>W-m.r-12)continue;lastX=px;txt(svg,px,H-8,short(iso(ms)),'ch-tick');}
+ let d=`M${x(0)},${y(plan[0])}`;for(let i=1;i<=days;i++)d+=`L${x(i)},${y(plan[i-1])}L${x(i)},${y(plan[i])}`;
+ sv('path',{d:`${d}L${x(days)},${y(0)}L${x(0)},${y(0)}Z`,class:'ch-area'},svg);sv('path',{d,class:'ch-line'},svg);
+ let label=`${short(iso(d0))}부터 ${short(iso(d1))}까지 계획상 남은 작업`;
+ const meta=$('burn-meta');meta.append(`전체 ${total}건 / ${short(iso(d0))} ~ ${short(iso(d1))}`);
+ if(today){const k=Math.round((t(today)-d0)/DAY)+1;
+  if(k>=0&&k<=days){
+   const px=x(k),actual=total-done,planned=plan[k],gap=actual-planned;
+   sv('line',{x1:px,x2:px,y1:m.t-4,y2:m.t+ph,class:'ch-now'},svg);
+   const tag=`기준일 ${short(today)}`,tw=tag.length*7+12;
+   sv('rect',{x:px-tw/2,y:4,width:tw,height:18,rx:4,class:'ch-now-box'},svg);txt(svg,px,17,tag,'ch-now-text');
+   if(gap)sv('line',{x1:px,x2:px,y1:y(planned),y2:y(actual),class:'ch-gap'},svg);
+   sv('circle',{cx:px,cy:y(planned),r:3.5,class:'ch-dot ch-dot--plan'},svg);sv('circle',{cx:px,cy:y(actual),r:5,class:'ch-dot'},svg);
+   const left=px>W-m.r-110;txt(svg,px+(left?-10:10),y(actual)+(actual>=planned?-8:16),`실제 ${actual}건`,'ch-note',left?'end':'start');
+   meta.replaceChildren(`기준일 계획 ${planned}건, 실제 ${actual}건 남음`);
+   if(gap>0){meta.append(' / ');meta.append(el('b',`${gap}건 뒤처짐`));}else if(gap<0)meta.append(` / ${-gap}건 앞섬`);else meta.append(' / 계획대로');
+   label+=`, 기준일 계획 ${planned}건, 실제 ${actual}건`;
+  }else meta.append(' / 기준일이 기간 밖입니다');}
+ svg.setAttribute('aria-label',label);
+ const guide=sv('line',{y1:m.t,y2:m.t+ph,class:'ch-guide',visibility:'hidden'},svg);
+ const gdot=sv('circle',{r:3.5,class:'ch-dot ch-dot--plan',visibility:'hidden'},svg);
+ const hit=sv('rect',{x:m.l,y:m.t,width:pw,height:ph,class:'ch-hit'},svg);
+ hit.addEventListener('pointermove',e=>{const r=svg.getBoundingClientRect(),i=Math.max(0,Math.min(days,Math.round((e.clientX-r.left-m.l)/pw*days)));const px=x(i);
+  for(const n of [guide,gdot])n.setAttribute('visibility','visible');guide.setAttribute('x1',px);guide.setAttribute('x2',px);gdot.setAttribute('cx',px);gdot.setAttribute('cy',y(plan[i]));
+  showTip(pointTip(svg,px,y(plan[i])),[`${short(iso(d0+i*DAY))} 시작 기준`,`계획상 남은 작업 ${plan[i]}건`]);});
+ hit.addEventListener('pointerleave',()=>{for(const n of [guide,gdot])n.setAttribute('visibility','hidden');hideTip();});
+ box.append(svg);
+}
+
+// Tasks due per week; the as-of week is the one colored bar.
+function drawWeeks({selected,today}){
+ const box=$('weeks');box.replaceChildren();$('weeks-meta').textContent='';
+ if(!selected.length){box.append(el('p','선택한 프로젝트에 데이터가 없습니다.','empty'));return;}
+ const w0=monday(Math.min(...selected.map(r=>t(r.due)))),w1=monday(Math.max(...selected.map(r=>t(r.due))));
+ const weeks=[];for(let w=w0;w<=w1;w+=7*DAY){const items=selected.filter(r=>t(r.due)>=w&&t(r.due)<w+7*DAY);weeks.push({w,n:items.length,done:items.filter(r=>r.status==='done').length});}
+ const cur=today?monday(t(today)):null,W=Math.max(280,box.clientWidth),H=220,m={t:24,r:4,b:28,l:4},pw=W-m.l-m.r,ph=H-m.t-m.b;
+ const max=Math.max(1,...weeks.map(w=>w.n)),slot=pw/weeks.length,bw=Math.min(44,slot*.56);
+ const svg=sv('svg',{viewBox:`0 0 ${W} ${H}`,width:W,height:H,class:'ch',role:'img','aria-label':'주차별 마감 작업: '+weeks.map(w=>`${short(iso(w.w))} 주 ${w.n}건`).join(', ')});
+ sv('line',{x1:m.l,x2:W-m.r,y1:m.t+ph,y2:m.t+ph,class:'ch-base'},svg);
+ weeks.forEach((w,i)=>{
+  const now=w.w===cur,h=w.n?Math.max(4,ph*w.n/max):0,bx=m.l+slot*i+(slot-bw)/2,by=m.t+ph-h,cx=m.l+slot*(i+.5),r=Math.min(4,h);
+  const col=sv('rect',{x:m.l+slot*i,y:m.t,width:slot,height:ph,class:'ch-col',tabindex:0},svg);
+  sv('path',{d:h?`M${bx},${by+h}V${by+r}Q${bx},${by} ${bx+r},${by}H${bx+bw-r}Q${bx+bw},${by} ${bx+bw},${by+r}V${by+h}Z`:'',class:'ch-bar'+(now?' is-now':'')},svg);
+  if(w.n)txt(svg,cx,by-8,w.n,'ch-val'+(now?' is-now':''));
+  txt(svg,cx,H-8,now?'이번 주':short(iso(w.w)),'ch-tick');
+  const info=[`${short(iso(w.w))} ~ ${short(iso(w.w+6*DAY))} 마감`,`${w.n}건 / 완료 ${w.done} / 미완료 ${w.n-w.done}`];
+  col.setAttribute('aria-label',info.join(', '));bindTip(col,info);
+ });
+ const curWeek=weeks.find(w=>w.w===cur);
+ $('weeks-meta').textContent=`${weeks.length}주 / 주 시작일 기준`+(curWeek?` / 이번 주 ${curWeek.n}건`:'');
+ box.append(svg);
+}
+
+// Three donuts: status uses the status colors; work area and owner take the top three plus 기타.
+const CAT=['#3987e5','#199e70','#c98500'],OTHER='#6b7586',STATUS_COLOR={done:'#2fa968',doing:'#3987e5',todo:'#6b7586',blocked:'#e5534b'};
+function topParts(list,key){const m=new Map();for(const r of list)m.set(r[key],(m.get(r[key])||0)+1);const all=[...m].sort((a,b)=>b[1]-a[1]||String(a[0]).localeCompare(b[0]));const top=all.slice(0,3).map(([name,n],i)=>({name,n,color:CAT[i]}));const rest=all.slice(3).reduce((a,[,n])=>a+n,0);if(rest)top.push({name:`기타 ${all.length-3}개`,n:rest,color:OTHER});return top;}
+function donut(title,parts){
+ const total=parts.reduce((a,p)=>a+p.n,0),wrap=el('div',undefined,'donut'),r=38,C=2*Math.PI*r,live=parts.filter(p=>p.n);
+ const svg=sv('svg',{viewBox:'0 0 96 96',width:96,height:96,class:'donut-ring',role:'img','aria-label':`${title}: `+live.map(p=>`${p.name} ${p.n}건`).join(', ')});
+ sv('circle',{cx:48,cy:48,r,fill:'none','stroke-width':12,class:'donut-track'},svg);
+ let off=0;for(const p of live){const len=C*p.n/total,gap=live.length>1?2:0;
+  const c=sv('circle',{cx:48,cy:48,r,fill:'none',stroke:p.color,'stroke-width':12,'stroke-dasharray':`${Math.max(len-gap,.5)} ${C}`,'stroke-dashoffset':-off,transform:'rotate(-90 48 48)',class:'donut-seg'},svg);
+  bindTip(c,[`${title} / ${p.name}`,`${p.n}건 / ${pct(p.n,total)}%`]);off+=len;}
+ txt(svg,48,52,title,'donut-label');
+ const ul=el('ul',undefined,'donut-legend');
+ for(const p of live){const li=el('li'),i=el('i');i.style.background=p.color;li.append(i,el('span',p.name),el('span',`${p.n}건`,'n'),el('span',`${pct(p.n,total)}%`,'p'));ul.append(li);}
+ wrap.append(svg,ul);return wrap;
+}
+function drawDonuts(selected){
+ const box=$('donuts');box.replaceChildren();
+ if(!selected.length){box.append(el('p','선택한 프로젝트에 데이터가 없습니다.','empty'));return;}
+ box.append(donut('상태',['done','doing','todo','blocked'].map(s=>({name:labels[s],n:selected.filter(r=>r.status===s).length,color:STATUS_COLOR[s]}))),donut('업무 영역',topParts(selected,'group')),donut('담당',topParts(selected,'owner')));
+}
+new ResizeObserver(()=>{const w=$('burn').clientWidth;if(w&&Math.abs(w-chartWidth)>4){hideTip();drawCharts();}}).observe(root);
+
 function render(){
  hideTip();
  const selected=rows(),validDate=dateValid($('date').value),today=validDate?$('date').value:null;
@@ -90,12 +188,17 @@ function render(){
  for(const [label,value,unit,sub,state] of [
   ['전체 작업',selected.length,'건',`${new Set(selected.map(r=>r.project)).size}개 프로젝트`],
   ['완료율',selected.length?pct(done,selected.length):'—',selected.length?'%':'',validDate?`${done}건 완료 / 기준일까지 예상 ${pct(due,selected.length)}%`:`${done}건 완료`],
+  ['진행 중',selected.filter(r=>r.status==='doing').length,'건','담당자가 작업 중'],
   ['지연',lateN??'—',lateN===null?'':'건',validDate?'종료일이 기준일보다 앞선 미완료':'기준일을 입력하세요',lateN?'late':null],
-  ['차단',blocked,'건','다른 작업을 기다리는 중',blocked?'blocked':null]]){
+  ['취소',blocked,'건','진행하지 않기로 한 작업',blocked?'blocked':null],
+  ['7일 안 마감',validDate?selected.filter(soon).length:'—',validDate?'건':'',validDate?`${short(today)}부터 일주일`:'기준일을 입력하세요']]){
   const k=el('div',undefined,'kpi');if(state)k.dataset.state=state;
   const v=el('p',undefined,'kpi-value');v.append(el('span',String(value)));if(unit)v.append(el('small',unit));
   k.append(el('p',label,'kpi-label'),v,el('p',sub,'kpi-sub'));$('kpis').append(k);
  }
+
+ chartCtx={selected,today,done};drawCharts();
+ drawDonuts(selected);
 
  // Timeline of open work against the as-of date.
  const open=selected.filter(r=>!isDone(r)).sort((a,b)=>a.due.localeCompare(b.due)||a.id.localeCompare(b.id));
@@ -122,7 +225,7 @@ function render(){
    const info=[r.title,`${r.project} / ${r.group} / ${r.owner}`,`${r.start} ~ ${r.due} / ${labels[r.status]}${late(r)?` / ${lateDays(r)}일 지연`:''}`];
    bar.setAttribute('aria-label',info.join(', '));
    for(const [on,fn] of [['pointerenter',()=>showTip(bar,info)],['pointerleave',hideTip],['focus',()=>showTip(bar,info)],['blur',hideTip]])bar.addEventListener(on,fn);
-   const tag=state==='blocked'?'차단':state==='late'?`${lateDays(r)}일 지연`:short(r.due);
+   const tag=state==='blocked'?'취소':state==='late'?`${lateDays(r)}일 지연`:short(r.due);
    const end=el('span',tag,'tl-end tl-end--'+state);end.style.left=x(t(r.due)+DAY);
    track.append(bar,end);li.append(name,track);list.append(li);
   }
@@ -138,12 +241,29 @@ function render(){
  if(validDate&&!risks.length)$('risks').append(el('li','확인할 작업이 없습니다.','empty'));
  for(const {r,kind} of risks.slice(0,8)){
   const li=el('li',undefined,'risk');
-  const text=kind==='blocked'?'차단':kind==='late'?`D+${lateDays(r)}`:`D-${Math.round((t(r.due)-t(today))/DAY)}`;
+  const text=kind==='blocked'?'취소':kind==='late'?`D+${lateDays(r)}`:`D-${Math.round((t(r.due)-t(today))/DAY)}`;
   const body=el('div',undefined,'risk-body');body.append(el('span',r.title,'risk-title'),el('span',`${r.project} / ${r.owner} / ${short(r.due)} 마감`,'risk-sub'));
   li.append(el('span',text,'risk-tag risk-tag--'+kind),body);$('risks').append(li);
  }
  if(risks.length>8)$('risks').append(el('li',`외 ${risks.length-8}건은 작업 목록에서 확인`,'empty'));
  if(!validDate)$('risks').append(el('li','기준일을 입력하면 지연과 마감 임박 작업도 계산합니다.','empty'));
+
+ // Open work per owner; blocked share at the end of each bar. A row filters the table.
+ $('owners').replaceChildren();
+ const owners=[...new Set(open.map(r=>r.owner))].map(o=>{const mine=open.filter(r=>r.owner===o);return {o,n:mine.length,b:mine.filter(r=>r.status==='blocked').length};}).sort((a,b)=>b.n-a.n||a.o.localeCompare(b.o));
+ const oMax=Math.max(1,...owners.map(x=>x.n));
+ for(const {o,n,b} of owners){
+  const li=el('li'),btn=el('button',undefined,'hbar');btn.type='button';btn.setAttribute('aria-pressed',String(filter.key==='owner'&&filter.value===o));
+  const track=el('span',undefined,'hbar-track'),fill=el('span',undefined,'hbar-fill');fill.style.width=(n/oMax*100)+'%';
+  if(n-b){const i=el('i');i.style.flexGrow=n-b;fill.append(i);}if(b){const i=el('i',undefined,'is-blocked');i.style.flexGrow=b;fill.append(i);}
+  track.append(fill);
+  const val=el('span',`${n}건`,'hbar-val');if(b)val.append(el('small',`취소 ${b}`));
+  btn.append(el('span',o,'hbar-name'),track,val);
+  btn.setAttribute('aria-label',`${o} 미완료 ${n}건${b?`, 취소 ${b}건`:''}, 작업 목록 거르기`);
+  btn.addEventListener('click',()=>setFilter('owner',o));
+  li.append(btn);$('owners').append(li);
+ }
+ if(!owners.length)$('owners').append(el('li','미완료 작업이 없습니다.','empty'));
 
  // Per project: thin segmented status bar; a segment filters the table.
  $('projects').replaceChildren();
@@ -158,7 +278,7 @@ function render(){
    for(const [on,fn] of [['pointerenter',()=>showTip(b,info)],['pointerleave',hideTip],['focus',()=>showTip(b,info)],['blur',hideTip]])b.addEventListener(on,fn);
    b.addEventListener('click',()=>setFilter('status',s,name));
    seg.append(b);}
-  row.append(head,seg,el('p',`${items.length}건 / 지연 ${validDate?items.filter(late).length:'—'} / 차단 ${items.filter(r=>r.status==='blocked').length}`,'prow-meta'));
+  row.append(head,seg,el('p',`${items.length}건 / 지연 ${validDate?items.filter(late).length:'—'} / 취소 ${items.filter(r=>r.status==='blocked').length}`,'prow-meta'));
   $('projects').append(row);
  }
 
@@ -191,7 +311,7 @@ function render(){
  }
  if(!shown.length){const tr=el('tr'),td=el('td','조건에 맞는 작업이 없습니다.','empty');td.colSpan=9;tr.append(td);$('tasks').append(tr);}
  const limit=$('limit');limit.replaceChildren();
- if(filter.key){const c=el('button',undefined,'filter-chip');c.type='button';const what=filter.key==='status'?`${filter.project} / ${labels[filter.value]}`:filter.value;c.append(el('span',what),el('span','×','x'));c.setAttribute('aria-label',`${what} 거르기 해제`);c.addEventListener('click',()=>{filter=NO_FILTER;render();});limit.append(c);}
+ if(filter.key){const c=el('button',undefined,'filter-chip');c.type='button';const what=filter.key==='status'?`${filter.project} / ${labels[filter.value]}`:filter.key==='owner'?`담당 ${filter.value}`:filter.value;c.append(el('span',what),el('span','×','x'));c.setAttribute('aria-label',`${what} 거르기 해제`);c.addEventListener('click',()=>{filter=NO_FILTER;render();});limit.append(c);}
  limit.append(el('span',`${shown.length}건${shown.length>200?' / 최대 200건 표시':''}`));
  $('caption').textContent=sources[mode]==='demo'?'시연용 가상 작업 목록':'불러온 CSV 작업 목록';
 }

@@ -80,8 +80,8 @@
 .pl-foot { margin:20px 0 0; font-size:.625rem; line-height:1.5; color:#8e8e93; }
 .pl-foot span { margin:0 6px 0 0; vertical-align:baseline; }
 .pl-all { margin:0; padding:40px 24px 64px; text-align:center; }
-.pl-all a { color:#2997ff; font-size:1.0625rem; text-decoration:none; }
-.pl-all a:hover { text-decoration:underline; text-underline-offset:.2em; }
+.pl .pl-all a { color:#6cb4ff; font-family:"Pretendard Variable",Pretendard,sans-serif; font-size:1.0625rem; font-weight:500; letter-spacing:0; text-decoration:none; }
+.pl .pl-all a:hover { color:#9ccbff; text-decoration:underline; text-underline-offset:.2em; }
 @media (max-width:1068px) {
  .pl-row--3 { grid-template-columns:repeat(2,minmax(0,1fr)); }
  .pl-row--3 .pl-col:last-child { grid-column:1 / -1; }

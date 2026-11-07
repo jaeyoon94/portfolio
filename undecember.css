@@ -1,0 +1,85 @@
+/* UNDECEMBER: build and update section, moved from the About page.
+   Tokens come from page-base.css; the drawn check matches the About page signature. */
+.ud-build { --br-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='.75' y='.75' width='18.5' height='18.5' rx='5.25' fill='none' stroke='%23111827' stroke-width='1.5'/%3E%3Cpath d='M5.5 10.25l3 3 6-6.5' fill='none' stroke='%23111827' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.ud-build p { margin:0; }
+.ud-build .br-head { display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:16px 64px; align-items:end; margin-bottom:40px; }
+.ud-build .br-head h2 { margin:0; }
+.ud-build .br-head > p { max-width:40rem; font-size:1rem; line-height:1.75; color:var(--p-ink-2); }
+.ud-build .br-checks { display:grid; margin:0; padding:0; list-style:none; }
+.ud-build .br-checks li { display:grid; grid-template-columns:20px minmax(0,1fr); align-content:start; gap:4px 16px; border-top:1px solid var(--p-line-strong); }
+.ud-build .br-checks li::before { content:''; grid-row:1 / span 2; width:20px; height:20px; margin-top:2px; background:var(--br-check) center / contain no-repeat; }
+.ud-build .br-checks h4 { margin:0; line-height:1.5; }
+.ud-build .br-checks p { line-height:1.75; color:var(--p-ink-2); }
+.ud-build .br-flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin:0; padding:0; list-style:none; counter-reset:none; }
+.ud-build .br-flow li { position:relative; padding:44px 24px 0 0; }
+.ud-build .br-flow li::before { content:''; position:absolute; top:13px; left:0; right:0; height:2px; background:var(--p-line-strong); }
+.ud-build .br-flow li:last-child::before { right:auto; width:28px; }
+.ud-build .br-flow-n { position:absolute; top:0; left:0; display:grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--p-ink); color:#fff; font-size:.8125rem; font-weight:600; font-variant-numeric:tabular-nums; }
+.ud-build .br-flow h3 { margin:0 0 8px; font-size:1rem; line-height:1.5; }
+.ud-build .br-flow p { font-size:.875rem; line-height:1.7; color:var(--p-ink-2); }
+.ud-build .br-evidence { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:16px; margin-top:48px; }
+.ud-build .br-evidence-main,.br-boundary { padding:24px; border-radius:12px; }
+.ud-build .br-evidence-main { background:var(--p-card); border:1px solid var(--p-line); }
+.ud-build .br-boundary { background:var(--p-raised); }
+.ud-build .br-evidence h3 { margin:0 0 8px; font-size:1rem; line-height:1.5; }
+.ud-build .br-evidence p { font-size:.9375rem; line-height:1.75; color:var(--p-ink-2); }
+.ud-build .br-evidence-main a { display:inline-block; margin-top:12px; font-size:.9375rem; font-weight:500; }
+.ud-build .br-examples { margin-top:16px; }
+.ud-build .br-examples summary { display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 16px; padding:16px 52px 16px 24px; position:relative; background:var(--p-card); border:1px solid var(--p-line); border-radius:12px; font-weight:600; cursor:pointer; list-style:none; transition:background-color 150ms var(--p-ease); }
+.ud-build .br-examples summary::-webkit-details-marker { display:none; }
+.ud-build .br-examples summary::after { content:''; position:absolute; right:24px; top:50%; width:8px; height:8px; border-right:1.5px solid var(--p-ink-2); border-bottom:1.5px solid var(--p-ink-2); transform:translateY(-70%) rotate(45deg); transition:transform 150ms var(--p-ease); }
+.ud-build .br-examples[open] summary::after { transform:translateY(-30%) rotate(-135deg); }
+.ud-build .br-examples summary:hover { background:var(--p-hover); }
+.ud-build .br-examples-meta { font-size:.8125rem; font-weight:400; color:var(--p-ink-3); }
+.ud-build .br-note { margin-top:12px !important; font-size:.8125rem; line-height:1.7; color:var(--p-ink-3); }
+.ud-build .br-examples > .br-note { margin:20px 0 0 !important; }
+.ud-build .br-ex { margin-top:40px; }
+.ud-build .br-ex h3 { margin:0 0 16px; font-size:1.0625rem; line-height:1.5; }
+.ud-build .br-table-scroll { overflow-x:auto; border:1px solid var(--p-line); border-radius:12px; background:var(--p-card); }
+.ud-build .br-matrix { width:100%; min-width:720px; border-collapse:collapse; font-size:.875rem; }
+.ud-build .br-matrix th,.br-matrix td { padding:12px 16px; border-top:1px solid var(--p-line); text-align:left; vertical-align:top; line-height:1.6; }
+.ud-build .br-matrix thead th { border-top:0; background:var(--p-hover); color:var(--p-ink-3); font-size:.8125rem; font-weight:500; }
+.ud-build .br-matrix tbody th { font-weight:600; color:var(--p-ink); white-space:nowrap; }
+.ud-build .br-matrix td { color:var(--p-ink-2); }
+.ud-build .br-matrix .is-pm,.br-matrix thead th:nth-child(2) { background:var(--p-accent-tint); color:var(--p-ink); }
+.ud-build .br-matrix td strong { color:var(--p-ink); font-weight:600; }
+.ud-build .br-handoff { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin:0 0 16px; }
+.ud-build .br-handoff div { padding:12px 16px; border-left:2px solid var(--p-line-strong); }
+.ud-build .br-handoff dt { font-size:.8125rem; color:var(--p-ink-3); }
+.ud-build .br-handoff dd { margin:4px 0 0; font-size:.9375rem; font-weight:500; }
+.ud-build .br-board { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.ud-build .br-board section { padding:16px; background:var(--p-card); border:1px solid var(--p-line); border-radius:12px; }
+.ud-build .br-board h4 { margin:0 0 8px; font-size:.8125rem; font-weight:500; color:var(--p-ink-3); }
+.ud-build .br-board p { font-size:.875rem; line-height:1.6; color:var(--p-ink-2); }
+.ud-build .br-board strong { display:block; margin-bottom:2px; font-size:.9375rem; color:var(--p-ink); }
+.ud-build .br-board span { display:block; margin-top:12px; font-size:.75rem; color:var(--p-ink-3); }
+.ud-build .br-ex-pair { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px; }
+.ud-build .br-defect { margin:0; padding:0; list-style:none; counter-reset:step; }
+.ud-build .br-defect > li { position:relative; padding:0 0 20px 40px; counter-increment:step; }
+.ud-build .br-defect > li::before { content:counter(step); position:absolute; left:0; top:0; display:grid; place-items:center; width:24px; height:24px; border:1.5px solid var(--p-line-strong); border-radius:50%; font-size:.75rem; font-weight:600; font-variant-numeric:tabular-nums; }
+.ud-build .br-defect > li:not(:last-child)::after { content:''; position:absolute; left:11px; top:28px; bottom:4px; width:2px; background:var(--p-line); }
+.ud-build .br-defect strong { display:block; font-size:.9375rem; line-height:1.6; }
+.ud-build .br-defect span { display:block; font-size:.875rem; line-height:1.7; color:var(--p-ink-2); }
+.ud-build .br-defect ul { display:grid; gap:6px; margin:8px 0 0; padding:0; list-style:none; }
+.ud-build .br-defect ul li { font-size:.875rem; color:var(--p-ink-2); }
+.ud-build .br-defect b { display:inline-block; margin-right:8px; padding:1px 8px; border-radius:6px; background:var(--p-raised); color:var(--p-ink); font-size:.8125rem; font-weight:600; }
+.ud-build .br-checks--compact { grid-template-columns:minmax(0,1fr); }
+.ud-build .br-checks--compact li { padding:12px 0; }
+.ud-build .br-checks--compact h4 { font-size:.9375rem; }
+.ud-build .br-checks--compact p { font-size:.875rem; }
+.ud-build .br-sources { margin-top:40px; padding-top:20px; border-top:1px solid var(--p-line-strong); }
+.ud-build .br-sources h3 { margin:0 0 8px; font-size:.875rem; }
+.ud-build .br-sources p { font-size:.8125rem; line-height:1.7; color:var(--p-ink-3); }
+.ud-build .br-sources p + p { margin-top:6px; }
+@media (max-width:900px) {
+ .ud-build .br-head,.ud-build .br-evidence,.ud-build .br-ex-pair { grid-template-columns:minmax(0,1fr); }
+ .ud-build .br-flow { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:32px; }
+ .ud-build .br-flow li:nth-child(2)::before { right:auto; width:28px; }
+}
+@media (max-width:767px) {
+ .ud-build .br-flow { grid-template-columns:minmax(0,1fr); }
+ .ud-build .br-flow li { padding:0 0 24px 44px; }
+ .ud-build .br-flow li::before,.ud-build .br-flow li:nth-child(2)::before { top:28px; bottom:0; left:13px; right:auto; width:2px; height:auto; }
+ .ud-build .br-flow li:last-child::before { display:none; }
+ .ud-build .br-handoff,.ud-build .br-board { grid-template-columns:minmax(0,1fr); }
+}

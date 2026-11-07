@@ -83,3 +83,8 @@
  .ud-build .br-flow li:last-child::before { display:none; }
  .ud-build .br-handoff,.ud-build .br-board { grid-template-columns:minmax(0,1fr); }
 }
+
+/* Season KPI dashboard image inside the outcome panel */
+.ud-outcome > div:has(.ud-kpi-figure) { max-width:none; }
+.ud-outcome .ud-kpi-figure { margin:24px 0 0; }
+.ud-outcome .ud-kpi-figure img { display:block; width:100%; height:auto; border-radius:12px; }
